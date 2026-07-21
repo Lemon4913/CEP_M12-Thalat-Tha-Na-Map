@@ -1,0 +1,27 @@
+# Secrets / environment
+.env
+*.env.local
+
+# Node / frontend
+node_modules/
+frontend/dist/
+frontend/.vite/
+
+# Python / backend + analytics
+__pycache__/
+*.pyc
+.venv/
+venv/
+*.egg-info/
+
+# Databases / local data
+*.sqlite3
+*.db
+
+# Analytics generated output
+analytics/reports/*
+!analytics/reports/.gitkeep
+
+# OS / editor
+.DS_Store
+.vscode/
