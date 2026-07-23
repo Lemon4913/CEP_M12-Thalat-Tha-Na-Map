@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>QR Code Generator — Talat Tha Na Map</title>
+<script src="vendor/qrcode.min.js"></script>
+<script src="vendor/jsQR.js"></script>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: system-ui, sans-serif;
+    background: #f4f4f4;
+    color: #1a1a1a;
+    display: flex;
+    justify-content: center;
+    padding: 24px 12px;
+  }
+  main {
+    width: 100%;
+    max-width: 480px;
+    background: #fff;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  }
+  h1 {
+    font-size: 1.25rem;
+    margin: 0 0 16px;
+  }
+  label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin: 16px 0 6px;
+  }
+  textarea, input[type="file"], select {
+    width: 100%;
+    padding: 8px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
+  textarea { resize: vertical; min-height: 60px; }
+  input[type="range"] { width: 100%; }
+  .row { display: flex; justify-content: space-between; font-size: 0.85rem; color: #555; }
+  button {
+    margin-top: 20px;
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  #generateBtn { background: #1a73e8; color: #fff; }
+  #downloadBtn { background: #22823c; color: #fff; margin-top: 10px; }
+  #downloadBtn:disabled { background: #a5c9b3; cursor: not-allowed; }
+  #preview {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+  }
+  #preview canvas {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #eee;
+  }
+  small { color: #777; }
+  #verifyResult {
+    margin-top: 12px;
+    padding: 10px 12px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-align: center;
+    display: none;
+  }
+  #verifyResult.pass { display: block; background: #e6f4ea; color: #22823c; }
+  #verifyResult.fail { display: block; background: #fce8e6; color: #c5221f; }
+</style>
+</head>
+<body>
+<main>
+  <h1>QR Code Generator</h1>
+
+  <label for="text">Link or text to encode</label>
+  <textarea id="text" placeholder="https://example.com/checkin/1"></textarea>
+
+  <label for="logo">Logo image (optional)</label>
+  <input type="file" id="logo" accept="image/*" />
+
+  <label for="size">QR code size</label>
+  <select id="size">
+    <option value="512" selected>512 x 512 px</option>
+    <option value="1024">1024 x 1024 px (print)</option>
+    <option value="256">256 x 256 px</option>
+  </select>
+
+  <label for="logoScale">Logo size <span id="logoScaleValue">22%</span> of QR code</label>
+  <input type="range" id="logoScale" min="10" max="100" value="22" />
+  <div class="row"><small>Larger logos are more likely to break scanning — use the verifier below to check.</small></div>
+
+  <button id="generateBtn">Generate QR Code</button>
+  <button id="downloadBtn" disabled>Download PNG</button>
+
+  <div id="preview"></div>
+  <div id="verifyResult"></div>
+</main>
+
+<script>
+const textEl = document.getElementById("text");
+const logoEl = document.getElementById("logo");
+const sizeEl = document.getElementById("size");
+const logoScaleEl = document.getElementById("logoScale");
+const logoScaleValueEl = document.getElementById("logoScaleValue");
+const generateBtn = document.getElementById("generateBtn");
+const downloadBtn = document.getElementById("downloadBtn");
+const preview = document.getElementById("preview");
+const verifyResult = document.getElementById("verifyResult");
+
+logoScaleEl.addEventListener("input", () => {
+  logoScaleValueEl.textContent = `${logoScaleEl.value}%`;
+});
+
+function readLogoAsImage(file) {
+  return new Promise((resolve, reject) => {
+    if (!file) return resolve(null);
+    const reader = new FileReader();
+    reader.onload = () => {
+      const img = new Image();
+      img.onload = () => resolve(img);
+      img.onerror = reject;
+      img.src = reader.result;
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+async function generate() {
+  const text = textEl.value.trim();
+  if (!text) {
+    alert("Enter a link or text to encode.");
+    return;
+  }
+
+  const size = parseInt(sizeEl.value, 10);
+  const canvas = document.createElement("canvas");
+
+  // High error correction leaves enough redundancy to cover a logo overlay.
+  await QRCode.toCanvas(canvas, text, {
+    errorCorrectionLevel: "H",
+    width: size,
+    margin: 2,
+  });
+
+  const logoFile = logoEl.files[0];
+  const logoImg = await readLogoAsImage(logoFile);
+
+  if (logoImg) {
+    const ctx = canvas.getContext("2d");
+    const logoSize = size * (parseInt(logoScaleEl.value, 10) / 100);
+    const pad = logoSize * 0.12;
+    const boxSize = logoSize + pad * 2;
+    const boxPos = (size - boxSize) / 2;
+
+    ctx.fillStyle = "#ffffff";
+    ctx.fillRect(boxPos, boxPos, boxSize, boxSize);
+
+    const logoPos = (size - logoSize) / 2;
+    ctx.drawImage(logoImg, logoPos, logoPos, logoSize, logoSize);
+  }
+
+  preview.innerHTML = "";
+  preview.appendChild(canvas);
+
+  downloadBtn.disabled = false;
+  downloadBtn.onclick = () => {
+    const link = document.createElement("a");
+    link.download = "qr-code.png";
+    link.href = canvas.toDataURL("image/png");
+    link.click();
+  };
+
+  verify(canvas, text);
+}
+
+function verify(canvas, expectedText) {
+  const ctx = canvas.getContext("2d");
+  const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+  const decoded = jsQR(imageData.data, imageData.width, imageData.height);
+
+  verifyResult.classList.remove("pass", "fail");
+  if (decoded && decoded.data === expectedText) {
+    verifyResult.classList.add("pass");
+    verifyResult.textContent = "✅ Verified — this QR code scans correctly.";
+  } else if (decoded) {
+    verifyResult.classList.add("fail");
+    verifyResult.textContent = "⚠️ Scans, but decoded content doesn't match. Try a smaller logo.";
+  } else {
+    verifyResult.classList.add("fail");
+    verifyResult.textContent = "❌ Not scannable — reduce logo size or increase QR code size.";
+  }
+}
+
+generateBtn.addEventListener("click", () => {
+  generate().catch((err) => alert(`Failed to generate QR code: ${err.message}`));
+});
+</script>
+</body>
+</html>
