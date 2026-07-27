@@ -1,0 +1,32 @@
+[
+  {
+    "id": "1",
+    "name": "Ban Khun Mae Noodle Shop",
+    "category": "food",
+    "description": "A family-run boat-noodle shop open since the 1960s, known for its dark herbal broth.",
+    "image_url": "/placeholder-poi.jpg",
+    "map_x": 22,
+    "map_y": 38,
+    "status": "active"
+  },
+  {
+    "id": "2",
+    "name": "Old Rice Pier",
+    "category": "history",
+    "description": "The pier that gave the market its name (\"Tha Na\") — once used to trade rice by boat.",
+    "image_url": "/placeholder-poi.jpg",
+    "map_x": 55,
+    "map_y": 20,
+    "status": "active"
+  },
+  {
+    "id": "3",
+    "name": "Riverside Mural Wall",
+    "category": "art",
+    "description": "A community mural project depicting the market's history, painted by local artists.",
+    "image_url": "/placeholder-poi.jpg",
+    "map_x": 70,
+    "map_y": 60,
+    "status": "active"
+  }
+]
