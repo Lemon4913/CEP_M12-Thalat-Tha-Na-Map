@@ -1,5 +1,7 @@
 # Project Structure
 
+*[อ่านเป็นภาษาไทย](PROJECT_STRUCTURE.th.md)*
+
 Recommended layout for the three phases of this project: frontend, backend, and post-process analytics.
 
 ```

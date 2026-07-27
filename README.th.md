@@ -35,7 +35,7 @@
 | Backend | Python + FastAPI พร้อมการเข้ารหัสข้อมูลที่จัดเก็บ |
 | Analytics | Python (pandas, matplotlib) สำหรับประมวลผลและสรุปข้อมูล |
 
-ดูโครงสร้างโปรเจกต์ทั้งหมดและเหตุผลของแต่ละส่วนได้ที่ [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md)
+ดูโครงสร้างโปรเจกต์ทั้งหมดและเหตุผลของแต่ละส่วนได้ที่ [PROJECT_STRUCTURE.th.md](PROJECT_STRUCTURE.th.md)
 
 ## เริ่มต้นใช้งาน
 
