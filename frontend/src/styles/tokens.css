@@ -1,0 +1,66 @@
+/* ============================================================
+   Talat Tha Na Map — Design Tokens
+   "Minimal Thai heritage"
+   Single source of truth for the web app, poster and postcard.
+   Do not introduce colours or fonts outside this file.
+   ============================================================ */
+
+:root {
+  /* ---- Colour ---------------------------------------------- */
+  --cream:    #F5EDD8;  /* page background                      */
+  --cream-lt: #FAF5EA;  /* raised surfaces, cards               */
+  --cream-md: #EAE0CC;  /* borders, dividers, inactive states   */
+
+  --green:    #2C5E42;  /* shophouse green — primary, header    */
+  --green-lt: #3D7A57;  /* hover / active                       */
+
+  --gold:     #C8993A;  /* rice-gold — accent, earned stamps    */
+  --gold-lt:  #E0B84A;  /* gold hover / glow                    */
+
+  --brown:    #3D2B1A;  /* body text                            */
+  --brown-lt: #6B4C30;  /* secondary text, map labels           */
+  --ink:      #1E1408;  /* headings                             */
+
+  --river:    #6A9888;  /* river / canal fill on the map        */
+
+  /* ---- Typography ------------------------------------------ */
+  --font: 'Sarabun', sans-serif;   /* the only font in the system */
+
+  --fs-h1:    1.35rem;
+  --fs-h2:    1.05rem;
+  --fs-body:  0.95rem;
+  --fs-small:  0.82rem;
+  --fs-label:  0.64rem;   /* bottom-nav labels, eyebrow text     */
+
+  --fw-light:    300;
+  --fw-regular:  400;
+  --fw-medium:   500;
+  --fw-semibold: 600;
+  --fw-bold:     700;
+
+  --ls-caps: 0.04em;      /* letter-spacing for uppercase labels */
+
+  /* ---- Space (4px base) ------------------------------------ */
+  --sp-1:  4px;
+  --sp-2:  8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+
+  /* ---- Shape ----------------------------------------------- */
+  --radius:    4px;    /* buttons, cards — deliberately tight   */
+  --radius-lg: 12px;   /* bottom-sheet modal                    */
+
+  /* ---- Elevation ------------------------------------------- */
+  --shadow-card:  0 1px 3px rgba(30, 20, 8, 0.08);
+  --shadow-modal: 0 -4px 24px rgba(30, 20, 8, 0.18);
+
+  /* ---- Motion ---------------------------------------------- */
+  --t-fast: 0.2s;
+  --t-base: 0.3s;
+
+  /* ---- Layout ---------------------------------------------- */
+  --nav-height: 60px;
+  --tap-min:    44px;  /* minimum tap target — never go smaller */
+}

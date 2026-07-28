@@ -1,24 +1,26 @@
+import type { POICategory } from "../types";
+
 interface Props {
-  poiId: string;
+  name: string;
+  category: POICategory;
+  index: number;
   collected: boolean;
 }
 
+const CATEGORY_ICON: Record<POICategory, string> = {
+  shop: "🛍",
+  history: "🏛",
+  art: "🎨",
+  food: "🍜",
+};
+
 // Owner: Person B.
-function StampBadge({ poiId, collected }: Props) {
+function StampBadge({ name, category, index, collected }: Props) {
   return (
-    <div
-      title={poiId}
-      style={{
-        aspectRatio: "1 / 1",
-        borderRadius: "50%",
-        border: "2px solid #999",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        opacity: collected ? 1 : 0.3,
-      }}
-    >
-      {collected ? "✅" : "?"}
+    <div className={`stamp-cell ${collected ? "earned" : "locked"}`}>
+      <div className="stamp-cell-icon">{CATEGORY_ICON[category]}</div>
+      <div className="stamp-cell-num">จุดที่ {index}</div>
+      <div className="stamp-cell-name">{name}</div>
     </div>
   );
 }
