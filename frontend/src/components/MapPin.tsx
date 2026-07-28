@@ -1,25 +1,30 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import type { POI } from "../types";
 
 interface Props {
   poi: POI;
+  x: number;
+  y: number;
+  done: boolean;
 }
 
-// Owner: Person A. Positioned absolutely over the map image using map_x/map_y (0-100%).
-function MapPin({ poi }: Props) {
+// Owner: Person A. An SVG pin positioned at (x, y) in the map's viewBox units
+// (already converted from poi.map_x/map_y percentages by the parent map).
+function MapPin({ poi, x, y, done }: Props) {
+  const navigate = useNavigate();
+
   return (
-    <Link
-      to={`/poi/${poi.id}`}
-      title={poi.name}
-      style={{
-        position: "absolute",
-        left: `${poi.map_x}%`,
-        top: `${poi.map_y}%`,
-        transform: "translate(-50%, -50%)",
-      }}
+    <g
+      className={`pin-group${done ? " pin-done" : ""}`}
+      onClick={() => navigate(`/poi/${poi.id}`)}
     >
-      📍
-    </Link>
+      <circle className="pin-pulse" cx={x} cy={y} r={10} />
+      <circle className="pin-outer" cx={x} cy={y} r={9} />
+      <text className="pin-num" x={x} y={y}>
+        {done ? "✓" : poi.id}
+      </text>
+      <title>{poi.name}</title>
+    </g>
   );
 }
 

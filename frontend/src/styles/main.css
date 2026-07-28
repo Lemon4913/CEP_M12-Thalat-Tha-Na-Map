@@ -25,6 +25,333 @@ body {
   margin-bottom: var(--sp-2);
 }
 
+/* ─── Progress strip (map page only) ───────────────────── */
+.progress-strip {
+  background: var(--green);
+  padding: var(--sp-3) var(--sp-4) 14px;
+  border-bottom: 3px solid var(--gold);
+}
+.progress-strip-inner {
+  max-width: 480px;
+  margin: 0 auto;
+}
+.progress-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--fs-small);
+  color: var(--cream-md);
+  margin-bottom: var(--sp-2);
+}
+.progress-label strong {
+  color: var(--gold-lt);
+  font-weight: var(--fw-semibold);
+}
+.progress-track {
+  height: 7px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold), var(--gold-lt));
+  border-radius: 4px;
+  transition: width var(--t-base) ease;
+  box-shadow: 0 0 8px rgba(200, 153, 58, 0.6);
+}
+.progress-stamp-row {
+  display: flex;
+  gap: 7px;
+  margin-top: 9px;
+}
+.progress-stamp {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  transition: all var(--t-base);
+}
+.progress-stamp.earned {
+  background: var(--gold);
+  border-color: var(--gold-lt);
+  box-shadow: 0 0 8px rgba(200, 153, 58, 0.5);
+}
+.progress-stamp.empty {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* ─── Map page ──────────────────────────────────────────── */
+.map-container {
+  background: var(--cream-lt);
+  border: 2px solid var(--cream-md);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: inset 0 0 30px rgba(61, 43, 26, 0.06), 0 2px 8px rgba(0, 0, 0, 0.08);
+  margin-bottom: var(--sp-4);
+}
+.map-container svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.map-road {
+  stroke: #d8ccb4;
+  stroke-width: 8;
+  fill: none;
+}
+.map-road-sm {
+  stroke: #d8ccb4;
+  stroke-width: 4;
+  fill: none;
+}
+.map-river {
+  fill: #b8d4c8;
+  stroke: #8eb8a8;
+  stroke-width: 2;
+}
+.map-building {
+  fill: #e8dcca;
+  stroke: #c8b898;
+  stroke-width: 1.5;
+}
+.map-building-main {
+  fill: #ddd0b8;
+  stroke: #b8a878;
+  stroke-width: 1.5;
+}
+.map-label {
+  font-family: var(--font);
+  fill: #6b4c30;
+  font-size: 9px;
+}
+.map-label-river {
+  font-family: var(--font);
+  fill: var(--river);
+  font-size: 8px;
+  font-style: italic;
+}
+
+.pin-group {
+  cursor: pointer;
+}
+.pin-outer {
+  fill: var(--green);
+  stroke: var(--cream);
+  stroke-width: 2;
+  transition: all var(--t-fast);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.25));
+}
+.pin-group:hover .pin-outer {
+  fill: var(--gold);
+  filter: drop-shadow(0 0 8px rgba(200, 153, 58, 0.7));
+}
+.pin-group.pin-done .pin-outer {
+  fill: var(--gold);
+  stroke: var(--gold-lt);
+}
+.pin-num {
+  font-family: var(--font);
+  font-size: 8px;
+  font-weight: var(--fw-bold);
+  fill: white;
+  text-anchor: middle;
+  dominant-baseline: middle;
+  pointer-events: none;
+}
+@keyframes pin-pulse {
+  0% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.15;
+    transform: scale(2.2);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(2.8);
+  }
+}
+.pin-pulse {
+  fill: var(--green);
+  opacity: 0.5;
+  animation: pin-pulse 2s ease-out infinite;
+  transform-origin: center;
+}
+.pin-group.pin-done .pin-pulse {
+  fill: var(--gold);
+}
+
+.checkin-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+.checkin-card {
+  background: var(--cream-lt);
+  border: 1.5px solid var(--cream-md);
+  border-radius: var(--radius);
+  padding: var(--sp-3) 14px;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  text-decoration: none;
+  color: inherit;
+  transition: all var(--t-fast);
+  position: relative;
+  overflow: hidden;
+}
+.checkin-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--cream-md);
+  transition: background var(--t-fast);
+}
+.checkin-card:hover {
+  border-color: var(--green);
+  transform: translateX(2px);
+}
+.checkin-card:hover::before {
+  background: var(--green);
+}
+.checkin-card.done {
+  background: #eff7f2;
+  border-color: #b8d8c4;
+}
+.checkin-card.done::before {
+  background: var(--green);
+}
+.card-num {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--cream-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: var(--fw-bold);
+  color: var(--brown-lt);
+  flex-shrink: 0;
+  transition: all var(--t-fast);
+}
+.checkin-card.done .card-num {
+  background: var(--green);
+  color: white;
+}
+.card-text {
+  flex: 1;
+}
+.card-name {
+  font-size: 0.92rem;
+  font-weight: var(--fw-semibold);
+  color: var(--brown);
+  line-height: 1.3;
+}
+.card-desc {
+  font-size: 0.76rem;
+  color: var(--brown-lt);
+  margin-top: 2px;
+  line-height: 1.4;
+}
+.card-check {
+  font-size: 1rem;
+  color: var(--green);
+  flex-shrink: 0;
+  opacity: 0;
+  transition: opacity var(--t-fast);
+}
+.checkin-card.done .card-check {
+  opacity: 1;
+}
+
+/* ─── POI detail page ───────────────────────────────────── */
+.poi-detail-header {
+  margin-bottom: var(--sp-4);
+}
+.poi-detail-category {
+  display: inline-block;
+  font-size: var(--fs-label);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+  color: var(--green);
+  background: rgba(44, 94, 66, 0.1);
+  padding: 3px 10px;
+  border-radius: 10px;
+  margin-bottom: var(--sp-2);
+}
+.poi-detail-name {
+  font-size: var(--fs-h1);
+  font-weight: var(--fw-bold);
+  color: var(--ink);
+}
+.poi-detail-stamped {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-1);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-semibold);
+  color: var(--green);
+  margin-top: var(--sp-2);
+}
+.poi-detail-desc {
+  font-size: var(--fs-body);
+  line-height: 1.8;
+  color: var(--brown);
+}
+
+/* ─── Landing page ──────────────────────────────────────── */
+.landing-hero {
+  background: var(--green);
+  border-radius: var(--radius-lg);
+  padding: 32px 24px;
+  text-align: center;
+  margin-bottom: var(--sp-5);
+}
+.landing-title {
+  font-size: 1.5rem;
+  font-weight: var(--fw-bold);
+  color: white;
+  margin-bottom: var(--sp-3);
+}
+.landing-desc {
+  font-size: var(--fs-small);
+  color: rgba(245, 237, 216, 0.75);
+  line-height: 1.7;
+  margin-bottom: var(--sp-4);
+}
+.landing-progress {
+  font-size: var(--fs-small);
+  color: var(--gold-lt);
+  font-weight: var(--fw-semibold);
+  margin-bottom: var(--sp-4);
+}
+.landing-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  padding: 14px 28px;
+  min-height: var(--tap-min);
+  background: var(--gold);
+  color: var(--ink);
+  border-radius: var(--radius);
+  font-family: var(--font);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-semibold);
+  text-decoration: none;
+  letter-spacing: var(--ls-caps);
+}
+
 /* ─── Stamps page ───────────────────────────────────────── */
 .stamps-hero {
   background: var(--green);

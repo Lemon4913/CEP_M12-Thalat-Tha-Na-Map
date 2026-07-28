@@ -1,27 +1,9 @@
-import { useEffect, useState } from "react";
-import type { CheckIn, POI } from "../types";
-import { fetchCheckIns } from "../api/checkins";
-import { fetchPOIs } from "../api/pois";
-import { getVisitorId } from "../lib/visitor";
+import { useMarketProgress } from "../hooks/useMarketProgress";
 import StampGrid from "../components/StampGrid";
 
 // Owner: Person B (Check-in & Stamp book)
 function Stamps() {
-  const [pois, setPois] = useState<POI[]>([]);
-  const [checkins, setCheckins] = useState<CheckIn[]>([]);
-
-  useEffect(() => {
-    fetchPOIs()
-      .then(setPois)
-      .catch(() => {
-        // backend not ready yet
-      });
-    fetchCheckIns(getVisitorId())
-      .then(setCheckins)
-      .catch(() => {
-        // backend not ready yet
-      });
-  }, []);
+  const { pois, checkins } = useMarketProgress();
 
   const total = pois.length;
   const collected = checkins.length;
