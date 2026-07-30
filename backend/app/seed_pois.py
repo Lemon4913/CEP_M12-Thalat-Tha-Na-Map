@@ -21,49 +21,73 @@ def seed_pois():
 
             POI(
                 id="food001",
-                name="ร้านกาแฟโบราณ",
+                name="ผัดไทยหอยทอด เบื้องญวน",
                 category="food",
-                description="กาแฟสูตรโบราณ เปิดมากว่า 40 ปี",
+                description="ผัดไทยหอยอร่อย การันตีโดยเชฟคุณภาพ",
                 image_url="/images/food001.jpg",
                 map_x=12.5,
                 map_y=18.2,
-                qr_secret="qr_food001",
+                qr_secret="pending_food001",
                 status="active",
             ),
 
             POI(
                 id="food002",
-                name="ร้านก๋วยเตี๋ยวเจ๊แดง",
+                name="ร้านอาหารสีฟ้า",
                 category="food",
-                description="ก๋วยเตี๋ยวหมูน้ำตกสูตรดั้งเดิม",
+                description="ร้านเจ้าเก่า วิวติดริมน้ำ",
                 image_url="/images/food002.jpg",
                 map_x=20.3,
                 map_y=22.1,
-                qr_secret="qr_food002",
+                qr_secret="pending_food002",
                 status="active",
             ),
 
             POI(
                 id="food003",
-                name="ร้านขนมไทยคุณยาย",
+                name="หน่อยเบเกอรี่",
                 category="food",
-                description="ขนมไทยทำสดทุกเช้า",
+                description="ขนมปังหอมๆ พร้อมไส้แน่นๆ",
                 image_url="/images/food003.jpg",
                 map_x=26.8,
                 map_y=17.5,
-                qr_secret="qr_food003",
+                qr_secret="pending_food003",
                 status="active",
             ),
 
             POI(
                 id="food004",
-                name="ร้านอาหารริมน้ำ",
+                name="บ้านป้าระเบียบ",
                 category="food",
-                description="ร้านอาหารที่ปิดกิจการแล้ว",
+                description="ร้านอาหารแนว Modern และอาหารที่แปลกใหม่",
                 image_url="/images/food004.jpg",
                 map_x=31.2,
                 map_y=19.6,
-                qr_secret="qr_food004",
+                qr_secret="pending_food004",
+                status="closed",
+            ),
+            
+            POI(
+                id="food005",
+                name="AYA Coffee",
+                category="food",
+                description="เครื่องดื่มหลากหลายรูปแบบ พร้อมกลิ่นหอมที่ลงตัว",
+                image_url="/images/food005.jpg",
+                map_x=31.2,
+                map_y=19.6,
+                qr_secret="Checkin_1_Coffee",
+                status="closed",
+            ),
+            
+            POI(
+                id="food006",
+                name="ร้านลุงโทนี่ อาหารตามสั่ง",
+                category="food",
+                description="ร้านอาหารที่ปิดกิจการแล้ว",
+                image_url="/images/food006.jpg",
+                map_x=31.2,
+                map_y=19.6,
+                qr_secret="pending_food005",
                 status="closed",
             ),
 
@@ -79,31 +103,31 @@ def seed_pois():
                 image_url="/images/shop001.jpg",
                 map_x=45.2,
                 map_y=20.1,
-                qr_secret="qr_shop001",
+                qr_secret="pending_shop001",
                 status="active",
             ),
 
             POI(
                 id="shop002",
-                name="ร้านเครื่องจักสาน",
+                name="นครชัยศรี แอนทีค",
                 category="shop",
-                description="สินค้าหัตถกรรมพื้นบ้าน",
+                description="ร้านจำหน่ายของเก่า",
                 image_url="/images/shop002.jpg",
                 map_x=49.8,
                 map_y=26.5,
-                qr_secret="qr_shop002",
+                qr_secret="Checkin_2_Antique",
                 status="active",
             ),
 
             POI(
                 id="shop003",
-                name="ร้านหนังสือเก่า",
+                name="กล้วยอบน้ำผึ้งทอด แม่เจริญ",
                 category="shop",
-                description="ปัจจุบันปิดกิจการ",
+                description="ร้านขนม",
                 image_url="/images/shop003.jpg",
                 map_x=51.3,
                 map_y=30.7,
-                qr_secret="qr_shop003",
+                qr_secret="pending_shop003",
                 status="closed",
             ),
 
@@ -113,25 +137,13 @@ def seed_pois():
 
             POI(
                 id="history001",
-                name="ศาลเจ้าตลาดท่านา",
+                name="ศาลเจ้าแม่เบิกไพร ตลาดท่านา",
                 category="history",
                 description="ศาลเจ้าเก่าแก่ประจำชุมชน",
                 image_url="/images/history001.jpg",
                 map_x=60.0,
                 map_y=35.2,
-                qr_secret="qr_history001",
-                status="active",
-            ),
-
-            POI(
-                id="history002",
-                name="ท่าเรือเก่า",
-                category="history",
-                description="จุดเริ่มต้นของตลาดท่านา",
-                image_url="/images/history002.jpg",
-                map_x=64.5,
-                map_y=39.7,
-                qr_secret="qr_history002",
+                qr_secret="Checkin_3_history001",
                 status="active",
             ),
 
@@ -141,25 +153,25 @@ def seed_pois():
 
             POI(
                 id="art001",
-                name="จิตรกรรมฝาผนัง",
+                name="จิตรกรรมฝาผนังบริเวณทางเดิน",
                 category="art",
-                description="ภาพวาดเล่าเรื่องวิถีชีวิตชุมชน",
+                description="ภาพวาดของขายดีในตลาดท่านา",
                 image_url="/images/art001.jpg",
                 map_x=70.1,
                 map_y=15.8,
-                qr_secret="qr_art001",
+                qr_secret="Checkin_4_Art",
                 status="active",
             ),
 
             POI(
                 id="art002",
-                name="ซุ้มภาพถ่ายย้อนยุค",
+                name="ภาพวาดในตลาด",
                 category="art",
                 description="มุมถ่ายภาพยอดนิยม",
                 image_url="/images/art002.jpg",
                 map_x=74.3,
                 map_y=18.6,
-                qr_secret="qr_art002",
+                qr_secret="pending_art002",
                 status="active",
             ),
 
@@ -175,7 +187,7 @@ def seed_pois():
                 image_url="/images/activity001.jpg",
                 map_x=82.6,
                 map_y=40.5,
-                qr_secret="qr_activity001",
+                qr_secret="Checkin_5_Activity",
                 status="active",
             ),
 
@@ -187,38 +199,10 @@ def seed_pois():
                 image_url="/images/activity002.jpg",
                 map_x=88.1,
                 map_y=44.2,
-                qr_secret="qr_activity002",
+                qr_secret="pending_activity002",
                 status="active",
             ),
 
-            # ==========================
-            # SERVICE
-            # ==========================
-
-            POI(
-                id="service001",
-                name="ห้องน้ำสาธารณะ",
-                category="service",
-                description="ห้องน้ำสำหรับนักท่องเที่ยว",
-                image_url="/images/service001.jpg",
-                map_x=92.5,
-                map_y=24.8,
-                qr_secret="qr_service001",
-                status="active",
-            ),
-
-            POI(
-                id="service002",
-                name="จุดประชาสัมพันธ์",
-                category="service",
-                description="สอบถามข้อมูลตลาด",
-                image_url="/images/service002.jpg",
-                map_x=95.3,
-                map_y=21.4,
-                qr_secret="qr_service002",
-                status="active",
-            ),
-        ]
 
         db.add_all(pois)
 
