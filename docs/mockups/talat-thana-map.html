@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ตลาดท่านา — แผนที่สะสมแต้ม</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --cream:    #F5EDD8;
+  --cream-lt: #FAF5EA;
+  --cream-md: #EAE0CC;
+  --green:    #2C5E42;
+  --green-lt: #3D7A57;
+  --gold:     #C8993A;
+  --gold-lt:  #E0B84A;
+  --brown:    #3D2B1A;
+  --brown-lt: #6B4C30;
+  --ink:      #1E1408;
+}
+
+html, body { height: 100%; }
+
+body {
+  background: var(--cream);
+  font-family: 'Sarabun', sans-serif;
+  color: var(--brown);
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 9999; opacity: 0.6;
+}
+
+/* ─── HEADER ─────────────────────────── */
+header {
+  background: var(--green);
+  padding: 16px 20px 14px;
+  flex-shrink: 0;
+  box-shadow: 0 2px 12px rgba(0,0,0,.18);
+  z-index: 100;
+}
+.header-inner {
+  max-width: 480px; margin: 0 auto;
+  display: flex; align-items: center; gap: 12px;
+}
+.logo-mark { width: 38px; height: 38px; flex-shrink: 0; }
+.header-text h1 { font-size: 1.15rem; font-weight: 700; color: var(--cream); letter-spacing: .02em; line-height: 1.2; }
+.header-text p  { font-size: .72rem; font-weight: 400; color: var(--gold-lt); letter-spacing: .06em; margin-top: 2px; }
+
+/* ─── PROGRESS STRIP (map tab only) ── */
+#progressStrip {
+  background: var(--green);
+  padding: 0 20px 14px;
+  border-bottom: 3px solid var(--gold);
+  flex-shrink: 0;
+}
+.progress-inner { max-width: 480px; margin: 0 auto; }
+.progress-label { display: flex; justify-content: space-between; font-size: .78rem; color: var(--cream-md); margin-bottom: 6px; }
+.progress-label strong { color: var(--gold-lt); font-weight: 600; }
+.progress-track { height: 7px; background: rgba(255,255,255,.15); border-radius: 4px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--gold), var(--gold-lt)); border-radius: 4px; transition: width .6s ease; box-shadow: 0 0 8px rgba(200,153,58,.6); }
+.stamp-row { display: flex; gap: 7px; margin-top: 9px; }
+.stamp { width: 26px; height: 26px; border-radius: 50%; border: 2px solid rgba(255,255,255,.25); display: flex; align-items: center; justify-content: center; font-size: .8rem; transition: all .3s; }
+.stamp.earned { background: var(--gold); border-color: var(--gold-lt); box-shadow: 0 0 8px rgba(200,153,58,.5); }
+.stamp.empty  { background: rgba(255,255,255,.08); }
+
+/* ─── PAGE CONTAINER ────────────────── */
+.pages-wrap {
+  flex: 1; overflow: hidden; position: relative;
+}
+.page {
+  position: absolute; inset: 0;
+  overflow-y: auto;
+  padding-bottom: 20px;
+  display: none;
+  -webkit-overflow-scrolling: touch;
+}
+.page.active { display: block; }
+
+/* ─── SHARED SECTION STYLES ─────────── */
+.section-eyebrow {
+  font-size: .7rem; font-weight: 600; letter-spacing: .12em;
+  color: var(--brown-lt); text-transform: uppercase; margin-bottom: 10px;
+}
+.page-inner { max-width: 480px; margin: 0 auto; padding: 18px 20px 0; }
+
+/* ─── PAGE 1: MAP ────────────────────── */
+.map-container {
+  background: var(--cream-lt);
+  border: 2px solid var(--cream-md);
+  border-radius: 4px; overflow: hidden;
+  box-shadow: inset 0 0 30px rgba(61,43,26,.06), 0 2px 8px rgba(0,0,0,.08);
+  margin-bottom: 16px;
+}
+.map-container svg { width: 100%; height: auto; display: block; }
+
+.map-road    { stroke: #D8CCB4; stroke-width: 8; fill: none; }
+.map-road-sm { stroke: #D8CCB4; stroke-width: 4; fill: none; }
+.map-river   { fill: #B8D4C8; stroke: #8EB8A8; stroke-width: 2; }
+.map-building      { fill: #E8DCCA; stroke: #C8B898; stroke-width: 1.5; }
+.map-building-main { fill: #DDD0B8; stroke: #B8A878; stroke-width: 1.5; }
+.map-label       { font-family: 'Sarabun',sans-serif; fill: #6B4C30; font-size: 9px; }
+.map-label-river { font-family: 'Sarabun',sans-serif; fill: #6A9888; font-size: 8px; font-style: italic; }
+
+.pin-group { cursor: pointer; }
+.pin-outer { fill: var(--green); stroke: var(--cream); stroke-width: 2; transition: all .2s; filter: drop-shadow(0 2px 4px rgba(0,0,0,.25)); }
+.pin-group:hover .pin-outer { fill: var(--gold); filter: drop-shadow(0 0 8px rgba(200,153,58,.7)); }
+.pin-done .pin-outer { fill: var(--gold); stroke: var(--gold-lt); }
+.pin-num { font-family:'Sarabun',sans-serif; font-size:8px; font-weight:700; fill:white; text-anchor:middle; dominant-baseline:middle; pointer-events:none; }
+@keyframes pulse { 0%{opacity:.6;transform:scale(1)} 50%{opacity:.15;transform:scale(2.2)} 100%{opacity:0;transform:scale(2.8)} }
+.pin-pulse { fill: var(--green); opacity:.5; animation: pulse 2s ease-out infinite; transform-origin: center; }
+
+.checkin-grid { display: flex; flex-direction: column; gap: 8px; }
+.checkin-card {
+  background: var(--cream-lt); border: 1.5px solid var(--cream-md);
+  border-radius: 4px; padding: 12px 14px;
+  display: flex; align-items: center; gap: 12px;
+  cursor: pointer; transition: all .2s; position: relative; overflow: hidden;
+}
+.checkin-card::before { content:''; position:absolute; left:0; top:0; bottom:0; width:3px; background:var(--cream-md); transition: background .2s; }
+.checkin-card:hover { border-color: var(--green); transform: translateX(2px); }
+.checkin-card:hover::before { background: var(--green); }
+.checkin-card.done { background: #EFF7F2; border-color: #B8D8C4; }
+.checkin-card.done::before { background: var(--green); }
+.card-num { width:32px; height:32px; border-radius:50%; background:var(--cream-md); display:flex; align-items:center; justify-content:center; font-size:.8rem; font-weight:700; color:var(--brown-lt); flex-shrink:0; transition:all .2s; }
+.checkin-card.done .card-num { background:var(--green); color:white; }
+.card-text { flex:1; }
+.card-name { font-size:.92rem; font-weight:600; color:var(--brown); line-height:1.3; }
+.card-desc { font-size:.76rem; color:var(--brown-lt); margin-top:2px; line-height:1.4; }
+.card-pts  { font-size:.72rem; font-weight:600; color:var(--gold); flex-shrink:0; }
+.card-check { font-size:1rem; color:var(--green); flex-shrink:0; opacity:0; transition:opacity .2s; }
+.checkin-card.done .card-check { opacity:1; }
+.checkin-card.done .card-pts  { display:none; }
+
+/* ─── PAGE 2: STAMPS ─────────────────── */
+.stamps-hero {
+  background: var(--green);
+  border-radius: 8px; padding: 24px 20px;
+  text-align: center; margin-bottom: 20px;
+  position: relative; overflow: hidden;
+}
+.stamps-hero::before {
+  content:''; position:absolute; top:-40px; right:-40px; width:160px; height:160px;
+  background: rgba(200,153,58,.08); border-radius:50%;
+}
+.stamps-hero-label { font-size:.72rem; font-weight:600; letter-spacing:.12em; color:var(--gold-lt); text-transform:uppercase; margin-bottom:8px; }
+.stamps-hero-count { font-size:3.5rem; font-weight:700; color:white; line-height:1; }
+.stamps-hero-count span { font-size:1.2rem; font-weight:300; opacity:.5; }
+.stamps-hero-sub { font-size:.82rem; color:rgba(245,237,216,.6); margin-top:6px; }
+.stamps-hero-bar { height:6px; background:rgba(255,255,255,.15); border-radius:3px; margin-top:16px; overflow:hidden; }
+.stamps-hero-fill { height:100%; background:var(--gold); border-radius:3px; transition:width .6s; box-shadow: 0 0 6px rgba(200,153,58,.5); }
+
+.stamp-grid-big { display:grid; grid-template-columns: repeat(4,1fr); gap:12px; margin-bottom:20px; }
+.stamp-cell {
+  background: var(--cream-lt); border:1.5px solid var(--cream-md);
+  border-radius:8px; padding:14px 8px 10px;
+  display:flex; flex-direction:column; align-items:center; gap:6px;
+  transition: all .2s;
+}
+.stamp-cell.earned { background:#EFF7F2; border-color:#B8D8C4; }
+.stamp-cell-icon { font-size:1.6rem; line-height:1; }
+.stamp-cell-num  { font-size:.65rem; font-weight:600; color:var(--brown-lt); letter-spacing:.06em; text-transform:uppercase; }
+.stamp-cell-name { font-size:.65rem; color:var(--brown-lt); text-align:center; line-height:1.3; }
+.stamp-cell.earned .stamp-cell-num { color:var(--green); }
+.stamp-cell.locked .stamp-cell-icon { filter:grayscale(1); opacity:.3; }
+
+.reward-card {
+  background:var(--green); border-radius:8px; padding:20px;
+  margin-bottom:20px; position:relative; overflow:hidden;
+}
+.reward-card::after { content:''; position:absolute; bottom:-20px; right:-20px; width:100px; height:100px; background:rgba(200,153,58,.1); border-radius:50%; }
+.reward-card-label { font-size:.7rem; letter-spacing:.12em; color:var(--gold-lt); text-transform:uppercase; margin-bottom:8px; font-weight:600; }
+.reward-card-title { font-size:1.05rem; font-weight:700; color:var(--cream); margin-bottom:6px; }
+.reward-card-desc  { font-size:.8rem; color:rgba(245,237,216,.65); line-height:1.6; }
+.reward-card-cta {
+  margin-top:14px; display:inline-flex; align-items:center; gap:6px;
+  background:rgba(200,153,58,.2); border:1.5px solid var(--gold);
+  color:var(--gold-lt); font-family:'Sarabun',sans-serif; font-size:.82rem; font-weight:600;
+  padding:8px 16px; border-radius:4px; cursor:default; letter-spacing:.04em;
+}
+.reward-card-cta.ready { background:var(--gold); color:var(--ink); cursor:pointer; border-color:var(--gold-lt); }
+
+/* history of check-ins */
+.history-list { display:flex; flex-direction:column; gap:0; }
+.history-item {
+  display:flex; gap:12px; align-items:flex-start;
+  padding:12px 0; border-bottom:1px solid var(--cream-md);
+}
+.history-item:last-child { border-bottom:none; }
+.history-dot { width:10px; height:10px; border-radius:50%; background:var(--gold); flex-shrink:0; margin-top:5px; }
+.history-dot.pending { background:var(--cream-md); }
+.history-text { flex:1; }
+.history-name { font-size:.9rem; font-weight:600; }
+.history-time { font-size:.75rem; color:var(--brown-lt); margin-top:2px; }
+.history-badge { font-size:.7rem; font-weight:600; color:var(--gold); background:rgba(200,153,58,.12); padding:2px 8px; border-radius:10px; flex-shrink:0; }
+
+/* ─── PAGE 3: HISTORY ───────────────── */
+.history-section-title {
+  font-size:1rem; font-weight:700; margin-bottom:4px;
+}
+.history-section-sub { font-size:.8rem; color:var(--brown-lt); line-height:1.6; margin-bottom:18px; }
+
+.history-chapter {
+  background:var(--cream-lt); border:1.5px solid var(--cream-md);
+  border-radius:6px; margin-bottom:12px; overflow:hidden;
+}
+.history-chapter-header {
+  padding:14px 16px; display:flex; align-items:center; gap:12px;
+  cursor:pointer; user-select:none;
+}
+.history-chapter-icon { font-size:1.4rem; flex-shrink:0; }
+.history-chapter-text { flex:1; }
+.history-chapter-title { font-size:.92rem; font-weight:700; }
+.history-chapter-era   { font-size:.74rem; color:var(--gold); font-weight:600; margin-bottom:1px; letter-spacing:.04em; }
+.history-chapter-arrow { color:var(--brown-lt); font-size:.8rem; transition:transform .2s; }
+.history-chapter.open .history-chapter-arrow { transform:rotate(90deg); }
+.history-chapter-body {
+  padding:0 16px; max-height:0; overflow:hidden; transition:max-height .3s ease, padding .3s;
+}
+.history-chapter.open .history-chapter-body { max-height:600px; padding:0 16px 16px; }
+.history-chapter-content { font-size:.82rem; line-height:1.8; color:var(--brown); border-top:1px solid var(--cream-md); padding-top:12px; }
+.history-chapter-content p { margin-bottom:10px; }
+.history-chapter-content p:last-child { margin-bottom:0; }
+
+/* ─── PAGE 4: KIOSK ──────────────────── */
+.kiosk-hero {
+  background: var(--green); border-radius:8px; padding:28px 20px 24px;
+  text-align:center; margin-bottom:20px; position:relative; overflow:hidden;
+}
+.kiosk-hero::before { content:''; position:absolute; top:-50px; left:50%; transform:translateX(-50%); width:200px; height:200px; background:rgba(200,153,58,.06); border-radius:50%; }
+.kiosk-icon { font-size:3.5rem; margin-bottom:12px; }
+.kiosk-hero-title { font-size:1.25rem; font-weight:700; color:var(--cream); margin-bottom:6px; }
+.kiosk-hero-sub   { font-size:.82rem; color:rgba(245,237,216,.65); line-height:1.6; }
+
+.kiosk-status {
+  background:var(--cream-lt); border:1.5px solid var(--cream-md);
+  border-radius:8px; padding:16px; margin-bottom:16px;
+  display:flex; align-items:center; gap:14px;
+}
+.kiosk-status-icon { font-size:2rem; flex-shrink:0; }
+.kiosk-status-text { flex:1; }
+.kiosk-status-title { font-size:.92rem; font-weight:700; }
+.kiosk-status-desc  { font-size:.78rem; color:var(--brown-lt); margin-top:2px; line-height:1.5; }
+.kiosk-status-badge { font-size:.7rem; font-weight:600; padding:4px 10px; border-radius:10px; flex-shrink:0; }
+.badge-locked { background:var(--cream-md); color:var(--brown-lt); }
+.badge-ready  { background:rgba(44,94,66,.15); color:var(--green); }
+
+.art-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:20px; }
+.art-card {
+  background:var(--cream-lt); border:1.5px solid var(--cream-md);
+  border-radius:6px; overflow:hidden; transition:all .2s;
+}
+.art-card:hover { border-color:var(--gold); }
+.art-preview {
+  aspect-ratio:3/4; background:var(--cream-md);
+  display:flex; align-items:center; justify-content:center;
+  font-size:2.5rem; position:relative; overflow:hidden;
+}
+.art-preview-bg {
+  position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+  font-size:5rem; opacity:.12;
+}
+.art-label { padding:8px 10px; }
+.art-name { font-size:.78rem; font-weight:600; }
+.art-sub  { font-size:.68rem; color:var(--brown-lt); margin-top:2px; }
+.art-locked { filter:grayscale(.6); opacity:.6; }
+
+.kiosk-how { background:var(--cream-lt); border:1.5px solid var(--cream-md); border-radius:8px; padding:16px; margin-bottom:20px; }
+.kiosk-how-title { font-size:.8rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--brown-lt); margin-bottom:12px; }
+.kiosk-step { display:flex; gap:12px; align-items:flex-start; margin-bottom:10px; }
+.kiosk-step:last-child { margin-bottom:0; }
+.kiosk-step-num { width:24px; height:24px; border-radius:50%; background:var(--green); color:white; font-size:.75rem; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:1px; }
+.kiosk-step-text { font-size:.82rem; line-height:1.6; color:var(--brown); }
+.kiosk-step-text strong { color:var(--green); }
+
+/* ─── BOTTOM NAV ─────────────────────── */
+.bottom-nav {
+  background:var(--cream-lt); border-top:2px solid var(--cream-md);
+  display:flex; flex-shrink:0;
+  padding-bottom:env(safe-area-inset-bottom,0);
+  z-index:100; box-shadow:0 -2px 12px rgba(0,0,0,.08);
+}
+.nav-item {
+  flex:1; padding:10px 4px 8px;
+  display:flex; flex-direction:column; align-items:center; gap:3px;
+  cursor:pointer; transition:all .2s; border:none; background:none;
+  color:var(--brown-lt);
+}
+.nav-item.active { color:var(--green); }
+.nav-icon  { font-size:1.1rem; line-height:1; }
+.nav-label { font-size:.64rem; font-weight:500; font-family:'Sarabun',sans-serif; letter-spacing:.04em; }
+
+/* ─── MODAL ──────────────────────────── */
+.modal-backdrop {
+  position:fixed; inset:0; background:rgba(30,20,8,.5); z-index:200;
+  display:flex; align-items:flex-end; opacity:0; pointer-events:none; transition:opacity .25s;
+}
+.modal-backdrop.open { opacity:1; pointer-events:all; }
+.modal {
+  background:var(--cream-lt); border-radius:12px 12px 0 0;
+  padding:0 0 32px; width:100%;
+  transform:translateY(100%); transition:transform .3s cubic-bezier(.32,.72,0,1);
+  max-height:80vh; overflow-y:auto;
+}
+.modal-backdrop.open .modal { transform:translateY(0); }
+.modal-handle { width:40px; height:4px; border-radius:2px; background:var(--cream-md); margin:12px auto 0; }
+.modal-header { padding:16px 20px 12px; border-bottom:1.5px solid var(--cream-md); display:flex; align-items:center; gap:12px; }
+.modal-num { width:40px; height:40px; border-radius:50%; background:var(--green); color:white; display:flex; align-items:center; justify-content:center; font-size:1rem; font-weight:700; flex-shrink:0; }
+.modal-title    { font-size:1.05rem; font-weight:700; }
+.modal-subtitle { font-size:.8rem; color:var(--brown-lt); margin-top:2px; }
+.modal-body  { padding:16px 20px; }
+.modal-fact  { background:var(--cream-md); border-left:3px solid var(--gold); padding:10px 14px; margin-bottom:14px; font-size:.83rem; line-height:1.6; border-radius:0 3px 3px 0; }
+.modal-tip-title { font-size:.75rem; font-weight:600; letter-spacing:.08em; color:var(--brown-lt); text-transform:uppercase; margin-bottom:8px; }
+.modal-tip { font-size:.83rem; line-height:1.6; margin-bottom:4px; }
+.modal-tip::before { content:'›  '; color:var(--gold); font-weight:700; }
+.modal-btn { display:flex; align-items:center; justify-content:center; gap:8px; width:100%; padding:14px; background:var(--green); color:white; border:none; border-radius:4px; font-family:'Sarabun',sans-serif; font-size:.95rem; font-weight:600; cursor:pointer; transition:background .2s; letter-spacing:.04em; }
+.modal-btn:hover { background:var(--green-lt); }
+.modal-btn.done-btn { background:var(--cream-md); color:var(--brown-lt); cursor:default; }
+.modal-close { margin-left:auto; background:none; border:none; font-size:1.2rem; color:var(--brown-lt); cursor:pointer; padding:4px; }
+
+@media (prefers-reduced-motion:reduce) { .pin-pulse { animation:none; } }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <svg class="logo-mark" viewBox="0 0 42 42" fill="none">
+      <circle cx="21" cy="21" r="20" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.2)" stroke-width="1"/>
+      <path d="M8 26 Q21 14 34 26" stroke="#C8993A" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <path d="M12 26 L21 10 L30 26 Z" fill="rgba(200,153,58,.3)" stroke="#C8993A" stroke-width="1.5"/>
+      <path d="M6 29 Q21 24 36 29" stroke="rgba(255,255,255,.35)" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <path d="M6 32 Q21 27 36 32" stroke="rgba(255,255,255,.2)" stroke-width="2" fill="none" stroke-linecap="round"/>
+    </svg>
+    <div class="header-text">
+      <h1>ตลาดท่านา</h1>
+      <p id="headerSub">TALAT THA NA · CHECK-IN MAP</p>
+    </div>
+  </div>
+</header>
+
+<!-- PROGRESS STRIP (map only) -->
+<div id="progressStrip">
+  <div class="progress-inner">
+    <div class="progress-label">
+      <span>เก็บแสตมป์</span>
+      <strong id="progressText">1 / 7 จุด</strong>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" id="progressFill" style="width:14.3%"></div>
+    </div>
+    <div class="stamp-row" id="stampRow"></div>
+  </div>
+</div>
+
+<!-- PAGES -->
+<div class="pages-wrap">
+
+  <!-- PAGE 1: MAP -->
+  <div class="page active" id="page-map">
+    <div class="page-inner">
+      <div class="section-eyebrow">แผนที่ตลาด</div>
+      <div class="map-container">
+        <svg viewBox="0 0 360 280" xmlns="http://www.w3.org/2000/svg">
+          <path class="map-river" d="M0 220 Q40 210 80 218 Q120 226 160 215 Q200 204 240 212 Q280 220 320 210 Q340 206 360 208 L360 280 L0 280 Z"/>
+          <text class="map-label-river" x="140" y="248" text-anchor="middle">แม่น้ำนครชัยศรี</text>
+          <path class="map-road" d="M0 145 L360 145" stroke="#D8CCB4"/>
+          <path class="map-road" d="M120 60 L120 220" stroke="#D8CCB4"/>
+          <path class="map-road-sm" d="M200 80 L200 220" stroke="#D8CCB4"/>
+          <path class="map-road-sm" d="M50 100 L50 220" stroke="#D8CCB4"/>
+          <path class="map-road-sm" d="M280 100 L280 220" stroke="#D8CCB4"/>
+          <path class="map-road-sm" d="M0 100 L360 100" stroke="#D8CCB4"/>
+          <rect class="map-building-main" x="60" y="108" width="50" height="28" rx="2"/>
+          <rect class="map-building" x="62" y="110" width="10" height="8" rx="1"/>
+          <rect class="map-building" x="75" y="110" width="10" height="8" rx="1"/>
+          <rect class="map-building" x="88" y="110" width="10" height="8" rx="1"/>
+          <rect class="map-building-main" x="130" y="60" width="60" height="32" rx="2"/>
+          <rect class="map-building" x="132" y="62" width="12" height="10" rx="1"/>
+          <rect class="map-building" x="148" y="62" width="12" height="10" rx="1"/>
+          <rect class="map-building" x="164" y="62" width="12" height="10" rx="1"/>
+          <rect class="map-building" x="210" y="108" width="60" height="26" rx="2"/>
+          <rect class="map-building" x="295" y="110" width="45" height="25" rx="2"/>
+          <rect class="map-building" x="60" y="155" width="50" height="28" rx="2"/>
+          <rect class="map-building" x="210" y="155" width="50" height="28" rx="2"/>
+          <rect class="map-building" x="130" y="155" width="60" height="28" rx="2"/>
+          <circle cx="30" cy="80" r="7" fill="#B8CEBC" opacity=".6"/>
+          <circle cx="310" cy="80" r="6" fill="#B8CEBC" opacity=".6"/>
+          <circle cx="335" cy="160" r="5" fill="#B8CEBC" opacity=".6"/>
+          <text class="map-label" x="85" y="101" text-anchor="middle">ตลาดเก่า</text>
+          <text class="map-label" x="160" y="56" text-anchor="middle">ถนนหลัก</text>
+          <text class="map-label" x="240" y="101" text-anchor="middle">โซนอาหาร</text>
+          <rect fill="#C8B898" stroke="#A89878" stroke-width="1" x="155" y="205" width="50" height="12" rx="2"/>
+          <text class="map-label" x="180" y="214" text-anchor="middle" font-size="7">ท่าเรือ</text>
+          <!-- Pins -->
+          <g class="pin-group pin-done" data-id="1" onclick="openModal(1)">
+            <circle class="pin-pulse" cx="180" cy="200" r="10"/>
+            <circle class="pin-outer" cx="180" cy="200" r="9"/>
+            <text class="pin-num" x="180" y="200">✓</text>
+          </g>
+          <g class="pin-group" data-id="2" onclick="openModal(2)">
+            <circle class="pin-pulse" cx="85" cy="122" r="10"/>
+            <circle class="pin-outer" cx="85" cy="122" r="9"/>
+            <text class="pin-num" x="85" y="122">2</text>
+          </g>
+          <g class="pin-group" data-id="3" onclick="openModal(3)">
+            <circle class="pin-pulse" cx="160" cy="75" r="10"/>
+            <circle class="pin-outer" cx="160" cy="75" r="9"/>
+            <text class="pin-num" x="160" y="75">3</text>
+          </g>
+          <g class="pin-group" data-id="4" onclick="openModal(4)">
+            <circle class="pin-pulse" cx="240" cy="122" r="10"/>
+            <circle class="pin-outer" cx="240" cy="122" r="9"/>
+            <text class="pin-num" x="240" y="122">4</text>
+          </g>
+          <g class="pin-group" data-id="5" onclick="openModal(5)">
+            <circle class="pin-pulse" cx="310" cy="122" r="10"/>
+            <circle class="pin-outer" cx="310" cy="122" r="9"/>
+            <text class="pin-num" x="310" y="122">5</text>
+          </g>
+          <g class="pin-group" data-id="6" onclick="openModal(6)">
+            <circle class="pin-pulse" cx="30" cy="58" r="10"/>
+            <circle class="pin-outer" cx="30" cy="58" r="9"/>
+            <text class="pin-num" x="30" y="58">6</text>
+          </g>
+          <g class="pin-group" data-id="7" onclick="openModal(7)">
+            <circle class="pin-pulse" cx="320" cy="168" r="10"/>
+            <circle class="pin-outer" cx="320" cy="168" r="9"/>
+            <text class="pin-num" x="320" y="168">7</text>
+          </g>
+          <!-- Compass -->
+          <g transform="translate(330,40)">
+            <circle cx="0" cy="0" r="14" fill="rgba(245,237,216,.8)" stroke="#C8B898" stroke-width="1"/>
+            <text font-family="Sarabun,sans-serif" font-size="7" fill="#6B4C30" text-anchor="middle" y="-5">N</text>
+            <path d="M0,-11 L2.5,-2 L0,-5 L-2.5,-2 Z" fill="#2C5E42"/>
+            <path d="M0,11 L2.5,2 L0,5 L-2.5,2 Z" fill="#C8B898"/>
+            <text font-family="Sarabun,sans-serif" font-size="5" fill="#6B4C30" text-anchor="middle" y="9">S</text>
+            <text font-family="Sarabun,sans-serif" font-size="5" fill="#6B4C30" text-anchor="middle" x="-10" y="2">W</text>
+            <text font-family="Sarabun,sans-serif" font-size="5" fill="#6B4C30" text-anchor="middle" x="10" y="2">E</text>
+          </g>
+        </svg>
+      </div>
+      <div class="section-eyebrow">จุด check-in ทั้งหมด</div>
+      <div class="checkin-grid" id="checkinGrid"></div>
+      <div style="height:20px"></div>
+    </div>
+  </div>
+
+  <!-- PAGE 2: STAMPS -->
+  <div class="page" id="page-stamps">
+    <div class="page-inner">
+      <div class="stamps-hero">
+        <div class="stamps-hero-label">แสตมป์ของฉัน</div>
+        <div class="stamps-hero-count" id="stampsHeroCount">1 <span>/ 7</span></div>
+        <div class="stamps-hero-sub" id="stampsHeroSub">เก็บอีก 6 จุด รับภาพ exclusive</div>
+        <div class="stamps-hero-bar">
+          <div class="stamps-hero-fill" id="stampsHeroFill" style="width:14.3%"></div>
+        </div>
+      </div>
+
+      <div class="section-eyebrow" style="margin-bottom:12px">แสตมป์ที่เก็บได้</div>
+      <div class="stamp-grid-big" id="stampGridBig"></div>
+
+      <div class="section-eyebrow" style="margin-bottom:12px">ประวัติการ check-in</div>
+      <div class="history-list" id="historyList"></div>
+
+      <div style="height:20px"></div>
+    </div>
+  </div>
+
+  <!-- PAGE 3: HISTORY -->
+  <div class="page" id="page-history">
+    <div class="page-inner">
+      <div class="history-section-title">ประวัติตลาดท่านา</div>
+      <div class="history-section-sub">ตลาดริมน้ำที่มีอายุกว่า 140 ปี ย่านการค้าสำคัญของลุ่มน้ำนครชัยศรี รากเหง้าของชุมชนไทย-จีน</div>
+
+      <div class="history-chapter" id="ch1">
+        <div class="history-chapter-header" onclick="toggleChapter('ch1')">
+          <div class="history-chapter-icon">⛵</div>
+          <div class="history-chapter-text">
+            <div class="history-chapter-era">ยุคแรก · รัชกาลที่ 4–5</div>
+            <div class="history-chapter-title">กำเนิดท่าเรือขนข้าว</div>
+          </div>
+          <div class="history-chapter-arrow">›</div>
+        </div>
+        <div class="history-chapter-body">
+          <div class="history-chapter-content">
+            <p>ตลาดท่านาเริ่มต้นจากท่าเรือขนาดเล็กริมแม่น้ำนครชัยศรี ในสมัยรัชกาลที่ 4-5 ชาวนาและพ่อค้าจากทั่วลุ่มน้ำนำข้าวเปลือกมาส่งที่ท่าเรือแห่งนี้ ก่อนส่งต่อไปยังกรุงเทพฯ</p>
+            <p>ชาวจีนโพ้นทะเลที่อพยพมาตั้งรกรากเป็นกลุ่มแรกๆ ที่เปิดร้านค้าริมท่าน้ำ สร้างห้องแถวไม้สักเรียงรายตลอดสองฝั่งถนน รูปแบบสถาปัตยกรรมที่เห็นได้จนถึงทุกวันนี้</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="history-chapter" id="ch2">
+        <div class="history-chapter-header" onclick="toggleChapter('ch2')">
+          <div class="history-chapter-icon">🏮</div>
+          <div class="history-chapter-text">
+            <div class="history-chapter-era">รุ่งเรือง · รัชกาลที่ 6–7</div>
+            <div class="history-chapter-title">ยุคทองของตลาดริมน้ำ</div>
+          </div>
+          <div class="history-chapter-arrow">›</div>
+        </div>
+        <div class="history-chapter-body">
+          <div class="history-chapter-content">
+            <p>ช่วงต้นศตวรรษที่ 20 ตลาดท่านาเจริญรุ่งเรืองที่สุด มีเรือสำปั้นเทียบท่าวันละหลายสิบลำ ร้านค้าเปิดตั้งแต่ดึก พ่อค้าแม่ค้าจากหลายจังหวัดมาซื้อขายสินค้า</p>
+            <p>ศาลเจ้าอาม่าถูกสร้างขึ้นในยุคนี้ เป็นศูนย์กลางจิตใจของชุมชนชาวจีน มีการจัดงานประเพณีประจำปีที่ดึงดูดผู้คนจากหลายอำเภอ</p>
+            <p>ส้มโอพันธุ์นครชัยศรีเริ่มเป็นที่รู้จักในยุคนี้ เกษตรกรริมน้ำพัฒนาพันธุ์พิเศษที่ปลูกได้ดีบนดินตะกอนริมแม่น้ำ</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="history-chapter" id="ch3">
+        <div class="history-chapter-header" onclick="toggleChapter('ch3')">
+          <div class="history-chapter-icon">🌾</div>
+          <div class="history-chapter-text">
+            <div class="history-chapter-era">สถาปัตยกรรม</div>
+            <div class="history-chapter-title">ห้องแถวไม้ · มรดกที่ยังหายใจ</div>
+          </div>
+          <div class="history-chapter-arrow">›</div>
+        </div>
+        <div class="history-chapter-body">
+          <div class="history-chapter-content">
+            <p>ห้องแถวไม้สักสีเหลืองที่เห็นอยู่ในปัจจุบันสร้างขึ้นในสมัยรัชกาลที่ 5-6 มีลักษณะเป็นสถาปัตยกรรมแบบชิโน-โปรตุกีส ผสมผสานรูปแบบจีนกับอิทธิพลตะวันตก</p>
+            <p>ลวดลายฉลุไม้เหนือประตูหน้าต่างเป็นฝีมือช่างท้องถิ่น แต่ละหลังมีลวดลายไม่ซ้ำกัน เป็นภูมิปัญญาที่ส่งต่อกันมาหลายรุ่น</p>
+            <p>อาคารเหล่านี้ยังคงมีผู้อยู่อาศัยและประกอบกิจการ ทำให้ตลาดท่านาเป็นชุมชนที่ "ยังมีชีวิต" ไม่ใช่แค่พิพิธภัณฑ์กลางแจ้ง</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="history-chapter" id="ch4">
+        <div class="history-chapter-header" onclick="toggleChapter('ch4')">
+          <div class="history-chapter-icon">🍊</div>
+          <div class="history-chapter-text">
+            <div class="history-chapter-era">อาหารและวัฒนธรรม</div>
+            <div class="history-chapter-title">รสชาติที่หาไม่ได้ที่ไหน</div>
+          </div>
+          <div class="history-chapter-arrow">›</div>
+        </div>
+        <div class="history-chapter-body">
+          <div class="history-chapter-content">
+            <p>ส้มโอนครชัยศรีได้รับการขึ้นทะเบียนสิ่งบ่งชี้ทางภูมิศาสตร์ (GI) ดินตะกอนริมแม่น้ำและสภาพอากาศพิเศษของพื้นที่ทำให้ส้มโอที่นี่มีรสชาติเฉพาะตัว</p>
+            <p>เป็ดพะโล้สูตรดั้งเดิมของชุมชนจีน ปรุงด้วยสมุนไพรและเครื่องเทศที่นำเข้ามาจากจีนในยุคแรก สูตรนี้ถ่ายทอดกันมากกว่า 3 รุ่น</p>
+            <p>ขนมปังเย็นและบัวลอยเป็นอาหารพื้นถิ่นที่กำเนิดมาจากการผสมผสานวัฒนธรรมไทยและจีน ที่เกิดขึ้นโดยธรรมชาติในชุมชนนี้</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="height:20px"></div>
+    </div>
+  </div>
+
+  <!-- PAGE 4: KIOSK -->
+  <div class="page" id="page-kiosk">
+    <div class="page-inner">
+      <div class="kiosk-hero">
+        <div class="kiosk-icon">🖼</div>
+        <div class="kiosk-hero-title">ตู้ภาพตลาดท่านา</div>
+        <div class="kiosk-hero-sub">ภาพ exclusive art สไตล์ street art<br>หาที่อื่นไม่ได้ในโลก · พิมพ์ได้ทันที</div>
+      </div>
+
+      <div class="section-eyebrow" style="margin-bottom:10px">สถานะของคุณ</div>
+      <div class="kiosk-status" id="kioskStatus">
+        <div class="kiosk-status-icon">🔒</div>
+        <div class="kiosk-status-text">
+          <div class="kiosk-status-title">ยังไม่ครบ 7 จุด</div>
+          <div class="kiosk-status-desc" id="kioskStatusDesc">เก็บแสตมป์ให้ครบก่อน จึงจะสามารถพิมพ์ภาพได้</div>
+        </div>
+        <span class="kiosk-status-badge badge-locked" id="kioskBadge">1/7</span>
+      </div>
+
+      <div class="section-eyebrow" style="margin-bottom:10px">ภาพ exclusive ที่รอคุณอยู่</div>
+      <div class="art-grid">
+        <div class="art-card art-locked" id="art1">
+          <div class="art-preview">
+            <div class="art-preview-bg">⛵</div>
+            🎨
+          </div>
+          <div class="art-label">
+            <div class="art-name">ท่าเรือยามเย็น</div>
+            <div class="art-sub">แม่น้ำนครชัยศรี</div>
+          </div>
+        </div>
+        <div class="art-card art-locked" id="art2">
+          <div class="art-preview" style="background:#DDD0B8">
+            <div class="art-preview-bg">🏮</div>
+            🎨
+          </div>
+          <div class="art-label">
+            <div class="art-name">ห้องแถวไม้</div>
+            <div class="art-sub">140 ปีที่ยังหายใจ</div>
+          </div>
+        </div>
+        <div class="art-card art-locked" id="art3">
+          <div class="art-preview" style="background:#E8D8C0">
+            <div class="art-preview-bg">🍊</div>
+            🎨
+          </div>
+          <div class="art-label">
+            <div class="art-name">สวนส้มโอ</div>
+            <div class="art-sub">ริมแม่น้ำนครชัยศรี</div>
+          </div>
+        </div>
+        <div class="art-card art-locked" id="art4">
+          <div class="art-preview" style="background:#D8E8D8">
+            <div class="art-preview-bg">🌉</div>
+            🎨
+          </div>
+          <div class="art-label">
+            <div class="art-name">สะพานรุ่งอรุณ</div>
+            <div class="art-sub">ยามเช้าของตลาด</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="kiosk-how">
+        <div class="kiosk-how-title">วิธีรับภาพ</div>
+        <div class="kiosk-step">
+          <div class="kiosk-step-num">1</div>
+          <div class="kiosk-step-text">เดินตลาดและ <strong>check-in ครบ 7 จุด</strong> บนแผนที่</div>
+        </div>
+        <div class="kiosk-step">
+          <div class="kiosk-step-num">2</div>
+          <div class="kiosk-step-text">กลับมาหน้านี้ — <strong>QR Code พิเศษ</strong>จะปลดล็อกให้อัตโนมัติ</div>
+        </div>
+        <div class="kiosk-step">
+          <div class="kiosk-step-num">3</div>
+          <div class="kiosk-step-text">นำโทรศัพท์ไป <strong>scan ที่ตู้</strong> ซึ่งตั้งอยู่ใกล้ทางออกตลาด</div>
+        </div>
+        <div class="kiosk-step">
+          <div class="kiosk-step-num">4</div>
+          <div class="kiosk-step-text"><strong>เลือกลาย</strong>ที่ชอบและรับภาพพิมพ์ได้เลย ไม่ต้องรอ</div>
+        </div>
+      </div>
+
+      <div style="height:20px"></div>
+    </div>
+  </div>
+
+</div><!-- /pages-wrap -->
+
+<!-- BOTTOM NAV -->
+<nav class="bottom-nav">
+  <button class="nav-item active" onclick="switchTab('map',this)">
+    <span class="nav-icon">🗺</span>
+    <span class="nav-label">แผนที่</span>
+  </button>
+  <button class="nav-item" onclick="switchTab('stamps',this)">
+    <span class="nav-icon">⭐</span>
+    <span class="nav-label">แต้มของฉัน</span>
+  </button>
+  <button class="nav-item" onclick="switchTab('history',this)">
+    <span class="nav-icon">📖</span>
+    <span class="nav-label">ประวัติ</span>
+  </button>
+  <button class="nav-item" onclick="switchTab('kiosk',this)">
+    <span class="nav-icon">🖼</span>
+    <span class="nav-label">ตู้ภาพ</span>
+  </button>
+</nav>
+
+<!-- MODAL -->
+<div class="modal-backdrop" id="modalBackdrop" onclick="closeModalIfBackdrop(event)">
+  <div class="modal" id="modal">
+    <div class="modal-handle"></div>
+    <div class="modal-header" id="modalHeader"></div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<script>
+const SPOTS = [
+  { id:1, name:"ท่าเรือท่านา",       sub:"จุดเริ่มต้นของตลาด",      icon:"⚓", done:true,
+    fact:"ท่าเรือแห่งนี้เคยเป็นจุดขนถ่ายข้าวเปลือกตั้งแต่สมัยรัชกาลที่ 5 เรือสำปั้นแล่นมาจากทั่วลุ่มน้ำนครชัยศรี",
+    tips:["มุมถ่ายรูปสวยช่วงเย็น แสงทองสะท้อนแม่น้ำ","มองเห็นฝั่งตรงข้ามมีสวนส้มโอเก่าแก่"] },
+  { id:2, name:"ตลาดเก่าห้องแถวไม้", sub:"อาคาร 140 ปี",             icon:"🏠", done:false,
+    fact:"ห้องแถวไม้สักสีเหลืองเหล่านี้สร้างมากกว่า 140 ปีแล้ว ยังคงสภาพดั้งเดิม มีศาลอาม่าจีนอยู่ในซอกอาคาร สะท้อนรากเหง้าไทย-จีนของชุมชน",
+    tips:["สังเกตลวดลายฉลุไม้เหนือประตู","ร้านแม่ทองย้อย — ขนมไทยโบราณที่อยู่มา 3 รุ่น"] },
+  { id:3, name:"ศาลเจ้าอาม่า",        sub:"ศาลจีนโบราณ",              icon:"🏮", done:false,
+    fact:"ศาลเจ้าอาม่าของชุมชนชาวจีนที่ตั้งถิ่นฐานมาพร้อมกับการค้าทางแม่น้ำ ยังมีพิธีกรรมตามประเพณีทุกปี",
+    tips:["ไหว้ขอพรก่อนเดินตลาด","ภาพวาดจิตรกรรมบนผนังงดงามมาก"] },
+  { id:4, name:"โซนอาหาร",            sub:"เป็ดพะโล้ · ส้มโอ · บัวลอย",icon:"🍊", done:false,
+    fact:"ส้มโอนครชัยศรีขึ้นชื่อระดับประเทศ ผิวบาง เนื้อฉ่ำ ไม่มีรสขม เพราะดินริมแม่น้ำแห่งนี้พิเศษ",
+    tips:["เป็ดพะโล้ร้านริมน้ำ — สั่งข้าวมาด้วย","บัวลอยน้ำขิงร้อนๆ เหมาะยามเช้า"] },
+  { id:5, name:"ร้านขนมปังเย็น",      sub:"ของกินขึ้นชื่อ",            icon:"🍞", done:false,
+    fact:"ขนมปังเย็นสูตรดั้งเดิม ทำมือทุกเช้า นุ่มพิเศษเพราะใช้น้ำจากแม่น้ำนครชัยศรี (ตำนานที่ชาวบ้านเชื่อกัน)",
+    tips:["ต้องมาก่อน 9 โมง ไม่งั้นหมด","กินคู่กับโอเลี้ยงเจ้าประจำฝั่งตรงข้าม"] },
+  { id:6, name:"สะพานเก่าริมน้ำ",    sub:"มุมถ่ายรูป icon",           icon:"🌉", done:false,
+    fact:"สะพานไม้เก่าที่ยังคงใช้งาน เชื่อมโซนตลาดกับย่านที่อยู่อาศัย วิวแม่น้ำจากสะพานนี้เป็นมุมที่นักถ่ายภาพมักมาเก็บยามรุ่งอรุณ",
+    tips:["ช่วง 6-7 โมงเช้าแสงดีที่สุด","นั่งขอบสะพานถ่ายรูปได้ วิวสวยมาก"] },
+  { id:7, name:"ตู้ภาพตลาดท่านา",    sub:"รับรางวัลที่นี่",           icon:"🖼", done:false,
+    fact:"ตู้พิมพ์ภาพ exclusive art ของตลาดท่านา — ภาพวาดสไตล์ street art ที่ไม่มีขายที่ไหนในโลก นอกจากที่นี่",
+    tips:["สแกน QR พิเศษหลังครบ 7 แสตมป์","มีให้เลือก 4 ลาย พิมพ์ได้เลย ไม่ต้องรอ"] },
+];
+
+let checkedIn = new Set([1]);
+
+/* ── TAB SWITCHING ──────────────────────── */
+const headerSubs = {
+  map:     'TALAT THA NA · CHECK-IN MAP',
+  stamps:  'TALAT THA NA · MY STAMPS',
+  history: 'TALAT THA NA · HISTORY',
+  kiosk:   'TALAT THA NA · PHOTO KIOSK',
+};
+
+function switchTab(tab, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+  document.getElementById('page-' + tab).classList.add('active');
+  btn.classList.add('active');
+  document.getElementById('progressStrip').style.display = tab === 'map' ? 'block' : 'none';
+  document.getElementById('headerSub').textContent = headerSubs[tab];
+  if (tab === 'stamps')  renderStampsPage();
+  if (tab === 'kiosk')   renderKioskPage();
+}
+
+/* ── RENDER MAP PAGE ────────────────────── */
+function renderCards() {
+  const grid = document.getElementById('checkinGrid');
+  grid.innerHTML = '';
+  SPOTS.forEach(s => {
+    const done = checkedIn.has(s.id);
+    const div = document.createElement('div');
+    div.className = 'checkin-card' + (done ? ' done' : '');
+    div.onclick = () => openModal(s.id);
+    div.innerHTML = `
+      <div class="card-num">${done ? '✓' : s.id}</div>
+      <div class="card-text">
+        <div class="card-name">${s.name}</div>
+        <div class="card-desc">${s.sub}</div>
+      </div>
+      <span class="card-check">✓</span>
+      <span class="card-pts">+1 แสตมป์</span>
+    `;
+    grid.appendChild(div);
+  });
+}
+
+function updateProgress() {
+  const n = checkedIn.size;
+  const pct = (n / 7 * 100).toFixed(1) + '%';
+  document.getElementById('progressFill').style.width = pct;
+  document.getElementById('progressText').textContent = `${n} / 7 จุด`;
+  const stamps = ['⚓','🏠','🏮','🍊','🍞','🌉','🖼'];
+  const row = document.getElementById('stampRow');
+  row.innerHTML = '';
+  for (let i = 0; i < 7; i++) {
+    const d = document.createElement('div');
+    d.className = 'stamp ' + (checkedIn.has(i+1) ? 'earned' : 'empty');
+    d.textContent = checkedIn.has(i+1) ? stamps[i] : '';
+    row.appendChild(d);
+  }
+  document.querySelectorAll('.pin-group').forEach(g => {
+    const id = +g.dataset.id;
+    if (checkedIn.has(id)) g.classList.add('pin-done');
+    else g.classList.remove('pin-done');
+  });
+}
+
+/* ── RENDER STAMPS PAGE ─────────────────── */
+function renderStampsPage() {
+  const n = checkedIn.size;
+  const pct = (n/7*100).toFixed(1)+'%';
+  document.getElementById('stampsHeroCount').innerHTML = `${n} <span>/ 7</span>`;
+  document.getElementById('stampsHeroFill').style.width = pct;
+  document.getElementById('stampsHeroSub').textContent =
+    n === 7 ? '🎉 ครบแล้ว! ไปรับภาพที่ตู้ได้เลย' : `เก็บอีก ${7-n} จุด รับภาพ exclusive`;
+
+  const grid = document.getElementById('stampGridBig');
+  grid.innerHTML = '';
+  SPOTS.forEach(s => {
+    const earned = checkedIn.has(s.id);
+    grid.innerHTML += `
+      <div class="stamp-cell ${earned ? 'earned' : 'locked'}">
+        <div class="stamp-cell-icon">${s.icon}</div>
+        <div class="stamp-cell-num">จุดที่ ${s.id}</div>
+        <div class="stamp-cell-name">${s.name}</div>
+      </div>`;
+  });
+
+  const hist = document.getElementById('historyList');
+  hist.innerHTML = '';
+  SPOTS.forEach(s => {
+    const earned = checkedIn.has(s.id);
+    hist.innerHTML += `
+      <div class="history-item">
+        <div class="history-dot ${earned ? '' : 'pending'}"></div>
+        <div class="history-text">
+          <div class="history-name">${s.name}</div>
+          <div class="history-time">${earned ? (s.id===1 ? 'วันนี้ 09:14' : 'รอ check-in') : 'ยังไม่ได้ไป'}</div>
+        </div>
+        <span class="history-badge">${earned ? '+1 แสตมป์' : '—'}</span>
+      </div>`;
+  });
+}
+
+/* ── RENDER KIOSK PAGE ──────────────────── */
+function renderKioskPage() {
+  const n = checkedIn.size;
+  const ready = n === 7;
+  document.getElementById('kioskStatus').querySelector('.kiosk-status-icon').textContent = ready ? '🎉' : '🔒';
+  document.getElementById('kioskStatus').querySelector('.kiosk-status-title').textContent = ready ? 'พร้อมพิมพ์ภาพแล้ว!' : 'ยังไม่ครบ 7 จุด';
+  document.getElementById('kioskStatusDesc').textContent = ready
+    ? 'สแกน QR ด้านล่างที่ตู้ได้เลย เลือกภาพที่ชอบและพิมพ์ทันที'
+    : `เก็บแสตมป์อีก ${7-n} จุด จึงจะปลดล็อกภาพได้`;
+  const badge = document.getElementById('kioskBadge');
+  badge.textContent = ready ? '✓ พร้อม' : `${n}/7`;
+  badge.className = 'kiosk-status-badge ' + (ready ? 'badge-ready' : 'badge-locked');
+  ['art1','art2','art3','art4'].forEach(id => {
+    const el = document.getElementById(id);
+    if (ready) el.classList.remove('art-locked');
+    else el.classList.add('art-locked');
+  });
+}
+
+/* ── HISTORY ACCORDION ──────────────────── */
+function toggleChapter(id) {
+  const el = document.getElementById(id);
+  el.classList.toggle('open');
+}
+
+/* ── MODAL ───────────────────────────────── */
+function openModal(id) {
+  const s = SPOTS.find(x => x.id === id);
+  const done = checkedIn.has(id);
+  document.getElementById('modalHeader').innerHTML = `
+    <div class="modal-num" style="${done?'background:var(--gold)':''}">${done ? '✓' : id}</div>
+    <div>
+      <div class="modal-title">${s.name}</div>
+      <div class="modal-subtitle">${s.sub}</div>
+    </div>
+    <button class="modal-close" onclick="closeModal()">✕</button>`;
+  document.getElementById('modalBody').innerHTML = `
+    <div class="modal-fact">${s.fact}</div>
+    <div style="margin-bottom:14px">
+      <div class="modal-tip-title">ไม่ควรพลาด</div>
+      ${s.tips.map(t=>`<div class="modal-tip">${t}</div>`).join('')}
+    </div>
+    ${done
+      ? `<button class="modal-btn done-btn">✓ Check-in แล้ว</button>`
+      : `<button class="modal-btn" onclick="doCheckin(${id})">📍 Check-in ที่นี่</button>`}`;
+  document.getElementById('modalBackdrop').classList.add('open');
+}
+
+function doCheckin(id) {
+  checkedIn.add(id);
+  renderCards();
+  updateProgress();
+  closeModal();
+}
+
+function closeModal() {
+  document.getElementById('modalBackdrop').classList.remove('open');
+}
+function closeModalIfBackdrop(e) {
+  if (e.target === document.getElementById('modalBackdrop')) closeModal();
+}
+
+// init
+renderCards();
+updateProgress();
+</script>
+</body>
+</html>

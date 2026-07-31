@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 297" width="420" height="297">
+<defs><style>@import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&amp;display=swap');</style></defs>
+  <rect width="420" height="297" fill="#F5EDD8"/>
+  <rect x="0" y="0" width="420" height="5" fill="#C8993A"/>
+  <path d="M0.0 33.0 L0.0 23.4 L19.1 10.0 L38.2 23.4 L38.2 33.0 Z" fill="#2C5E42"/><path d="M38.2 33.0 L38.2 25.7 L57.3 15.6 L76.4 25.7 L76.4 33.0 Z" fill="#2C5E42"/><path d="M76.4 33.0 L76.4 23.4 L95.5 10.0 L114.5 23.4 L114.5 33.0 Z" fill="#2C5E42"/><path d="M114.5 33.0 L114.5 25.7 L133.6 15.6 L152.7 25.7 L152.7 33.0 Z" fill="#2C5E42"/><path d="M152.7 33.0 L152.7 23.4 L171.8 10.0 L190.9 23.4 L190.9 33.0 Z" fill="#2C5E42"/><path d="M190.9 33.0 L190.9 25.7 L210.0 15.6 L229.1 25.7 L229.1 33.0 Z" fill="#2C5E42"/><path d="M229.1 33.0 L229.1 23.4 L248.2 10.0 L267.3 23.4 L267.3 33.0 Z" fill="#2C5E42"/><path d="M267.3 33.0 L267.3 25.7 L286.4 15.6 L305.5 25.7 L305.5 33.0 Z" fill="#2C5E42"/><path d="M305.5 33.0 L305.5 23.4 L324.5 10.0 L343.6 23.4 L343.6 33.0 Z" fill="#2C5E42"/><path d="M343.6 33.0 L343.6 25.7 L362.7 15.6 L381.8 25.7 L381.8 33.0 Z" fill="#2C5E42"/><path d="M381.8 33.0 L381.8 23.4 L400.9 10.0 L420.0 23.4 L420.0 33.0 Z" fill="#2C5E42"/>
+
+  <text x="30" y="90" font-family="Sarabun, 'Noto Sans Thai', sans-serif" font-size="30" font-weight="700"
+        fill="#1E1408">ตลาดท่านา</text>
+  <text x="31" y="108" font-family="Sarabun, 'Noto Sans Thai', sans-serif" font-size="9" font-weight="600"
+        fill="#C8993A" letter-spacing="3">STAMP EXCHANGE · แลกแต้ม</text>
+  <text x="30" y="142" font-family="Sarabun, 'Noto Sans Thai', sans-serif" font-size="12" font-weight="400" fill="#6B4C30">เก็บแสตมป์ครบ 7 จุด</text>
+  <text x="30" y="162" font-family="Sarabun, 'Noto Sans Thai', sans-serif" font-size="12" font-weight="400" fill="#6B4C30">นำบัตรนี้ไปที่ตู้จ่ายภาพ</text>
+
+  <g transform="translate(332,148) scale(0.72)">
+  <!-- leaf + stem -->
+  <path d="M6 -104 q4 -22 30 -30 q2 26 -24 34 z" fill="#8FA845" stroke="#2C5E42" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M0 -96 q3 -10 8 -16" stroke="#3D2B1A" stroke-width="7" fill="none" stroke-linecap="round"/>
+  <!-- body -->
+  <circle cx="0" cy="0" r="94" fill="#E0B84A" stroke="#2C5E42" stroke-width="6"/>
+  <circle cx="0" cy="0" r="94" fill="#8FA845" opacity=".28"/>
+  <!-- rind texture -->
+  <g fill="#2C5E42" opacity=".16">
+    <circle cx="-46" cy="-40" r="3.4"/><circle cx="-22" cy="-58" r="2.8"/><circle cx="34" cy="-50" r="3.2"/>
+    <circle cx="58" cy="-16" r="2.9"/><circle cx="46" cy="30" r="3.3"/><circle cx="-58" cy="8" r="3"/>
+    <circle cx="-34" cy="48" r="2.7"/><circle cx="10" cy="62" r="3.1"/><circle cx="66" cy="52" r="2.6"/>
+  </g>
+  <!-- cheeks -->
+  <ellipse cx="-42" cy="16" rx="15" ry="10" fill="#A63A2E" opacity=".22"/>
+  <ellipse cx="42" cy="16" rx="15" ry="10" fill="#A63A2E" opacity=".22"/>
+  <!-- eyes -->
+  <ellipse cx="-26" cy="-10" rx="8.5" ry="10" fill="#1E1408"/>
+  <ellipse cx="26" cy="-10" rx="8.5" ry="10" fill="#1E1408"/>
+  <circle cx="-23" cy="-14" r="3" fill="#FAF5EA"/>
+  <circle cx="29" cy="-14" r="3" fill="#FAF5EA"/>
+  <!-- smile -->
+  <path d="M-16 20 q16 16 32 0" stroke="#1E1408" stroke-width="5" fill="none" stroke-linecap="round"/>
+  
+    <path d="M-72 20 Q-102 36 -94 64" stroke="#2C5E42" stroke-width="10" fill="none" stroke-linecap="round"/>
+    <circle cx="-95" cy="70" r="10" fill="#E0B84A" stroke="#2C5E42" stroke-width="4.5"/>
+    <path d="M72 20 Q102 36 94 64" stroke="#2C5E42" stroke-width="10" fill="none" stroke-linecap="round"/>
+    <circle cx="95" cy="70" r="10" fill="#E0B84A" stroke="#2C5E42" stroke-width="4.5"/>
+</g>
+
+  <line x1="30" y1="204" x2="390" y2="204" stroke="#EAE0CC" stroke-width="1.5"/>
+  <text x="30" y="242" font-family="Sarabun, 'Noto Sans Thai', sans-serif" font-size="11" font-weight="600" fill="#2C5E42">แสตมป์ของฉัน</text>
+  <circle cx="158" cy="238" r="13" fill="#FAF5EA" stroke="#C8993A" stroke-width="1.6"/><g transform="translate(158,238) scale(0.867)" opacity="1"><circle cx="0" cy="-8" r="2.6" stroke="#2C5E42" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M0 -5.4 V9" stroke="#2C5E42" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M-5 -2 H5" stroke="#2C5E42" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M-8.5 3.5 A8.5 8.5 0 0 0 8.5 3.5" stroke="#2C5E42" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g><circle cx="167.4" cy="228.6" r="3.6" fill="#C8993A"/><circle cx="192" cy="238" r="13" fill="#FAF5EA" stroke="#C8993A" stroke-width="1.6"/><g transform="translate(192,238) scale(0.867)" opacity="1"><path d="M-10 -1 L0 -9 L10 -1" stroke="#2C5E42" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M-8 -1 V9 H8 V-1" stroke="#2C5E42" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M-2.6 9 V2 H2.6 V9" stroke="#2C5E42" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M-10 -1 H10" stroke="#2C5E42" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g><circle cx="201.4" cy="228.6" r="3.6" fill="#C8993A"/><circle cx="226" cy="238" r="13" fill="#EAE0CC" stroke="#EAE0CC" stroke-width="1.6" stroke-dasharray="4.4 3.4"/><g transform="translate(226,238) scale(0.867)" opacity=".42"><path d="M0 -11.5 V-8.6" stroke="#6B4C30" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M-4.4 -8.6 H4.4" stroke="#6B4C30" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><ellipse cx="0" cy="0" rx="7.6" ry="8.2" stroke="#6B4C30" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M-3.1 -7.6 Q-5.4 0 -3.1 7.6" stroke="#6B4C30" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M3.1 -7.6 Q5.4 0 3.1 7.6" stroke="#6B4C30" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M-4.4 8.6 H4.4" stroke="#6B4C30" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M0 8.6 V11.8" stroke="#6B4C30" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g><circle cx="260" cy="238" r="13" fill="#EAE0CC" stroke="#EAE0CC" stroke-width="1.6" stroke-dasharray="4.4 3.4"/><g transform="translate(260,238) scale(0.867)" opacity=".42"><circle cx="0" cy="1.5" r="7.6" stroke="#6B4C30" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M1 -6 q1.6 -4.6 6.4 -5.4 q0.4 5.2 -5 6.4" stroke="#6B4C30" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M-3.4 -1.4 q3.4 2.6 7 0.4" stroke="#6B4C30" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g><circle cx="294" cy="238" r="13" fill="#EAE0CC" stroke="#EAE0CC" stroke-width="1.6" stroke-dasharray="4.4 3.4"/><g transform="translate(294,238) scale(0.867)" opacity=".42"><path d="M-9.6 7.2 Q-11 -1 -6 -5.2 Q0 -9.6 6 -5.2 Q11 -1 9.6 7.2 Z" stroke="#6B4C30" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M-9.2 3.4 Q0 5.4 9.2 3.4" stroke="#6B4C30" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M-5.2 -3.4 l3.4 -2.6" stroke="#6B4C30" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M-1 -4.6 l3.4 -2.6" stroke="#6B4C30" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M3.2 -3.4 l3.4 -2.6" stroke="#6B4C30" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g><circle cx="328" cy="238" r="13" fill="#EAE0CC" stroke="#EAE0CC" stroke-width="1.6" stroke-dasharray="4.4 3.4"/><g transform="translate(328,238) scale(0.867)" opacity=".42"><path d="M-11 4 Q0 -8 11 4" stroke="#6B4C30" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M-11 4 V9" stroke="#6B4C30" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M11 4 V9" stroke="#6B4C30" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M-5.5 -0.4 V6.6" stroke="#6B4C30" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M0 -3 V6.6" stroke="#6B4C30" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.5 -0.4 V6.6" stroke="#6B4C30" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M-11 6.6 H11" stroke="#6B4C30" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g><circle cx="362" cy="238" r="13" fill="#EAE0CC" stroke="#EAE0CC" stroke-width="1.6" stroke-dasharray="4.4 3.4"/><g transform="translate(362,238) scale(0.867)" opacity=".42"><rect x="-9" y="-9.5" width="18" height="15" rx="1.6" stroke="#6B4C30" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M-6 1.5 L-1.6 -3.4 L1.4 -0.4 L4 -3.2 L6.4 -0.6" stroke="#6B4C30" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="-4.4" cy="-5.6" r="1.5" stroke="#6B4C30" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M-5 5.5 V8.4 H5 V5.5" stroke="#6B4C30" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M-3 8.4 H3" stroke="#6B4C30" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g>
+  <text x="210.0" y="288" font-family="Sarabun, 'Noto Sans Thai', sans-serif" font-size="6.5" fill="#6B4C30"
+        text-anchor="middle" opacity=".6">REFERENCE ASSET · MASCOT PLACEHOLDER — SEE docs/05-print-assets.md</text>
+</svg>

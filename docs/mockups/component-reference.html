@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Talat Tha Na Map — Component Reference</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<!--
+  Component reference for the Talat Tha Na Map design system.
+  Static, self-contained, no build step — open it directly in a browser.
+
+  This is a SPEC, not the app. The interactive prototype is
+  ./talat-thana-map.html. Use this page to check that a React component
+  you're building matches the agreed visual language.
+
+  Tokens are duplicated below from ../design-tokens.css so this file stays
+  standalone. If you change a token, change it in BOTH places.
+-->
+<style>
+:root{
+  --cream:#F5EDD8; --cream-lt:#FAF5EA; --cream-md:#EAE0CC;
+  --green:#2C5E42; --green-lt:#3D7A57;
+  --gold:#C8993A;  --gold-lt:#E0B84A;
+  --brown:#3D2B1A; --brown-lt:#6B4C30; --ink:#1E1408;
+  --river:#6A9888;
+  --font:'Sarabun',sans-serif;
+  --radius:4px; --radius-lg:12px;
+  --shadow-card:0 1px 3px rgba(30,20,8,.08);
+  --shadow-modal:0 -4px 24px rgba(30,20,8,.18);
+  --t-fast:.2s; --nav-height:60px; --tap-min:44px;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:var(--brown);font-family:var(--font);font-weight:400;
+     -webkit-font-smoothing:antialiased}
+.wrap{max-width:1180px;margin:0 auto;padding:0 28px 96px}
+
+/* page head */
+.head{background:var(--green);color:var(--cream);padding:38px 28px 30px;border-top:6px solid var(--gold);margin-bottom:44px}
+.head-in{max-width:1180px;margin:0 auto}
+.head h1{margin:0;font-size:1.8rem;font-weight:700;letter-spacing:.01em}
+.head p{margin:8px 0 0;font-size:.86rem;color:var(--gold-lt);font-weight:600;letter-spacing:.14em}
+.head .note{margin-top:16px;font-size:.86rem;font-weight:400;color:rgba(245,237,216,.78);max-width:56ch;letter-spacing:0}
+
+h2{font-size:1.05rem;font-weight:700;color:var(--ink);margin:56px 0 6px;
+   padding-bottom:8px;border-bottom:2px solid var(--cream-md)}
+h2 span{float:right;font-size:.62rem;font-weight:600;color:var(--brown-lt);
+        letter-spacing:.14em;padding-top:6px;opacity:.75}
+.lede{margin:12px 0 22px;font-size:.9rem;color:var(--brown-lt);max-width:70ch}
+
+/* swatches */
+.sw-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:14px}
+.sw{background:var(--cream-lt);border:1px solid var(--cream-md);border-radius:var(--radius);overflow:hidden}
+.sw i{display:block;height:66px}
+.sw b{display:block;font-size:.76rem;font-weight:600;color:var(--ink);padding:9px 10px 0}
+.sw em{display:block;font-size:.72rem;font-style:normal;color:var(--brown-lt);padding:1px 10px 10px}
+.sw u{display:block;font-size:.66rem;text-decoration:none;color:var(--brown-lt);padding:0 10px 10px;opacity:.8}
+
+/* type */
+.type-row{display:flex;align-items:baseline;gap:20px;padding:13px 0;border-bottom:1px solid var(--cream-md)}
+.type-row code{flex:0 0 130px;font-size:.7rem;color:var(--brown-lt);font-family:ui-monospace,monospace}
+
+/* phones */
+.phones{display:flex;gap:24px;flex-wrap:wrap}
+.phone{width:264px;background:var(--cream-lt);border:1px solid var(--cream-md);border-radius:14px;
+       overflow:hidden;box-shadow:var(--shadow-card);display:flex;flex-direction:column;height:520px}
+.phone-cap{font-size:.64rem;font-weight:600;letter-spacing:.12em;color:var(--brown-lt);
+           text-align:center;margin-top:9px}
+.ph-head{background:var(--green);padding:11px 13px;display:flex;gap:9px;align-items:center;flex:0 0 auto}
+.ph-head h3{margin:0;font-size:1.02rem;font-weight:700;color:var(--cream);line-height:1.15}
+.ph-head p{margin:2px 0 0;font-size:.54rem;font-weight:600;color:var(--gold-lt);letter-spacing:.12em}
+.ph-body{flex:1;overflow:hidden;padding:13px}
+.ph-nav{flex:0 0 auto;height:var(--nav-height);background:var(--green);display:flex;
+        border-top:1px solid rgba(255,255,255,.08)}
+.ph-nav div{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
+            color:rgba(245,237,216,.55);font-size:.56rem;font-weight:500;letter-spacing:.04em}
+.ph-nav div.on{color:var(--gold)}
+.ph-nav svg{width:17px;height:17px}
+
+/* progress strip */
+.prog{background:var(--cream-lt);border:1px solid var(--cream-md);border-radius:var(--radius);
+      padding:9px 11px;margin-bottom:12px}
+.prog .lab{display:flex;justify-content:space-between;font-size:.68rem;margin-bottom:6px}
+.prog .lab strong{font-weight:700;color:var(--gold)}
+.track{height:6px;background:var(--cream-md);border-radius:3px;overflow:hidden}
+.fill{height:100%;background:var(--gold);border-radius:3px}
+
+/* map */
+.map{background:var(--cream);border:1px solid var(--cream-md);border-radius:var(--radius);height:250px}
+
+/* stamps */
+.st-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:11px}
+.st{aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative}
+.st.on{background:var(--cream-lt);border:3px solid var(--gold)}
+.st.off{background:var(--cream-md);border:2px dashed #d8cbb2}
+.st.on::after{content:'';position:absolute;top:2px;right:2px;width:12px;height:12px;
+              border-radius:50%;background:var(--gold)}
+.st svg{width:52%;height:52%}
+.st.off svg{opacity:.42}
+
+/* history */
+.hist{border-bottom:1px solid var(--cream-md);padding:10px 0;display:flex;gap:10px;align-items:flex-start}
+.hist svg{width:20px;height:20px;flex:0 0 20px;margin-top:2px}
+.hist b{display:block;font-size:.76rem;font-weight:600;color:var(--ink)}
+.hist span{display:block;font-size:.66rem;color:var(--brown-lt);line-height:1.5}
+.hist.locked{opacity:.45}
+
+/* kiosk */
+.kiosk{text-align:center;padding:14px 8px;border:1px solid var(--cream-md);border-radius:var(--radius);
+       background:var(--cream-lt)}
+.kiosk.locked{background:var(--cream-md);border-style:dashed}
+.badge{display:inline-block;font-size:.62rem;font-weight:700;letter-spacing:.1em;padding:4px 11px;
+       border-radius:2px;background:var(--cream-md);color:var(--brown-lt)}
+.badge.ready{background:var(--gold);color:#fff}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:var(--tap-min);
+     padding:0 20px;background:var(--green);color:var(--cream);border:none;border-radius:var(--radius);
+     font-family:var(--font);font-size:.9rem;font-weight:600;letter-spacing:.04em;cursor:pointer;
+     transition:background var(--t-fast)}
+.btn:hover{background:var(--green-lt)}
+.btn.block{width:100%}
+.btn[disabled]{background:var(--cream-md);color:var(--brown-lt);cursor:not-allowed}
+
+/* modal spec */
+.sheet{max-width:330px;background:var(--cream-lt);border-radius:var(--radius-lg) var(--radius-lg) 0 0;
+       box-shadow:var(--shadow-modal);overflow:hidden}
+.sheet .handle{width:38px;height:4px;background:var(--cream-md);border-radius:2px;margin:11px auto 0}
+.sheet .sh-head{display:flex;gap:11px;align-items:center;padding:13px 17px 11px}
+.sheet .sh-head svg{width:26px;height:26px;flex:0 0 26px}
+.sheet .sh-head b{display:block;font-size:.95rem;font-weight:700;color:var(--ink)}
+.sheet .sh-head em{display:block;font-size:.72rem;font-style:normal;color:var(--brown-lt)}
+.sheet .sh-body{padding:0 17px 17px;font-size:.8rem;line-height:1.65;color:var(--brown)}
+.sheet .tip{display:flex;gap:7px;margin-top:7px;font-size:.75rem;color:var(--brown-lt)}
+.sheet .tip::before{content:'·';color:var(--gold);font-weight:700}
+
+/* rules */
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-top:18px}
+.rule{background:var(--cream-lt);border:1px solid var(--cream-md);border-left:3px solid var(--gold);
+      border-radius:var(--radius);padding:13px 15px}
+.rule b{display:block;font-size:.82rem;font-weight:700;color:var(--ink);margin-bottom:4px}
+.rule span{font-size:.78rem;color:var(--brown-lt);line-height:1.6}
+.rule.no{border-left-color:#A63A2E}
+footer{margin-top:64px;padding-top:20px;border-top:2px solid var(--cream-md);
+       font-size:.76rem;color:var(--brown-lt)}
+code.k{font-family:ui-monospace,monospace;font-size:.76rem;background:var(--cream-md);
+       padding:1px 5px;border-radius:2px;color:var(--ink)}
+</style>
+</head>
+<body>
+
+<!-- ============ shared icon defs ============ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <g id="i-anchor" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="0" cy="-8" r="2.6"/><path d="M0 -5.4 V9"/><path d="M-5 -2 H5"/>
+    <path d="M-8.5 3.5 A8.5 8.5 0 0 0 8.5 3.5"/></g>
+  <g id="i-shophouse" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M-10 -1 L0 -9 L10 -1"/><path d="M-8 -1 V9 H8 V-1"/>
+    <path d="M-2.6 9 V2 H2.6 V9"/><path d="M-10 -1 H10"/></g>
+  <g id="i-lantern" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M0 -11.5 V-8.6"/><path d="M-4.4 -8.6 H4.4"/><ellipse cx="0" cy="0" rx="7.6" ry="8.2"/>
+    <path d="M-3.1 -7.6 Q-5.4 0 -3.1 7.6"/><path d="M3.1 -7.6 Q5.4 0 3.1 7.6"/>
+    <path d="M-4.4 8.6 H4.4"/><path d="M0 8.6 V11.8"/></g>
+  <g id="i-pomelo" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="0" cy="1.5" r="7.6"/><path d="M1 -6 q1.6 -4.6 6.4 -5.4 q0.4 5.2 -5 6.4"/>
+    <path d="M-3.4 -1.4 q3.4 2.6 7 0.4"/></g>
+  <g id="i-bread" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M-9.6 7.2 Q-11 -1 -6 -5.2 Q0 -9.6 6 -5.2 Q11 -1 9.6 7.2 Z"/>
+    <path d="M-9.2 3.4 Q0 5.4 9.2 3.4"/><path d="M-5.2 -3.4 l3.4 -2.6"/>
+    <path d="M-1 -4.6 l3.4 -2.6"/><path d="M3.2 -3.4 l3.4 -2.6"/></g>
+  <g id="i-bridge" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M-11 4 Q0 -8 11 4"/><path d="M-11 4 V9"/><path d="M11 4 V9"/>
+    <path d="M-5.5 -0.4 V6.6"/><path d="M0 -3 V6.6"/><path d="M5.5 -0.4 V6.6"/>
+    <path d="M-11 6.6 H11"/></g>
+  <g id="i-kiosk" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="-9" y="-9.5" width="18" height="15" rx="1.6"/>
+    <path d="M-6 1.5 L-1.6 -3.4 L1.4 -0.4 L4 -3.2 L6.4 -0.6"/>
+    <circle cx="-4.4" cy="-5.6" r="1.5"/><path d="M-5 5.5 V8.4 H5 V5.5"/><path d="M-3 8.4 H3"/></g>
+  <g id="i-map" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M-9 -6 L-3 -8.5 L3 -6 L9 -8.5 V7 L3 9.5 L-3 7 L-9 9.5 Z"/>
+    <path d="M-3 -8.5 V7"/><path d="M3 -6 V9.5"/></g>
+  <g id="i-star" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M0 -9 L2.6 -2.9 L9 -2.4 L4.1 1.8 L5.6 8.2 L0 4.8 L-5.6 8.2 L-4.1 1.8 L-9 -2.4 L-2.6 -2.9 Z"/></g>
+  <g id="i-book" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M-8.5 -8 H-2 A2.5 2.5 0 0 1 0 -6 V9 A2.5 2.5 0 0 0 -2 7.5 H-8.5 Z"/>
+    <path d="M8.5 -8 H2 A2.5 2.5 0 0 0 0 -6 V9 A2.5 2.5 0 0 1 2 7.5 H8.5 Z"/></g>
+</defs></svg>
+
+<div class="head"><div class="head-in">
+  <h1>Talat Tha Na Map — Component Reference</h1>
+  <p>ตลาดท่านา · MINIMAL THAI HERITAGE</p>
+  <p class="note">A spec sheet, not the app. Build React components against this page; check
+  interaction against <code style="color:var(--gold-lt)">talat-thana-map.html</code>. Tokens live in
+  <code style="color:var(--gold-lt)">docs/design-tokens.css</code>.</p>
+</div></div>
+
+<div class="wrap">
+
+<h2>Colour <span>DOCS/03-DESIGN-SYSTEM.MD</span></h2>
+<p class="lede">Cream is the background. Green is the frame. <strong>Gold is the reward</strong> — it means
+“you earned this”, so it never gets used decoratively. Never set gold text on cream; contrast fails
+outdoors, which is where this app is used.</p>
+<div class="sw-grid">
+  <div class="sw"><i style="background:#F5EDD8"></i><b>--cream</b><em>#F5EDD8</em><u>page background</u></div>
+  <div class="sw"><i style="background:#FAF5EA"></i><b>--cream-lt</b><em>#FAF5EA</em><u>cards, surfaces</u></div>
+  <div class="sw"><i style="background:#EAE0CC"></i><b>--cream-md</b><em>#EAE0CC</em><u>borders, locked</u></div>
+  <div class="sw"><i style="background:#2C5E42"></i><b>--green</b><em>#2C5E42</em><u>primary, header</u></div>
+  <div class="sw"><i style="background:#3D7A57"></i><b>--green-lt</b><em>#3D7A57</em><u>hover</u></div>
+  <div class="sw"><i style="background:#C8993A"></i><b>--gold</b><em>#C8993A</em><u>earned, accent</u></div>
+  <div class="sw"><i style="background:#E0B84A"></i><b>--gold-lt</b><em>#E0B84A</em><u>gold hover</u></div>
+  <div class="sw"><i style="background:#3D2B1A"></i><b>--brown</b><em>#3D2B1A</em><u>body text</u></div>
+  <div class="sw"><i style="background:#6B4C30"></i><b>--brown-lt</b><em>#6B4C30</em><u>secondary text</u></div>
+  <div class="sw"><i style="background:#1E1408"></i><b>--ink</b><em>#1E1408</em><u>headings</u></div>
+  <div class="sw"><i style="background:#6A9888"></i><b>--river</b><em>#6A9888</em><u>river on map</u></div>
+</div>
+
+<h2>Typography <span>SARABUN ONLY</span></h2>
+<p class="lede">Sarabun covers Thai and Latin in one family. Never substitute <code class="k">system-ui</code>
+or a generic sans fallback — Thai tone marks and diacritics break. Thai text never gets letter-spacing;
+uppercase Latin labels take <code class="k">0.04em</code>.</p>
+<div class="type-row"><code>--fs-h1 · 700</code><span style="font-size:1.35rem;font-weight:700;color:var(--ink)">ตลาดท่านา · Talat Tha Na</span></div>
+<div class="type-row"><code>--fs-h2 · 600</code><span style="font-size:1.05rem;font-weight:600;color:var(--ink)">เก็บแสตมป์ครบ 7 จุด</span></div>
+<div class="type-row"><code>--fs-body · 400</code><span style="font-size:.95rem">สแกน QR ที่จุดเช็คอิน แล้วสะสมแสตมป์ให้ครบ</span></div>
+<div class="type-row"><code>--fs-small · 400</code><span style="font-size:.82rem;color:var(--brown-lt)">มุมถ่ายรูปสวยช่วงเย็น แสงทองสะท้อนแม่น้ำ</span></div>
+<div class="type-row"><code>--fs-label · 500</code><span style="font-size:.64rem;font-weight:500;letter-spacing:.04em;color:var(--brown-lt)">TALAT THA NA · CHECK-IN MAP</span></div>
+
+<h2>Check-in point icons <span>VECTOR, NOT EMOJI</span></h2>
+<p class="lede">Emoji render inconsistently across print pipelines and are off-brand. Every point icon is a
+drawn path — see <code class="k">docs/assets/make_assets.py</code>.</p>
+<div style="display:flex;gap:26px;flex-wrap:wrap;padding:6px 0">
+  <div style="text-align:center"><svg viewBox="-14 -14 28 28" width="44" height="44" stroke="var(--green)"><use href="#i-anchor"/></svg><div style="font-size:.72rem;color:var(--brown-lt)">ท่าเรือ</div></div>
+  <div style="text-align:center"><svg viewBox="-14 -14 28 28" width="44" height="44" stroke="var(--green)"><use href="#i-shophouse"/></svg><div style="font-size:.72rem;color:var(--brown-lt)">ห้องแถว</div></div>
+  <div style="text-align:center"><svg viewBox="-14 -14 28 28" width="44" height="44" stroke="var(--green)"><use href="#i-lantern"/></svg><div style="font-size:.72rem;color:var(--brown-lt)">ศาลเจ้า</div></div>
+  <div style="text-align:center"><svg viewBox="-14 -14 28 28" width="44" height="44" stroke="var(--green)"><use href="#i-pomelo"/></svg><div style="font-size:.72rem;color:var(--brown-lt)">โซนอาหาร</div></div>
+  <div style="text-align:center"><svg viewBox="-14 -14 28 28" width="44" height="44" stroke="var(--green)"><use href="#i-bread"/></svg><div style="font-size:.72rem;color:var(--brown-lt)">ขนมปัง</div></div>
+  <div style="text-align:center"><svg viewBox="-14 -14 28 28" width="44" height="44" stroke="var(--green)"><use href="#i-bridge"/></svg><div style="font-size:.72rem;color:var(--brown-lt)">สะพาน</div></div>
+  <div style="text-align:center"><svg viewBox="-14 -14 28 28" width="44" height="44" stroke="var(--green)"><use href="#i-kiosk"/></svg><div style="font-size:.72rem;color:var(--brown-lt)">ตู้ภาพ</div></div>
+</div>
+
+<h2>The four tabs <span>DOCS/02-PRODUCT-SPEC.MD</span></h2>
+<p class="lede">Mobile-first, one-handed, used outdoors in sunlight. Bottom nav is fixed at
+<code class="k">60px</code>; every tap target is at least <code class="k">44px</code>.
+All four states below show a visitor at <strong>2 / 7</strong>.</p>
+<div class="phones">
+
+  <!-- MAP -->
+  <div>
+  <div class="phone">
+    <div class="ph-head">
+      <svg viewBox="0 0 42 42" width="26" height="26" fill="none">
+        <circle cx="21" cy="21" r="20" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.2)"/>
+        <path d="M8 26 Q21 14 34 26" stroke="#C8993A" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <path d="M12 26 L21 10 L30 26 Z" fill="rgba(200,153,58,.3)" stroke="#C8993A" stroke-width="1.5"/>
+        <path d="M6 30 Q21 25 36 30" stroke="rgba(255,255,255,.35)" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+      <div><h3>ตลาดท่านา</h3><p>CHECK-IN MAP</p></div>
+    </div>
+    <div class="ph-body">
+      <div class="prog">
+        <div class="lab"><span>เก็บแสตมป์</span><strong>2 / 7 จุด</strong></div>
+        <div class="track"><div class="fill" style="width:28.6%"></div></div>
+      </div>
+      <svg class="map" viewBox="0 0 220 210">
+        <rect width="220" height="210" fill="#F5EDD8"/>
+        <path d="M0 158 Q60 142 110 156 Q165 170 220 152 L220 210 L0 210 Z" fill="#6A9888" opacity=".32"/>
+        <text x="18" y="182" font-family="Sarabun" font-size="7" font-style="italic" fill="#6A9888">แม่น้ำนครชัยศรี</text>
+        <g fill="#EAE0CC" stroke="#d9cdb4">
+          <rect x="24" y="42" width="66" height="30" rx="2"/><rect x="24" y="80" width="66" height="30" rx="2"/>
+          <rect x="128" y="42" width="66" height="30" rx="2"/><rect x="128" y="80" width="66" height="30" rx="2"/>
+          <rect x="24" y="118" width="170" height="24" rx="2"/>
+        </g>
+        <path d="M109 30 V150" stroke="#EAE0CC" stroke-width="9"/>
+        <text x="109" y="26" font-family="Sarabun" font-size="7" fill="#6B4C30" text-anchor="middle">ทางเข้าตลาด</text>
+        <g font-family="Sarabun" font-size="8" font-weight="700" text-anchor="middle" dominant-baseline="central">
+          <circle cx="60" cy="150" r="10" fill="#C8993A"/><text y="150" x="60" fill="#fff">1</text>
+          <circle cx="57" cy="57" r="10" fill="#C8993A"/><text y="57" x="57" fill="#fff">2</text>
+          <circle cx="161" cy="57" r="10" fill="#EAE0CC" stroke="#d9cdb4"/><text y="57" x="161" fill="#6B4C30">3</text>
+          <circle cx="57" cy="95" r="10" fill="#EAE0CC" stroke="#d9cdb4"/><text y="95" x="57" fill="#6B4C30">4</text>
+          <circle cx="161" cy="95" r="10" fill="#EAE0CC" stroke="#d9cdb4"/><text y="95" x="161" fill="#6B4C30">5</text>
+          <circle cx="150" cy="150" r="10" fill="#EAE0CC" stroke="#d9cdb4"/><text y="150" x="150" fill="#6B4C30">6</text>
+          <circle cx="109" cy="130" r="10" fill="#EAE0CC" stroke="#d9cdb4"/><text y="130" x="109" fill="#6B4C30">7</text>
+        </g>
+        <g transform="translate(198,190)">
+          <circle r="9" fill="none" stroke="#6B4C30" stroke-width=".7"/>
+          <path d="M0 -6 L2.4 2 L0 0.6 L-2.4 2 Z" fill="#C8993A"/>
+          <text y="-11" font-family="Sarabun" font-size="6" fill="#6B4C30" text-anchor="middle">N</text></g>
+      </svg>
+    </div>
+    <div class="ph-nav">
+      <div class="on"><svg viewBox="-14 -14 28 28" fill="none" stroke="currentColor"><use href="#i-map"/></svg>แผนที่</div>
+      <div><svg viewBox="-14 -14 28 28" fill="none" stroke="currentColor"><use href="#i-star"/></svg>แต้มของฉัน</div>
+      <div><svg viewBox="-14 -14 28 28" fill="none" stroke="currentColor"><use href="#i-book"/></svg>ประวัติ</div>
+      <div><svg viewBox="-14 -14 28 28" fill="none" stroke="currentColor"><use href="#i-kiosk"/></svg>ตู้ภาพ</div>
+    </div>
+  </div><div class="phone-cap">MAP · แผนที่</div></div>
+
+  <!-- STAMPS -->
+  <div>
+  <div class="phone">
+    <div class="ph-head"><div><h3>ตลาดท่านา</h3><p>MY STAMPS</p></div></div>
+    <div class="ph-body">
+      <div class="prog">
+        <div class="lab"><span>เก็บแสตมป์</span><strong>2 / 7 จุด</strong></div>
+        <div class="track"><div class="fill" style="width:28.6%"></div></div>
+      </div>
+      <div class="st-grid">
+        <div class="st on"><svg viewBox="-14 -14 28 28" fill="none" stroke="var(--green)"><use href="#i-anchor"/></svg></div>
+        <div class="st on"><svg viewBox="-14 -14 28 28" fill="none" stroke="var(--green)"><use href="#i-shophouse"/></svg></div>
+        <div class="st off"><svg viewBox="-14 -14 28 28" fill="none" stroke="var(--brown-lt)"><use href="#i-lantern"/></svg></div>
+        <div class="st off"><svg viewBox="-14 -14 28 28" fill="none" stroke="var(--brown-lt)"><use href="#i-pomelo"/></svg></div>
+        <div class="st off"><svg viewBox="-14 -14 28 28" fill="none" stroke="var(--brown-lt)"><use href="#i-bread"/></svg></div>
+        <div class="st off"><svg viewBox="-14 -14 28 28" fill="none" stroke="var(--brown-lt)"><use href="#i-bridge"/></svg></div>
+        <div class="st off"><svg viewBox="-14 -14 28 28" fill="none" stroke="var(--brown-lt)"><use href="#i-kiosk"/></svg></div>
+      </div>
+      <p style="font-size:.72rem;color:var(--brown-lt);margin-top:14px;line-height:1.6">
+        อีก 5 จุด ก็ครบแล้ว — เดินต่อไปทางท้ายตลาด</p>
+    </div>
+    <div class="ph-nav">
+      <div><svg viewBox="-14 -14 28 28" fill="none" stroke="currentColor"><use href="#i-map"/></svg>แผนที่</div>
+      <div class="on"><svg viewBox="-14 -14 28 28" fill="none" stroke="currentColor"><use href="#i-star"/></svg>แต้มของฉัน</div>
+      <div><svg viewBox="-14 -14 28 28" fill="none" stroke="currentColor"><use href="#i-book"/></svg>ประวัติ</div>
+      <div><svg viewBox="-14 -14 28 28" fill="none" stroke="currentColor"><use href="#i-kiosk"/></svg>ตู้ภาพ</div>
+    </div>
+  </div><div class="phone-cap">STAMPS · แต้มของฉัน</div></div>
+
+  <!-- HISTORY -->
+  <div>
+  <div class="phone">
+    <div class="ph-head"><div><h3>ตลาดท่านา</h3><p>MARKET HISTORY</p></div></div>
+    <div class="ph-body" style="overflow-y:auto">
+      <div class="hist">
+        <svg viewBox="-14 -14 28 28" fill="none" stroke="var(--green)"><use href="#i-anchor"/></svg>
+        <div><b>ท่าเรือท่านา</b><span>เคยเป็นจุดขนถ่ายข้าวเปลือกตั้งแต่สมัยรัชกาลที่ 5 เรือสำปั้นแล่นมาจากทั่วลุ่มน้ำนครชัยศรี</span></div>
+      </div>
+      <div class="hist">
+        <svg viewBox="-14 -14 28 28" fill="none" stroke="var(--green)"><use href="#i-shophouse"/></svg>
+        <div><b>ตลาดเก่าห้องแถวไม้</b><span>ห้องแถวไม้สักสีเหลืองสร้างมากว่า 140 ปี ยังคงสภาพดั้งเดิม สะท้อนรากเหง้าไทย-จีนของชุมชน</span></div>
+      </div>
+      <div class="hist locked">
+        <svg viewBox="-14 -14 28 28" fill="none" stroke="var(--brown-lt)"><use href="#i-lantern"/></svg>
+        <div><b>ศาลเจ้าอาม่า</b><span>ยังไม่ปลดล็อก — สแกน QR ที่จุดนี้เพื่ออ่านประวัติ</span></div>
+      </div>
+      <div class="hist locked">
+        <svg viewBox="-14 -14 28 28" fill="none" stroke="var(--brown-lt)"><use href="#i-pomelo"/></svg>
+        <div><b>โซนอาหาร</b><span>ยังไม่ปลดล็อก — สแกน QR ที่จุดนี้เพื่ออ่านประวัติ</span></div>
+      </div>
+      <div class="hist locked">
+        <svg viewBox="-14 -14 28 28" fill="none" stroke="var(--brown-lt)"><use href="#i-bread"/></svg>
+        <div><b>ร้านขนมปังเย็น</b><span>ยังไม่ปลดล็อก</span></div>
+      </div>
+    </div>
+    <div class="ph-nav">
+      <div><svg viewBox="-14 -14 28 28" fill="none" stroke="currentColor"><use href="#i-map"/></svg>แผนที่</div>
+      <div><svg viewBox="-14 -14 28 28" fill="none" stroke="currentColor"><use href="#i-star"/></svg>แต้มของฉัน</div>
+      <div class="on"><svg viewBox="-14 -14 28 28" fill="none" stroke="currentColor"><use href="#i-book"/></svg>ประวัติ</div>
+      <div><svg viewBox="-14 -14 28 28" fill="none" stroke="currentColor"><use href="#i-kiosk"/></svg>ตู้ภาพ</div>
+    </div>
+  </div><div class="phone-cap">HISTORY · ประวัติ · UNLOCK-GATED</div></div>
+
+  <!-- KIOSK -->
+  <div>
+  <div class="phone">
+    <div class="ph-head"><div><h3>ตลาดท่านา</h3><p>PHOTO KIOSK</p></div></div>
+    <div class="ph-body">
+      <div class="kiosk locked">
+        <span class="badge">2 / 7</span>
+        <svg viewBox="-14 -14 28 28" width="70" height="70" fill="none" stroke="var(--brown-lt)"
+             style="opacity:.4;margin:12px 0 4px"><use href="#i-kiosk"/></svg>
+        <p style="font-size:.8rem;font-weight:600;color:var(--brown-lt);margin:6px 0 2px">ยังไม่ครบ 7 จุด</p>
+        <p style="font-size:.7rem;color:var(--brown-lt);margin:0 0 12px;line-height:1.6">
+          เก็บอีก 5 จุด แล้วกลับมาที่ตู้จ่ายภาพ<br>เพื่อรับภาพศิลปะพิเศษ</p>
+        <button class="btn block" disabled>ยังแลกไม่ได้</button>
+      </div>
+      <p style="font-size:.68rem;color:var(--brown-lt);margin-top:12px;line-height:1.6">
+        เมื่อครบ 7 จุด ปุ่มจะเปลี่ยนเป็นสีเขียว และแสดงรหัสแลกรับ (ใช้ได้ครั้งเดียว)</p>
+    </div>
+    <div class="ph-nav">
+      <div><svg viewBox="-14 -14 28 28" fill="none" stroke="currentColor"><use href="#i-map"/></svg>แผนที่</div>
+      <div><svg viewBox="-14 -14 28 28" fill="none" stroke="currentColor"><use href="#i-star"/></svg>แต้มของฉัน</div>
+      <div><svg viewBox="-14 -14 28 28" fill="none" stroke="currentColor"><use href="#i-book"/></svg>ประวัติ</div>
+      <div class="on"><svg viewBox="-14 -14 28 28" fill="none" stroke="currentColor"><use href="#i-kiosk"/></svg>ตู้ภาพ</div>
+    </div>
+  </div><div class="phone-cap">KIOSK · ตู้ภาพ · LOCKED STATE</div></div>
+
+</div>
+
+<h2>Stamp states <span>THE CORE OBJECT</span></h2>
+<p class="lede">A stamp can never be un-earned, and can only come from a scan — there is no
+“mark as visited” affordance. Locked uses <code class="k">--cream-md</code>, never opacity on a
+coloured element; opacity washes out in sunlight.</p>
+<div style="display:flex;gap:26px;align-items:flex-start;flex-wrap:wrap">
+  <div style="width:96px;text-align:center">
+    <div class="st on" style="width:76px;margin:0 auto"><svg viewBox="-14 -14 28 28" fill="none" stroke="var(--green)"><use href="#i-lantern"/></svg></div>
+    <div style="font-size:.66rem;font-weight:600;letter-spacing:.1em;color:var(--gold);margin-top:9px">EARNED</div></div>
+  <div style="width:96px;text-align:center">
+    <div class="st off" style="width:76px;margin:0 auto"><svg viewBox="-14 -14 28 28" fill="none" stroke="var(--brown-lt)"><use href="#i-lantern"/></svg></div>
+    <div style="font-size:.66rem;font-weight:600;letter-spacing:.1em;color:var(--brown-lt);margin-top:9px">LOCKED</div></div>
+  <div style="flex:1;min-width:260px;font-size:.82rem;color:var(--brown-lt);line-height:1.7;padding-top:6px">
+    <strong style="color:var(--ink)">Just earned:</strong> brief <code class="k">--gold-lt</code> glow and
+    slight scale over <code class="k">0.2s</code>, settling into Earned. Nothing longer — someone is standing
+    in the sun waiting.<br>
+    <strong style="color:var(--ink)">Never colour alone:</strong> earned also changes border weight, icon
+    saturation and adds the gold dot.
+  </div>
+</div>
+
+<h2>Buttons <span>ONE STYLE, ON PURPOSE</span></h2>
+<div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap">
+  <button class="btn">สแกน QR</button>
+  <button class="btn">แลกรับภาพ</button>
+  <button class="btn" disabled>ยังแลกไม่ได้</button>
+  <span style="font-size:.78rem;color:var(--brown-lt);max-width:34ch">
+    There is no secondary button style. If you need one, add it to the design system first —
+    don't invent it inside a component.</span>
+</div>
+
+<h2>Bottom-sheet modal <span>PIN / STAMP DETAIL</span></h2>
+<p class="lede">Opens on tapping a map pin or a stamp. Dismiss by tap-outside or swipe-down.
+If the spot isn't earned yet, the historical fact is hidden — unlocking history is part of the reward loop.</p>
+<div class="sheet">
+  <div class="handle"></div>
+  <div class="sh-head">
+    <svg viewBox="-14 -14 28 28" fill="none" stroke="var(--green)"><use href="#i-shophouse"/></svg>
+    <div><b>ตลาดเก่าห้องแถวไม้</b><em>อาคาร 140 ปี</em></div>
+  </div>
+  <div class="sh-body">
+    ห้องแถวไม้สักสีเหลืองเหล่านี้สร้างมากกว่า 140 ปีแล้ว ยังคงสภาพดั้งเดิม มีศาลอาม่าจีนอยู่ในซอกอาคาร
+    สะท้อนรากเหง้าไทย-จีนของชุมชน
+    <div class="tip">สังเกตลวดลายฉลุไม้เหนือประตู</div>
+    <div class="tip">ร้านแม่ทองย้อย — ขนมไทยโบราณที่อยู่มา 3 รุ่น</div>
+    <button class="btn block" style="margin-top:15px">ดูบนแผนที่</button>
+  </div>
+</div>
+
+<h2>Rules that are easy to break <span>READ BEFORE BUILDING</span></h2>
+<div class="rules">
+  <div class="rule"><b>UI copy stays Thai</b><span>Code, comments and docs are English. Don't
+    translate interface strings “for clarity” — the users are Thai visitors standing in the market.</span></div>
+  <div class="rule"><b>Give Thai vertical room</b><span>Thai stacks vowels and tone marks above and below
+    the line. Never tighten leading or shrink type to make a layout fit — cut copy instead.</span></div>
+  <div class="rule"><b>Tap targets ≥ 44px</b><span>One-handed, walking, in sunlight, possibly holding a bag
+    of pomelo. No exceptions on the nav or the map pins.</span></div>
+  <div class="rule"><b>Assume the network drops</b><span>Riverside 4G is unreliable. Progress must survive
+    a dropped connection; queue writes and reconcile.</span></div>
+  <div class="rule no"><b>Don't let the client decide 7/7</b><span>The reward is a physical print that costs
+    money. Redemption eligibility is verified server-side, single-use.</span></div>
+  <div class="rule no"><b>Don't collect more than you need</b><span>Real people in a real community.
+    Anonymous session, scan events, nothing more. No accounts, no personal identifiers.</span></div>
+</div>
+
+<footer>
+  Talat Tha Na Map (CEP_M12) · Mahidol Wittayanusorn School ·
+  see <code class="k">CLAUDE.md</code> and <code class="k">docs/</code> for full context.
+</footer>
+</div>
+</body>
+</html>

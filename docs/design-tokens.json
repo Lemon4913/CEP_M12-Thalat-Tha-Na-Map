@@ -1,0 +1,57 @@
+{
+  "$comment": "Generated from docs/design-tokens.css. Edit the CSS, then regenerate.",
+  "name": "Talat Tha Na Map",
+  "tokens": {
+    "color": {
+      "--cream": "#F5EDD8",
+      "--cream-lt": "#FAF5EA",
+      "--cream-md": "#EAE0CC",
+      "--green": "#2C5E42",
+      "--green-lt": "#3D7A57",
+      "--gold": "#C8993A",
+      "--gold-lt": "#E0B84A",
+      "--brown": "#3D2B1A",
+      "--brown-lt": "#6B4C30",
+      "--ink": "#1E1408",
+      "--river": "#6A9888"
+    },
+    "typography": {
+      "--font": "'Sarabun', sans-serif",
+      "--fs-h1": "1.35rem",
+      "--fs-h2": "1.05rem",
+      "--fs-body": "0.95rem",
+      "--fs-small": "0.82rem",
+      "--fs-label": "0.64rem",
+      "--fw-light": "300",
+      "--fw-regular": "400",
+      "--fw-medium": "500",
+      "--fw-semibold": "600",
+      "--fw-bold": "700",
+      "--ls-caps": "0.04em"
+    },
+    "space": {
+      "--sp-1": "4px",
+      "--sp-2": "8px",
+      "--sp-3": "12px",
+      "--sp-4": "16px",
+      "--sp-5": "24px",
+      "--sp-6": "32px"
+    },
+    "shape": {
+      "--radius": "4px",
+      "--radius-lg": "12px"
+    },
+    "elevation": {
+      "--shadow-card": "0 1px 3px rgba(30, 20, 8, 0.08)",
+      "--shadow-modal": "0 -4px 24px rgba(30, 20, 8, 0.18)"
+    },
+    "motion": {
+      "--t-fast": "0.2s",
+      "--t-base": "0.3s"
+    },
+    "layout": {
+      "--nav-height": "60px",
+      "--tap-min": "44px"
+    }
+  }
+}

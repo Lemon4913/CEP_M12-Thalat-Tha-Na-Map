@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 430" width="760" height="430">
+<defs><style>@import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&amp;display=swap');</style></defs>
+  <rect width="760" height="430" fill="#F5EDD8"/>
+  <rect x="0" y="0" width="760" height="5" fill="#C8993A"/>
+  <text x="32" y="42" font-family="Sarabun, 'Noto Sans Thai', sans-serif" font-size="17" font-weight="700" fill="#1E1408">Minimal Thai heritage — design tokens</text>
+  <text x="32" y="60" font-family="Sarabun, 'Noto Sans Thai', sans-serif" font-size="10" font-weight="500"
+        fill="#6B4C30" letter-spacing="1.5">TALAT THA NA MAP · docs/design-tokens.css</text>
+  <rect x="32" y="80" width="104" height="66" rx="4" fill="#F5EDD8"
+          stroke="#EAE0CC" stroke-width="1"/>
+      <text x="32" y="162" font-family="Sarabun, 'Noto Sans Thai', sans-serif" font-size="10" font-weight="600"
+            fill="#1E1408">--cream</text>
+      <text x="32" y="175" font-family="Sarabun, 'Noto Sans Thai', sans-serif" font-size="9.5"
+            fill="#6B4C30">#F5EDD8</text><rect x="152" y="80" width="104" height="66" rx="4" fill="#FAF5EA"
+          stroke="#EAE0CC" stroke-width="1"/>
+      <text x="152" y="162" font-family="Sarabun, 'Noto Sans Thai', sans-serif" font-size="10" font-weight="600"
+            fill="#1E1408">--cream-lt</text>
+      <text x="152" y="175" font-family="Sarabun, 'Noto Sans Thai', sans-serif" font-size="9.5"
+            fill="#6B4C30">#FAF5EA</text><rect x="272" y="80" width="104" height="66" rx="4" fill="#EAE0CC"
+          stroke="#EAE0CC" stroke-width="1"/>
+      <text x="272" y="162" font-family="Sarabun, 'Noto Sans Thai', sans-serif" font-size="10" font-weight="600"
+            fill="#1E1408">--cream-md</text>
+      <text x="272" y="175" font-family="Sarabun, 'Noto Sans Thai', sans-serif" font-size="9.5"
+            fill="#6B4C30">#EAE0CC</text><rect x="392" y="80" width="104" height="66" rx="4" fill="#2C5E42"
+          stroke="#EAE0CC" stroke-width="1"/>
+      <text x="392" y="162" font-family="Sarabun, 'Noto Sans Thai', sans-serif" font-size="10" font-weight="600"
+            fill="#1E1408">--green</text>
+      <text x="392" y="175" font-family="Sarabun, 'Noto Sans Thai', sans-serif" font-size="9.5"
+            fill="#6B4C30">#2C5E42</text><rect x="512" y="80" width="104" height="66" rx="4" fill="#3D7A57"
+          stroke="#EAE0CC" stroke-width="1"/>
+      <text x="512" y="162" font-family="Sarabun, 'Noto Sans Thai', sans-serif" font-size="10" font-weight="600"
+            fill="#1E1408">--green-lt</text>
+      <text x="512" y="175" font-family="Sarabun, 'Noto Sans Thai', sans-serif" font-size="9.5"
+            fill="#6B4C30">#3D7A57</text><rect x="632" y="80" width="104" height="66" rx="4" fill="#C8993A"
+          stroke="#EAE0CC" stroke-width="1"/>
+      <text x="632" y="162" font-family="Sarabun, 'Noto Sans Thai', sans-serif" font-size="10" font-weight="600"
+            fill="#1E1408">--gold</text>
+      <text x="632" y="175" font-family="Sarabun, 'Noto Sans Thai', sans-serif" font-size="9.5"
+            fill="#6B4C30">#C8993A</text><rect x="32" y="198" width="104" height="66" rx="4" fill="#E0B84A"
+          stroke="#EAE0CC" stroke-width="1"/>
+      <text x="32" y="280" font-family="Sarabun, 'Noto Sans Thai', sans-serif" font-size="10" font-weight="600"
+            fill="#1E1408">--gold-lt</text>
+      <text x="32" y="293" font-family="Sarabun, 'Noto Sans Thai', sans-serif" font-size="9.5"
+            fill="#6B4C30">#E0B84A</text><rect x="152" y="198" width="104" height="66" rx="4" fill="#3D2B1A"
+          stroke="#EAE0CC" stroke-width="1"/>
+      <text x="152" y="280" font-family="Sarabun, 'Noto Sans Thai', sans-serif" font-size="10" font-weight="600"
+            fill="#1E1408">--brown</text>
+      <text x="152" y="293" font-family="Sarabun, 'Noto Sans Thai', sans-serif" font-size="9.5"
+            fill="#6B4C30">#3D2B1A</text><rect x="272" y="198" width="104" height="66" rx="4" fill="#6B4C30"
+          stroke="#EAE0CC" stroke-width="1"/>
+      <text x="272" y="280" font-family="Sarabun, 'Noto Sans Thai', sans-serif" font-size="10" font-weight="600"
+            fill="#1E1408">--brown-lt</text>
+      <text x="272" y="293" font-family="Sarabun, 'Noto Sans Thai', sans-serif" font-size="9.5"
+            fill="#6B4C30">#6B4C30</text><rect x="392" y="198" width="104" height="66" rx="4" fill="#1E1408"
+          stroke="#EAE0CC" stroke-width="1"/>
+      <text x="392" y="280" font-family="Sarabun, 'Noto Sans Thai', sans-serif" font-size="10" font-weight="600"
+            fill="#1E1408">--ink</text>
+      <text x="392" y="293" font-family="Sarabun, 'Noto Sans Thai', sans-serif" font-size="9.5"
+            fill="#6B4C30">#1E1408</text><rect x="512" y="198" width="104" height="66" rx="4" fill="#6A9888"
+          stroke="#EAE0CC" stroke-width="1"/>
+      <text x="512" y="280" font-family="Sarabun, 'Noto Sans Thai', sans-serif" font-size="10" font-weight="600"
+            fill="#1E1408">--river</text>
+      <text x="512" y="293" font-family="Sarabun, 'Noto Sans Thai', sans-serif" font-size="9.5"
+            fill="#6B4C30">#6A9888</text>
+  <line x1="32" y1="330" x2="728" y2="330" stroke="#EAE0CC" stroke-width="1"/>
+  <text x="32" y="360" font-family="Sarabun, 'Noto Sans Thai', sans-serif" font-size="24" font-weight="700" fill="#1E1408">ตลาดท่านา · เก็บแสตมป์ครบ 7 จุด</text>
+  <text x="32" y="386" font-family="Sarabun, 'Noto Sans Thai', sans-serif" font-size="14" font-weight="400" fill="#3D2B1A">Sarabun 400 — ตัวอย่างการเรียงพิมพ์ภาษาไทย · The quick brown fox 0123456789</text>
+  <text x="32" y="410" font-family="Sarabun, 'Noto Sans Thai', sans-serif" font-size="11" font-weight="600"
+        fill="#2C5E42" letter-spacing="1.5">SARABUN 600 · UPPERCASE LABEL · LETTER-SPACING 0.04EM</text>
+</svg>

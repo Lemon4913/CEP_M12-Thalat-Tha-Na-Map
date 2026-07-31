@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<meta name="design_doc_mode" content="canvas">
+<link href="https://fonts.googleapis.com/css2?family=Srisakdi:wght@400;700&family=Trirong:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#f0eee9;font-family:system-ui,sans-serif}
+.dv-turn{padding:40px 44px 32px;border-bottom:1px solid rgba(0,0,0,.08);scroll-margin-top:16px}
+.dv-thd{display:flex;align-items:baseline;gap:10px;margin:0 0 20px}
+.dv-tid{font:600 10px ui-monospace,Menlo,monospace;padding:3px 7px;background:#1a1a1a;color:#fff;border-radius:4px;text-decoration:none}
+.dv-tname{font:600 13px/1.2 system-ui,sans-serif;color:#1a1a1a}
+.dv-opts{display:flex;flex-wrap:wrap;gap:28px;align-items:flex-start}
+.dv-opt{flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px}
+.dv-oid{font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none}
+.dv-olabel{display:flex;align-items:baseline;gap:8px;font:400 11px/1.3 system-ui,sans-serif;color:rgba(0,0,0,.55)}
+.dv-card{max-width:100%;background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.06);overflow:hidden}
+.dv-opt:target .dv-oid{background:#2a78d6;color:#fff}
+.dv-next{margin:22px 0 0;font:12px/1.5 system-ui,sans-serif;color:rgba(0,0,0,.5)}
+</style>
+<script src="https://cdn.jsdelivr.net/gh/davidshimjs/qrcodejs@04f46c6a/qrcode.min.js"></script>
+</helmet>
+
+<section class="dv-turn" id="t3">
+  <div class="dv-thd"><a class="dv-tid" href="#t3">3</a><span class="dv-tname">อีกแนว — โปสเตอร์ท่องเที่ยวสีสด ภาพประกอบใหญ่ (golden hour ริมน้ำ)</span></div>
+  <div class="dv-opts">
+
+    <!-- 3a Bold illustrated travel poster -->
+    <div class="dv-opt" id="3a">
+      <div class="dv-olabel"><a class="dv-oid" href="#3a">3a</a>โปสเตอร์ภาพประกอบแบน สีสด · เรือหางยาว โคมแดง เรือนแถวริมน้ำ + QR</div>
+      <div class="dv-card" style="width:840px">
+        <div data-screen-label="3a poster" style="position:relative;width:840px;height:1188px;background:#fff3d9;overflow:hidden;font-family:'Trirong',serif;color:#2a1c12">
+
+          <!-- ===== Big illustration ===== -->
+          <div data-om-raster style="position:absolute;top:0;left:0;width:840px;height:772px">
+            <svg viewBox="0 0 840 772" width="840" height="772" xmlns="http://www.w3.org/2000/svg" style="display:block">
+              <defs>
+                <linearGradient id="sky3a" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#ff6f4d"/><stop offset="0.5" stop-color="#ff9e3d"/><stop offset="1" stop-color="#ffd27a"/>
+                </linearGradient>
+                <radialGradient id="sun3a" cx="0.5" cy="0.5" r="0.5">
+                  <stop offset="0" stop-color="#fff4cf"/><stop offset="1" stop-color="#ffcf52"/>
+                </radialGradient>
+                <linearGradient id="river3a" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#22b0a3"/><stop offset="1" stop-color="#0c6c62"/>
+                </linearGradient>
+              </defs>
+
+              <!-- sky -->
+              <rect x="0" y="0" width="840" height="620" fill="url(#sky3a)"/>
+              <!-- sun rays -->
+              <g transform="translate(420 300)" opacity="0.5">
+                <g fill="#ffe6a3">
+                  <path d="M-9,-360 L9,-360 L0,-140 Z"/>
+                  <path d="M-9,-360 L9,-360 L0,-140 Z" transform="rotate(30)"/>
+                  <path d="M-9,-360 L9,-360 L0,-140 Z" transform="rotate(60)"/>
+                  <path d="M-9,-360 L9,-360 L0,-140 Z" transform="rotate(90)"/>
+                  <path d="M-9,-360 L9,-360 L0,-140 Z" transform="rotate(120)"/>
+                  <path d="M-9,-360 L9,-360 L0,-140 Z" transform="rotate(150)"/>
+                  <path d="M-9,-360 L9,-360 L0,-140 Z" transform="rotate(180)"/>
+                  <path d="M-9,-360 L9,-360 L0,-140 Z" transform="rotate(210)"/>
+                  <path d="M-9,-360 L9,-360 L0,-140 Z" transform="rotate(240)"/>
+                  <path d="M-9,-360 L9,-360 L0,-140 Z" transform="rotate(270)"/>
+                  <path d="M-9,-360 L9,-360 L0,-140 Z" transform="rotate(300)"/>
+                  <path d="M-9,-360 L9,-360 L0,-140 Z" transform="rotate(330)"/>
+                </g>
+              </g>
+              <!-- sun -->
+              <circle cx="420" cy="300" r="132" fill="url(#sun3a)"/>
+
+              <!-- back hills -->
+              <path d="M0,540 C160,470 320,520 480,500 C640,482 760,520 840,498 L840,640 L0,640 Z" fill="#2fa172"/>
+              <!-- mid paddy -->
+              <path d="M0,592 C180,548 340,596 520,566 C660,543 760,588 840,566 L840,660 L0,660 Z" fill="#1c855f"/>
+
+              <!-- shophouse row (left) -->
+              <g>
+                <rect x="34" y="452" width="196" height="150" fill="#0e6b63"/>
+                <polygon points="20,452 244,452 224,410 40,410" fill="#c9402f"/>
+                <polygon points="20,452 244,452 224,436 40,436" fill="#a8291d"/>
+                <g fill="#ffd98a">
+                  <rect x="52" y="474" width="30" height="46" rx="3"/>
+                  <rect x="96" y="474" width="30" height="46" rx="3"/>
+                  <rect x="140" y="474" width="30" height="46" rx="3"/>
+                  <rect x="184" y="474" width="30" height="46" rx="3"/>
+                </g>
+                <g fill="#0e6b63">
+                  <rect x="64" y="474" width="6" height="46"/><rect x="108" y="474" width="6" height="46"/>
+                  <rect x="152" y="474" width="6" height="46"/><rect x="196" y="474" width="6" height="46"/>
+                </g>
+                <rect x="34" y="536" width="196" height="66" fill="#0a544e"/>
+                <rect x="120" y="548" width="40" height="54" fill="#083f3a"/>
+              </g>
+              <!-- shophouse row (right) -->
+              <g>
+                <rect x="640" y="470" width="176" height="132" fill="#0e6b63"/>
+                <polygon points="628,470 828,470 808,432 648,432" fill="#c9402f"/>
+                <g fill="#ffd98a">
+                  <rect x="660" y="490" width="28" height="42" rx="3"/>
+                  <rect x="700" y="490" width="28" height="42" rx="3"/>
+                  <rect x="740" y="490" width="28" height="42" rx="3"/>
+                  <rect x="780" y="490" width="28" height="42" rx="3"/>
+                </g>
+                <rect x="640" y="548" width="176" height="54" fill="#0a544e"/>
+              </g>
+
+              <!-- river -->
+              <rect x="0" y="600" width="840" height="172" fill="url(#river3a)"/>
+              <!-- sun reflection -->
+              <g fill="#ffd98a" opacity="0.55">
+                <rect x="386" y="612" width="68" height="8" rx="4"/>
+                <rect x="376" y="632" width="88" height="8" rx="4"/>
+                <rect x="392" y="652" width="56" height="7" rx="3.5"/>
+                <rect x="380" y="672" width="80" height="7" rx="3.5"/>
+              </g>
+              <!-- ripples -->
+              <g stroke="#8fe6dc" stroke-width="3" fill="none" opacity="0.6" stroke-linecap="round">
+                <path d="M70,690 q22,-10 44,0"/><path d="M150,712 q22,-10 44,0"/>
+                <path d="M640,700 q22,-10 44,0"/><path d="M720,724 q22,-10 44,0"/>
+              </g>
+
+              <!-- long-tail boat -->
+              <g transform="translate(300 632)">
+                <!-- engine pole -->
+                <rect x="228" y="-6" width="150" height="8" rx="4" transform="rotate(-16)" fill="#3a2415"/>
+                <circle cx="372" cy="-64" r="9" fill="#2a1a0f"/>
+                <!-- hull -->
+                <path d="M-22,44 Q140,92 300,26 Q290,58 270,66 Q140,110 6,72 Q-14,64 -22,44 Z" fill="#e23b2e"/>
+                <path d="M-16,46 Q140,88 292,30" stroke="#ffcf52" stroke-width="6" fill="none" stroke-linecap="round"/>
+                <!-- canopy (striped, echoes awning) -->
+                <rect x="70" y="-30" width="150" height="14" fill="#0e6b63"/>
+                <g>
+                  <rect x="74" y="-58" width="140" height="30" rx="6" fill="#ffb03b"/>
+                  <rect x="74" y="-58" width="20" height="30" fill="#0e6b63" opacity="0.85"/>
+                  <rect x="114" y="-58" width="20" height="30" fill="#0e6b63" opacity="0.85"/>
+                  <rect x="154" y="-58" width="20" height="30" fill="#0e6b63" opacity="0.85"/>
+                  <rect x="194" y="-58" width="20" height="30" fill="#0e6b63" opacity="0.85"/>
+                </g>
+                <rect x="138" y="-28" width="10" height="42" fill="#8a5a33"/>
+                <!-- passengers -->
+                <circle cx="104" cy="6" r="13" fill="#2a1c12"/>
+                <circle cx="180" cy="6" r="13" fill="#5a3b22"/>
+              </g>
+
+              <!-- hanging lantern string -->
+              <path d="M0,64 Q420,120 840,64" stroke="#7a1f16" stroke-width="3" fill="none"/>
+              <g>
+                <!-- lantern maker -->
+                <g transform="translate(120 96)">
+                  <rect x="-3" y="-14" width="6" height="14" fill="#c9a24a"/>
+                  <ellipse cx="0" cy="18" rx="26" ry="22" fill="#e23b2e"/>
+                  <rect x="-26" y="14" width="52" height="8" fill="#b81f16" opacity="0.5"/>
+                  <rect x="-6" y="-2" width="12" height="6" fill="#ffcf52"/>
+                  <rect x="-6" y="34" width="12" height="6" fill="#ffcf52"/>
+                  <line x1="0" y1="40" x2="0" y2="56" stroke="#c9a24a" stroke-width="3"/>
+                </g>
+                <g transform="translate(300 112)">
+                  <rect x="-3" y="-14" width="6" height="14" fill="#c9a24a"/>
+                  <ellipse cx="0" cy="18" rx="30" ry="25" fill="#e23b2e"/>
+                  <rect x="-30" y="13" width="60" height="9" fill="#b81f16" opacity="0.5"/>
+                  <rect x="-7" y="-4" width="14" height="7" fill="#ffcf52"/>
+                  <rect x="-7" y="38" width="14" height="7" fill="#ffcf52"/>
+                  <line x1="0" y1="45" x2="0" y2="64" stroke="#c9a24a" stroke-width="3"/>
+                </g>
+                <g transform="translate(540 112)">
+                  <rect x="-3" y="-14" width="6" height="14" fill="#c9a24a"/>
+                  <ellipse cx="0" cy="18" rx="30" ry="25" fill="#e23b2e"/>
+                  <rect x="-30" y="13" width="60" height="9" fill="#b81f16" opacity="0.5"/>
+                  <rect x="-7" y="-4" width="14" height="7" fill="#ffcf52"/>
+                  <rect x="-7" y="38" width="14" height="7" fill="#ffcf52"/>
+                  <line x1="0" y1="45" x2="0" y2="64" stroke="#c9a24a" stroke-width="3"/>
+                </g>
+                <g transform="translate(720 96)">
+                  <rect x="-3" y="-14" width="6" height="14" fill="#c9a24a"/>
+                  <ellipse cx="0" cy="18" rx="26" ry="22" fill="#e23b2e"/>
+                  <rect x="-26" y="14" width="52" height="8" fill="#b81f16" opacity="0.5"/>
+                  <rect x="-6" y="-2" width="12" height="6" fill="#ffcf52"/>
+                  <rect x="-6" y="34" width="12" height="6" fill="#ffcf52"/>
+                  <line x1="0" y1="40" x2="0" y2="56" stroke="#c9a24a" stroke-width="3"/>
+                </g>
+              </g>
+
+              <!-- foreground banana leaves -->
+              <g fill="#0c5a3f">
+                <path d="M-20,772 C40,660 120,620 210,632 C120,652 70,712 60,772 Z"/>
+                <path d="M860,772 C800,650 720,612 626,628 C724,650 782,714 792,772 Z"/>
+              </g>
+              <g stroke="#16794f" stroke-width="3" fill="none">
+                <path d="M40,760 C80,700 140,660 196,640"/>
+                <path d="M800,760 C760,698 700,660 640,636"/>
+              </g>
+            </svg>
+            <!-- top ribbon over sky -->
+            <div style="position:absolute;top:24px;left:50%;transform:translateX(-50%);background:#2a1c12;color:#ffd98a;padding:7px 26px;border-radius:999px;font-family:'Srisakdi',cursive;font-weight:700;font-size:19px;letter-spacing:.08em;box-shadow:0 4px 12px rgba(0,0,0,.3)">ตลาดท่านา · ริมน้ำนครชัยศรี</div>
+          </div>
+
+          <!-- ===== Bottom copy band ===== -->
+          <div style="position:absolute;left:0;right:0;top:772px;bottom:0;background:#fff3d9;padding:26px 60px 0">
+            <!-- seal + title -->
+            <div style="display:flex;align-items:center;gap:22px">
+              <div style="flex:none;width:118px;height:118px;border-radius:50%;background:#e23b2e;box-shadow:0 8px 20px rgba(226,59,46,.35);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff3d9">
+                <div style="font-family:'Trirong',serif;font-size:12px;letter-spacing:.28em;padding-left:.28em">จุดเช็คอิน</div>
+                <div style="font-family:'Srisakdi',cursive;font-weight:700;font-size:60px;line-height:.86">๓</div>
+              </div>
+              <div>
+                <div style="font-family:'Srisakdi',cursive;font-weight:700;font-size:50px;line-height:1.02;color:#0e6b63">แยกหน้าร้านของฝาก</div>
+                <div style="font-family:'Trirong',serif;font-size:18px;letter-spacing:.06em;color:#9c4a2a;margin-top:4px">สามแยกกลางตลาด · หัวใจย่านของฝาก ๑๔๐ ปี</div>
+              </div>
+            </div>
+
+            <!-- highlight chips -->
+            <div style="display:flex;flex-wrap:wrap;gap:11px;margin-top:24px">
+              <span style="padding:9px 20px;background:#e23b2e;color:#fff3d9;border-radius:999px;font-size:16.5px">ส้มโอนครชัยศรี</span>
+              <span style="padding:9px 20px;background:#0e6b63;color:#fff3d9;border-radius:999px;font-size:16.5px">ข้าวหลาม</span>
+              <span style="padding:9px 20px;background:#ffb03b;color:#4a2a0e;border-radius:999px;font-size:16.5px">ขนมไทยโบราณ</span>
+              <span style="padding:9px 20px;background:#0e6b63;color:#fff3d9;border-radius:999px;font-size:16.5px">เป็ดพะโล้</span>
+              <span style="padding:9px 20px;background:#e23b2e;color:#fff3d9;border-radius:999px;font-size:16.5px">ขนมปังเย็น · บัวลอย</span>
+            </div>
+
+            <!-- QR row -->
+            <div style="display:flex;align-items:center;gap:24px;margin-top:26px;background:#fff;border:2px solid #ffb03b;border-radius:18px;padding:22px 26px">
+              <div style="flex:none;width:150px;height:150px;background:#fff;border:2px solid #0e6b63;border-radius:12px;padding:10px;box-sizing:border-box;display:flex;align-items:center;justify-content:center">
+                <div ref="{{ qrRef2 }}" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center"></div>
+              </div>
+              <div style="flex:1">
+                <div style="font-family:'Srisakdi',cursive;font-weight:700;font-size:30px;color:#e23b2e;line-height:1.05">สแกนสะสมแสตมป์ดิจิทัล</div>
+                <div style="font-family:'Trirong',serif;font-size:17px;color:#6b4a2a;margin:6px 0 12px">สแกน QR รับตราประจำจุดที่ ๓ · เก็บครบทุกจุดทั่วตลาด รับของที่ระลึก</div>
+                <div style="display:flex;gap:10px;flex-wrap:wrap;font-family:'Trirong',serif;font-size:14.5px;color:#0e6b63">
+                  <span style="padding:5px 14px;background:#eafaf4;border-radius:999px">๑ เปิดกล้องสแกน</span>
+                  <span style="padding:5px 14px;background:#eafaf4;border-radius:999px">๒ รับตราจุดที่ ๓</span>
+                  <span style="padding:5px 14px;background:#eafaf4;border-radius:999px">๓ ไปจุดต่อไป</span>
+                </div>
+              </div>
+            </div>
+
+            <div style="position:absolute;left:60px;right:60px;bottom:22px;display:flex;align-items:center;justify-content:space-between;font-family:'Trirong',serif;font-size:12.5px;letter-spacing:.12em;color:#a06a3a">
+              <span>ตลาดท่านา · ต.นครชัยศรี อ.นครชัยศรี จ.นครปฐม</span>
+              <span>#เที่ยวตลาดท่านา</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <p class="dv-next">ลองต่อ: "เปลี่ยนเป็นโทนกลางคืน โคมไฟเรืองแสง" · "ใส่ภาพเรือหางยาวให้เด่นขึ้น" · "ทำชุดจุด ๑–๕ สไตล์นี้" · "ไฟล์พร้อมพิมพ์ A3 มีระยะตัดตก"</p>
+</section>
+
+<section class="dv-turn" id="t2">
+  <div class="dv-thd"><a class="dv-tid" href="#t2">2</a><span class="dv-tname">จุดเช็คอินที่ ๓ — แยกหน้าร้านของฝาก · โปสเตอร์ติดผนัง A3 (แนวตั้ง)</span></div>
+  <div class="dv-opts">
+
+    <!-- 2a Checkpoint poster -->
+    <div class="dv-opt" id="2a">
+      <div class="dv-olabel"><a class="dv-oid" href="#2a">2a</a>โปสเตอร์เช็คอิน A3 · หน้าตาแบบร้านของฝาก (กันสาดลายทาง) + QR สะสมแสตมป์</div>
+      <div class="dv-card" style="width:840px">
+        <div data-screen-label="2a poster" style="position:relative;width:840px;height:1188px;background:#f6efdd;overflow:hidden;font-family:'Trirong',serif;color:#3f3324">
+
+          <!-- paper texture / inner keyline -->
+          <div style="position:absolute;inset:26px;border:1.5px solid #c8b48a;pointer-events:none;z-index:6"></div>
+
+          <!-- ===== Awning header ===== -->
+          <div style="position:absolute;top:0;left:0;right:0;height:196px;background:repeating-linear-gradient(90deg,#2f7d4f 0 46px,#f3ead8 46px 92px,#df8a2b 92px 138px,#f3ead8 138px 184px)"></div>
+          <div style="position:absolute;top:0;left:0;right:0;height:196px;background:linear-gradient(180deg,rgba(255,255,255,.14),rgba(0,0,0,.12))"></div>
+          <!-- scalloped valance -->
+          <div style="position:absolute;top:196px;left:0;right:0;height:34px;display:flex">
+            <div style="flex:1;height:34px;background:repeating-linear-gradient(90deg,#2f7d4f 0 46px,#f3ead8 46px 92px,#df8a2b 92px 138px,#f3ead8 138px 184px);-webkit-mask:radial-gradient(28px 34px at 23px 0,transparent 0 27px,#000 28px) 0 0/46px 34px repeat-x;mask:radial-gradient(28px 34px at 23px 0,transparent 0 27px,#000 28px) 0 0/46px 34px repeat-x"></div>
+          </div>
+          <!-- header text on awning -->
+          <div style="position:absolute;top:0;left:0;right:0;height:196px;display:flex;align-items:center;justify-content:center;z-index:2">
+            <div style="background:#20504f;border:1.5px solid rgba(255,248,234,.5);border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,.28);padding:16px 44px;display:flex;flex-direction:column;align-items:center;gap:4px">
+              <div style="font-family:'Srisakdi',cursive;font-weight:700;font-size:25px;letter-spacing:.06em;color:#fff8ea">ตลาดท่านา · นครชัยศรี</div>
+              <div style="font-family:'Trirong',serif;font-size:15px;letter-spacing:.44em;color:#f0dcb2;padding-left:.44em">ตลาดริมน้ำ ๑๔๐ ปี</div>
+            </div>
+          </div>
+
+          <!-- ===== Checkpoint seal ===== -->
+          <div style="position:absolute;top:250px;left:50%;transform:translateX(-50%);width:150px;height:150px;border-radius:50%;background:#20504f;box-shadow:0 8px 22px rgba(32,80,79,.35);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:5">
+            <div style="position:absolute;inset:9px;border-radius:50%;border:1.5px dashed rgba(255,248,234,.6)"></div>
+            <div style="font-family:'Trirong',serif;font-size:14px;letter-spacing:.34em;color:#f0dcb2;padding-left:.34em;margin-top:4px">จุดเช็คอิน</div>
+            <div style="font-family:'Srisakdi',cursive;font-weight:700;font-size:78px;line-height:.9;color:#fff8ea">๓</div>
+          </div>
+
+          <!-- ===== Title block ===== -->
+          <div style="position:absolute;top:420px;left:64px;right:64px;text-align:center">
+            <div style="font-family:'Srisakdi',cursive;font-weight:700;font-size:52px;line-height:1.06;color:#9c2b23">แยกหน้าร้านของฝาก</div>
+            <div style="display:flex;align-items:center;justify-content:center;gap:14px;margin-top:14px">
+              <div style="width:54px;height:1.5px;background:#c8a24a"></div>
+              <div style="font-family:'Trirong',serif;font-size:19px;letter-spacing:.14em;color:#5d4a33">สามแยกกลางตลาด · ริมแม่น้ำนครชัยศรี</div>
+              <div style="width:54px;height:1.5px;background:#c8a24a"></div>
+            </div>
+          </div>
+
+          <!-- ===== History caption ===== -->
+          <div style="position:absolute;top:540px;left:96px;right:96px;text-align:center;font-family:'Trirong',serif;font-weight:300;font-size:18px;line-height:1.85;color:#4a3c29">
+            ตรงนี้คือหัวใจของตลาดท่านา ตลาดสดเก่าแก่กว่า ๑๔๐ ปี ที่เติบโตมาตั้งแต่ครั้งเรือข้าวล่องแม่น้ำนครชัยศรี มาเทียบท่าในสมัยรัชกาลที่ ๕ เรือนไม้สองชั้นอายุกว่า ๙๐ ปี กันสาดลายทาง และร้านของฝากพื้นเมือง ยังคงยืนเคียงข้างวิถีชุมชนจนถึงวันนี้
+          </div>
+
+          <!-- ===== Highlights ===== -->
+          <div style="position:absolute;top:712px;left:72px;right:72px">
+            <div style="text-align:center;font-family:'Trirong',serif;font-size:15px;letter-spacing:.3em;color:#9c2b23;padding-left:.3em;margin-bottom:16px">ของขึ้นชื่อประจำจุดนี้</div>
+            <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px">
+              <span style="padding:9px 20px;background:#20504f;color:#fff8ea;border-radius:999px;font-size:17px">ส้มโอนครชัยศรี</span>
+              <span style="padding:9px 20px;background:#fff;border:1.5px solid #20504f;color:#20504f;border-radius:999px;font-size:17px">ข้าวหลาม</span>
+              <span style="padding:9px 20px;background:#df8a2b;color:#3f2a12;border-radius:999px;font-size:17px">ขนมไทยโบราณ</span>
+              <span style="padding:9px 20px;background:#fff;border:1.5px solid #9c2b23;color:#9c2b23;border-radius:999px;font-size:17px">เป็ดพะโล้</span>
+              <span style="padding:9px 20px;background:#fff;border:1.5px solid #c8a24a;color:#8a6a1e;border-radius:999px;font-size:17px">ขนมปังเย็น · บัวลอย</span>
+            </div>
+          </div>
+
+          <!-- ===== QR / passport card ===== -->
+          <div style="position:absolute;left:64px;right:64px;bottom:80px;background:#fff;border:1.5px solid #e0d2ad;border-radius:16px;box-shadow:0 10px 30px rgba(60,45,25,.12);padding:24px 30px;display:flex;align-items:center;gap:26px" data-comment-anchor="cc-2">
+            <!-- Live QR -->
+            <div style="flex:none;width:172px;height:172px;background:#fff;border:2px solid #20504f;border-radius:12px;padding:11px;box-sizing:border-box;display:flex;align-items:center;justify-content:center">
+              <div ref="{{ qrRef }}" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center"></div>
+            </div>
+            <!-- steps -->
+            <div style="flex:1">
+              <div style="font-family:'Srisakdi',cursive;font-weight:700;font-size:27px;color:#9c2b23;line-height:1.1">สแกนสะสมแสตมป์ดิจิทัล</div>
+              <div style="font-family:'Trirong',serif;font-size:15.5px;color:#6b5a41;margin:4px 0 14px">เก็บครบทุกจุดทั่วตลาด รับของที่ระลึก</div>
+              <div style="display:flex;flex-direction:column;gap:9px">
+                <div style="display:flex;align-items:center;gap:11px;font-size:16px;color:#4a3c29"><span style="flex:none;width:26px;height:26px;border-radius:50%;background:#20504f;color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Trirong',serif;font-size:14px">๑</span>เปิดกล้องมือถือ สแกน QR</div>
+                <div style="display:flex;align-items:center;gap:11px;font-size:16px;color:#4a3c29"><span style="flex:none;width:26px;height:26px;border-radius:50%;background:#20504f;color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Trirong',serif;font-size:14px">๒</span>กดรับตราประจำจุดที่ ๓</div>
+                <div style="display:flex;align-items:center;gap:11px;font-size:16px;color:#4a3c29"><span style="flex:none;width:26px;height:26px;border-radius:50%;background:#20504f;color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Trirong',serif;font-size:14px">๓</span>ตามหาจุดเช็คอินถัดไป</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ===== Footer ===== -->
+          <div style="position:absolute;left:64px;right:64px;bottom:44px;display:flex;align-items:center;justify-content:space-between;font-family:'Trirong',serif;font-size:13px;letter-spacing:.14em;color:#9c8768">
+            <span>ตลาดท่านา · ต.นครชัยศรี อ.นครชัยศรี จ.นครปฐม</span>
+            <span>#เที่ยวตลาดท่านา · #สะสมแสตมป์ท่านา</span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <p class="dv-next">ลองต่อ: "ทำจุดที่ ๑–๕ ให้ครบชุด" · "ใส่แผนผังตลาดชี้ตำแหน่งจุดนี้" · "เปลี่ยนกันสาดเป็นโทนแดง-เขียวแบบร้านฝั่งขวา" · "ทำไฟล์พร้อมพิมพ์ A3 มีระยะตัดตก"</p>
+</section>
+
+<section class="dv-turn" id="t1">
+  <div class="dv-thd"><a class="dv-tid" href="#t1">1</a><span class="dv-tname">Souvenir postcards — Tha Na Riverside Market (6×4 in, front + a shared back)</span></div>
+  <div class="dv-opts">
+
+    <!-- 1a Vintage hand-tinted travel postcard -->
+    <div class="dv-opt" id="1a">
+      <div class="dv-olabel"><a class="dv-oid" href="#1a">1a</a>Hand-tinted vintage travel postcard — river &amp; iron bridge</div>
+      <div class="dv-card" style="width:900px">
+        <div data-screen-label="1a front" style="position:relative;width:900px;height:600px;background:#f3ead8;overflow:hidden">
+          <div style="position:absolute;inset:16px;border:1px solid #9c2b23;outline:4px solid #f3ead8;outline-offset:-7px;box-shadow:inset 0 0 0 8px #9c2b23"></div>
+          <div style="position:absolute;inset:34px;display:flex;flex-direction:column">
+            <div style="flex:1;position:relative;overflow:hidden;background:#20504f">
+              <img src="uploads/S__27795465_0.jpg" alt="Tha Chin River and iron bridge" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 42%;filter:sepia(.45) saturate(1.35) contrast(1.06) brightness(1.04)">
+              <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(243,234,216,.25),rgba(156,43,35,0) 30%,rgba(32,80,79,.28));mix-blend-mode:multiply"></div>
+              <div style="position:absolute;inset:0;background:radial-gradient(120% 90% at 50% 40%,rgba(0,0,0,0) 55%,rgba(60,30,10,.35))"></div>
+              <div style="position:absolute;top:18px;left:0;right:0;text-align:center;color:#fdf6e6;font-family:'Cormorant Garamond',serif;font-size:26px;letter-spacing:.42em;text-transform:uppercase;text-shadow:0 1px 6px rgba(0,0,0,.45)">Greetings from</div>
+              <div style="position:absolute;bottom:24px;left:0;right:0;text-align:center;color:#fdf6e6;text-shadow:0 2px 10px rgba(0,0,0,.55)">
+                <div style="font-family:'Srisakdi',cursive;font-weight:700;font-size:76px;line-height:1">ตลาดท่านา</div>
+                <div style="font-family:'Cormorant Garamond',serif;font-size:24px;letter-spacing:.34em;text-transform:uppercase;margin-top:6px">Tha Na Riverside Market</div>
+              </div>
+            </div>
+            <div style="height:74px;display:flex;align-items:center;justify-content:center;gap:22px;background:#f3ead8">
+              <div style="width:110px;height:1px;background:#9c2b23"></div>
+              <div style="text-align:center;font-family:'Trirong',serif;color:#5d4a33;font-size:16px;line-height:1.5">a century of trade on the Tha Chin River<br><span style="font-size:14px;letter-spacing:.18em;color:#9c2b23">NAKHON CHAI SI · NAKHON PATHOM</span></div>
+              <div style="width:110px;height:1px;background:#9c2b23"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 1b Lantern hall — painterly full bleed -->
+    <div class="dv-opt" id="1b">
+      <div class="dv-olabel"><a class="dv-oid" href="#1b">1b</a>Painterly full-bleed — lantern hall &amp; opera mural, museum caption</div>
+      <div class="dv-card" style="width:900px">
+        <div data-screen-label="1b front" style="position:relative;width:900px;height:600px;background:#1d3a33;overflow:hidden">
+          <img src="uploads/S__27795468_0.jpg" alt="Lantern hall with Chinese opera mural" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:62% 45%;filter:saturate(1.4) contrast(1.12) brightness(.98)">
+          <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(29,58,51,.18),rgba(0,0,0,0) 35%,rgba(20,16,10,.72))"></div>
+          <div style="position:absolute;inset:14px;border:1px solid rgba(253,246,230,.65)"></div>
+          <div style="position:absolute;left:0;right:0;bottom:40px;display:flex;flex-direction:column;align-items:center;gap:8px;color:#fdf6e6">
+            <div style="font-family:'Srisakdi',cursive;font-weight:700;font-size:58px;line-height:1;text-shadow:0 2px 12px rgba(0,0,0,.6)">ห้องโคมแดง ตลาดท่านา</div>
+            <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:22px;color:#f0dcb2">The Lantern Hall — where the opera still watches over tea tables</div>
+            <div style="font-family:'Cormorant Garamond',serif;font-size:15px;letter-spacing:.38em;text-transform:uppercase;color:rgba(253,246,230,.8)">Tha Na Market · Est. in the reign of Rama V</div>
+          </div>
+          <div style="position:absolute;top:30px;right:30px;width:86px;height:104px;background:#f3ead8;padding:6px;box-shadow:0 3px 10px rgba(0,0,0,.4);transform:rotate(3deg)">
+            <img src="uploads/S__27795466_0.jpg" alt="Market cat" style="width:100%;height:78px;object-fit:cover;object-position:50% 60%;filter:sepia(.5)">
+            <div style="text-align:center;font-family:'Cormorant Garamond',serif;font-size:10px;letter-spacing:.14em;color:#5d4a33;margin-top:3px">THA NA · 10 ฿</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 1c Shared back -->
+    <div class="dv-opt" id="1c">
+      <div class="dv-olabel"><a class="dv-oid" href="#1c">1c</a>Postcard back — divided, with story caption &amp; stamp box</div>
+      <div class="dv-card" style="width:900px">
+        <div data-screen-label="1c back" style="position:relative;width:900px;height:600px;background:#f7f1e2;overflow:hidden;color:#3f3324">
+          <div style="position:absolute;inset:16px;border:1px solid #b8a98a"></div>
+          <div style="position:absolute;top:36px;left:0;right:0;text-align:center;font-family:'Cormorant Garamond',serif;font-size:19px;letter-spacing:.4em;text-transform:uppercase;color:#9c2b23">Post Card · ไปรษณียบัตร</div>
+          <div style="position:absolute;top:80px;bottom:44px;left:44px;width:390px;display:flex;flex-direction:column;gap:14px">
+            <div style="font-family:'Srisakdi',cursive;font-weight:700;font-size:30px;color:#20504f">ตลาดท่านา</div>
+            <div style="font-family:'Trirong',serif;font-weight:300;font-size:15.5px;line-height:1.75">More than a hundred years ago, rice barges from the Tha Chin River moored here and a wooden market grew on the bank. The teal shutters, the iron bridge, the red lanterns and the opera mural are not décor — they are the diary of Nakhon Chai Si, still open every weekend.</div>
+            <div style="font-family:'Trirong',serif;font-weight:300;font-size:14.5px;line-height:1.75;color:#6b5a41">กว่าร้อยปีที่เรือข้าวจากแม่น้ำท่าจีนมาเทียบท่า ณ ที่แห่งนี้ ตลาดไม้ริมน้ำจึงเติบโตขึ้นเป็นบันทึกชีวิตของชาวนครชัยศรีจวบจนวันนี้</div>
+            <div style="margin-top:auto;font-family:'Cormorant Garamond',serif;font-size:13px;letter-spacing:.22em;text-transform:uppercase;color:#9c8768">Tha Na Market · Nakhon Chai Si · Thailand</div>
+          </div>
+          <div style="position:absolute;top:80px;bottom:44px;left:465px;width:1px;background:#b8a98a"></div>
+          <div style="position:absolute;top:88px;right:44px;width:96px;height:116px;border:1.5px dashed #9c2b23;display:flex;align-items:center;justify-content:center;text-align:center;font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:.18em;line-height:1.6;color:#9c2b23;text-transform:uppercase">Place<br>stamp<br>here</div>
+          <div style="position:absolute;left:500px;right:44px;bottom:64px;display:flex;flex-direction:column;gap:34px">
+            <div style="border-bottom:1px solid #b8a98a;height:22px"></div>
+            <div style="border-bottom:1px solid #b8a98a;height:22px"></div>
+            <div style="border-bottom:1px solid #b8a98a;height:22px"></div>
+            <div style="border-bottom:1px solid #b8a98a;height:22px;width:70%"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <p class="dv-next">Try next: "make <a class="dv-oid" href="#1a">1a</a> with the shophouse street photo" · "warmer, more gold in <a class="dv-oid" href="#1b">1b</a>" · "print-ready file of <a class="dv-oid" href="#1a">1a</a> + <a class="dv-oid" href="#1c">1c</a>"</p>
+</section>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:900,&quot;height&quot;:760},&quot;qrUrl&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;https://thana-market.example/checkpoint/3&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;เช็คอิน&quot;}}">
+class Component extends DCLogic {
+  qrRef = React.createRef();
+  qrRef2 = React.createRef();
+  renderVals() {
+    return { qrRef: this.qrRef, qrRef2: this.qrRef2 };
+  }
+  componentDidMount() {
+    this._drawQR();
+  }
+  componentDidUpdate() {
+    this._drawQR();
+  }
+  _drawQR() {
+    const url = this.props.qrUrl || "https://thana-market.example/checkpoint/3";
+    if (this._drawn === url) return;
+    const draw = (el, dark) => {
+      if (!el) return;
+      el.innerHTML = "";
+      new QRCode(el, {
+        text: url, width: 150, height: 150,
+        colorDark: dark, colorLight: "#ffffff",
+        correctLevel: QRCode.CorrectLevel.M
+      });
+    };
+    const tryDraw = () => {
+      if (typeof QRCode === "undefined") { setTimeout(tryDraw, 120); return; }
+      if (!this.qrRef.current && !this.qrRef2.current) return;
+      draw(this.qrRef.current, "#20504f");
+      draw(this.qrRef2.current, "#0e6b63");
+      this._drawn = url;
+    };
+    tryDraw();
+  }
+}
+</script>
+</body>
+</html>
