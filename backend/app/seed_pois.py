@@ -51,7 +51,7 @@ def seed_pois():
                 image_url="/images/food003.jpg",
                 map_x=26.8,
                 map_y=17.5,
-                qr_secret="pending_food003",
+                qr_secret="Checkin_5_Bakery",
                 status="active",
             ),
 
