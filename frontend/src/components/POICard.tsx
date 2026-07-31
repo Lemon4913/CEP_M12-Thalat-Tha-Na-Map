@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import type { POI } from "../types";
+import PoiArt, { artVariantFor } from "./PoiArt";
 
 interface Props {
   poi: POI;
@@ -11,12 +12,28 @@ interface Props {
 function POICard({ poi, index, done }: Props) {
   return (
     <Link to={`/poi/${poi.id}`} className={`checkin-card${done ? " done" : ""}`}>
-      <div className="card-num">{done ? "✓" : index}</div>
-      <div className="card-text">
-        <div className="card-name">{poi.name}</div>
-        <div className="card-desc">{poi.description}</div>
-      </div>
-      <span className="card-check">✓</span>
+      <span className="checkin-card-thumb">
+        <PoiArt variant={artVariantFor(poi.id, poi.category)} />
+        <span className="card-num">{done ? "✓" : index}</span>
+      </span>
+
+      <span className="card-text">
+        <span className="card-name">{poi.name}</span>
+        <span className="card-desc">{poi.description}</span>
+      </span>
+
+      <span className="card-chevron" aria-hidden="true">
+        <svg viewBox="0 0 24 24">
+          <path
+            d="M9 5l7 7-7 7"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </span>
     </Link>
   );
 }

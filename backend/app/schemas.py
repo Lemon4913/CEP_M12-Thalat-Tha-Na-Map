@@ -9,8 +9,8 @@ class POIOut(BaseModel):
     category: str
     description: str
     image_url: str
-    map_x: float
-    map_y: float
+    map_x: float  # longitude (WGS84 decimal degrees)
+    map_y: float  # latitude  (WGS84 decimal degrees)
     status: str
 
     class Config:

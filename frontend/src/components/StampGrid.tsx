@@ -16,6 +16,7 @@ function StampGrid({ pois, checkins }: Props) {
       {pois.map((poi, i) => (
         <StampBadge
           key={poi.id}
+          poiId={poi.id}
           name={poi.name}
           category={poi.category}
           index={i + 1}

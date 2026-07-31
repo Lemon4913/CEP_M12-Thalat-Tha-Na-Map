@@ -1,31 +1,397 @@
+/* ============================================================
+   Talat Tha Na Map — application styles
+   Everything here is built from the tokens in tokens.css.
+   No colour, font or radius literals outside that file.
+   ============================================================ */
+
 * {
   box-sizing: border-box;
 }
 
+html,
 body {
   margin: 0;
-  font-family: var(--font, sans-serif);
   background: var(--cream);
-  color: var(--brown);
 }
 
-/* ─── Shared layout primitives ─────────────────────────── */
+body {
+  font-family: var(--font, sans-serif);
+  color: var(--brown);
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+}
+
+/* ─── App shell ─────────────────────────────────────────── */
+.app-shell {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+.app-body {
+  flex: 1;
+  /* clears the fixed bottom nav, including the iOS home-indicator inset */
+  padding-bottom: calc(var(--nav-height) + env(safe-area-inset-bottom, 0px));
+}
+
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 1100;
+  background: var(--green);
+  border-bottom: 3px solid var(--gold);
+}
+.app-header-inner {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: var(--sp-3) var(--sp-4);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  text-decoration: none;
+  min-height: var(--tap-min);
+}
+.app-header-logo {
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+}
+.app-header-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+}
+.app-header-title {
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-bold);
+  color: #fff;
+}
+.app-header-sub {
+  font-size: var(--fs-label);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-caps);
+  color: var(--gold-lt);
+}
+
+/* ─── Bottom navigation ─────────────────────────────────── */
+.bottom-nav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1200; /* above the map stage and its check-point badges */
+  display: flex;
+  background: var(--cream-lt);
+  border-top: 1px solid var(--cream-md);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  box-shadow: 0 -2px 12px rgba(30, 20, 8, 0.06);
+}
+.bottom-nav-item {
+  flex: 1;
+  min-height: var(--nav-height);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  text-decoration: none;
+  color: var(--brown-lt);
+  transition: color var(--t-fast);
+}
+.bottom-nav-item.is-active {
+  color: var(--green);
+}
+.bottom-nav-icon {
+  width: 22px;
+  height: 22px;
+}
+.bottom-nav-label {
+  font-size: var(--fs-label);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-caps);
+}
+.bottom-nav-item.is-active .bottom-nav-label {
+  font-weight: var(--fw-bold);
+}
+
+/* ─── Shared layout primitives ──────────────────────────── */
 .page-inner {
   max-width: 480px;
   margin: 0 auto;
-  padding: var(--sp-4) var(--sp-4) var(--sp-5);
+  padding: var(--sp-4) var(--sp-4) var(--sp-6);
 }
 
+.section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  margin: var(--sp-5) 0 var(--sp-3);
+}
+.section-head:first-child {
+  margin-top: 0;
+}
 .section-eyebrow {
   font-size: var(--fs-label);
   font-weight: var(--fw-semibold);
   letter-spacing: var(--ls-caps);
   color: var(--brown-lt);
   text-transform: uppercase;
-  margin-bottom: var(--sp-2);
+}
+.section-note {
+  margin: 0;
+  font-size: var(--fs-small);
+  color: var(--brown-lt);
+  opacity: 0.85;
 }
 
-/* ─── Progress strip (map page only) ───────────────────── */
+.empty-state {
+  background: var(--cream-lt);
+  border: 1px dashed var(--cream-md);
+  border-radius: var(--radius);
+  padding: var(--sp-5) var(--sp-4);
+  text-align: center;
+  font-size: var(--fs-small);
+  color: var(--brown-lt);
+}
+.empty-state p {
+  margin: 0 0 var(--sp-2);
+  font-weight: var(--fw-semibold);
+  color: var(--brown);
+}
+.empty-state-sub {
+  font-weight: var(--fw-regular) !important;
+  color: var(--brown-lt) !important;
+  margin-bottom: var(--sp-4) !important;
+}
+
+.notice {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  background: var(--cream-lt);
+  border: 1px solid var(--cream-md);
+  border-left: 3px solid var(--green);
+  border-radius: var(--radius);
+  padding: var(--sp-3) 14px;
+  margin-bottom: var(--sp-4);
+  font-size: var(--fs-small);
+  color: var(--brown-lt);
+  line-height: 1.6;
+}
+.notice strong {
+  color: var(--ink);
+  font-weight: var(--fw-semibold);
+}
+.notice-gold {
+  border-left-color: var(--gold);
+  background: rgba(200, 153, 58, 0.1);
+  border-color: rgba(200, 153, 58, 0.35);
+}
+
+/* ─── Buttons: floating pills ───────────────────────────── */
+.btn-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  min-height: var(--tap-min);
+  padding: 12px 26px;
+  border: none;
+  border-radius: 999px;
+  font-family: var(--font);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-caps);
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform var(--t-fast), box-shadow var(--t-fast), background var(--t-fast);
+}
+.btn-pill:active {
+  transform: translateY(1px);
+}
+.btn-pill-icon {
+  width: 18px;
+  height: 18px;
+}
+.btn-pill-gold {
+  background: var(--gold);
+  color: var(--ink);
+  box-shadow: 0 6px 18px rgba(200, 153, 58, 0.35);
+}
+.btn-pill-gold:hover {
+  background: var(--gold-lt);
+}
+.btn-pill-green {
+  background: var(--green);
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(44, 94, 66, 0.28);
+}
+.btn-pill-green:hover {
+  background: var(--green-lt);
+}
+.btn-pill-ghost {
+  background: transparent;
+  color: var(--green);
+  border: 1.5px solid var(--cream-md);
+}
+.btn-pill-ghost:hover {
+  border-color: var(--green);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  font-size: var(--fs-label);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+  padding: 4px 11px;
+  border-radius: 999px;
+  background: rgba(250, 245, 234, 0.22);
+  color: var(--cream-lt);
+  border: 1px solid rgba(250, 245, 234, 0.3);
+  backdrop-filter: blur(6px);
+}
+.chip-solid {
+  background: var(--gold);
+  color: var(--ink);
+  border-color: transparent;
+}
+
+/* ─── Original artwork (PoiArt) ─────────────────────────── */
+.poi-art {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* ─── Landing ───────────────────────────────────────────── */
+.landing {
+  position: relative;
+  min-height: calc(100dvh - var(--nav-height));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  isolation: isolate;
+}
+.landing-art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+}
+.landing-veil {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    180deg,
+    rgba(30, 20, 8, 0.34) 0%,
+    rgba(30, 20, 8, 0.12) 38%,
+    rgba(30, 20, 8, 0.52) 100%
+  );
+}
+.landing-content {
+  width: 100%;
+  max-width: 400px;
+  padding: var(--sp-6) var(--sp-4);
+  text-align: center;
+  color: var(--cream-lt);
+}
+.landing-badge {
+  width: 58px;
+  height: 58px;
+  margin: 0 auto var(--sp-4);
+}
+.landing-eyebrow {
+  margin: 0 0 var(--sp-2);
+  font-size: var(--fs-label);
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold-lt);
+}
+.landing-title {
+  margin: 0;
+  font-size: clamp(2.2rem, 12vw, 3rem);
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.01em;
+  line-height: 1.15;
+  color: #fff;
+  text-shadow: 0 2px 18px rgba(30, 20, 8, 0.4);
+}
+.landing-sub {
+  margin: var(--sp-2) 0 0;
+  font-size: var(--fs-small);
+  font-weight: var(--fw-light);
+  letter-spacing: 0.08em;
+  color: rgba(250, 245, 234, 0.78);
+}
+
+/* frosted panel over the hero art */
+.landing-panel {
+  margin-top: var(--sp-5);
+  padding: var(--sp-5) var(--sp-4);
+  border-radius: var(--radius-lg);
+  background: rgba(250, 245, 234, 0.13);
+  border: 1px solid rgba(250, 245, 234, 0.22);
+  backdrop-filter: blur(16px) saturate(1.1);
+  -webkit-backdrop-filter: blur(16px) saturate(1.1);
+  box-shadow: 0 8px 32px rgba(30, 20, 8, 0.22);
+}
+.landing-desc {
+  margin: 0 0 var(--sp-4);
+  font-size: var(--fs-small);
+  line-height: 1.8;
+  color: rgba(250, 245, 234, 0.92);
+}
+.landing-progress {
+  margin-bottom: var(--sp-4);
+}
+.landing-progress-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--fs-small);
+  color: rgba(250, 245, 234, 0.8);
+  margin-bottom: var(--sp-2);
+}
+.landing-progress-row strong {
+  color: var(--gold-lt);
+  font-weight: var(--fw-semibold);
+}
+.landing-progress-track {
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(250, 245, 234, 0.2);
+  overflow: hidden;
+}
+.landing-progress-fill {
+  height: 100%;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-lt));
+  transition: width var(--t-base) ease;
+}
+.landing-cta {
+  width: 100%;
+}
+.landing-secondary {
+  display: inline-block;
+  margin-top: var(--sp-3);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-medium);
+  color: rgba(250, 245, 234, 0.85);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  min-height: var(--tap-min);
+  line-height: var(--tap-min);
+}
+
+/* ─── Progress strip (map page) ─────────────────────────── */
 .progress-strip {
   background: var(--green);
   padding: var(--sp-3) var(--sp-4) 14px;
@@ -69,10 +435,6 @@ body {
   height: 26px;
   border-radius: 50%;
   border: 2px solid rgba(255, 255, 255, 0.25);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.8rem;
   transition: all var(--t-base);
 }
 .progress-stamp.earned {
@@ -84,108 +446,229 @@ body {
   background: rgba(255, 255, 255, 0.08);
 }
 
-/* ─── Map page ──────────────────────────────────────────── */
-.map-container {
-  background: var(--cream-lt);
-  border: 2px solid var(--cream-md);
-  border-radius: var(--radius);
+/* ─── Illustrated isometric market map ──────────────────── */
+.market-map {
+  border-radius: var(--radius-lg);
   overflow: hidden;
-  box-shadow: inset 0 0 30px rgba(61, 43, 26, 0.06), 0 2px 8px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--cream-md);
+  box-shadow: var(--shadow-card);
   margin-bottom: var(--sp-4);
 }
-.map-container svg {
+/* The stage matches the illustration's aspect exactly (it is square), so a
+   check-point badge positioned in per-cent lands on the building drawn
+   underneath it. The Leaflet view overrides this with its own ratio below. */
+.market-map-stage {
+  position: relative;
   width: 100%;
-  height: auto;
+  aspect-ratio: 1 / 1;
+  background: var(--cream-lt);
+}
+/* Shared by the isometric artwork <img> and the leader-line <svg> stacked over
+   it — both fill the stage exactly, so they share one coordinate space. */
+.market-map-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   display: block;
-}
-.map-road {
-  stroke: #d8ccb4;
-  stroke-width: 8;
-  fill: none;
-}
-.map-road-sm {
-  stroke: #d8ccb4;
-  stroke-width: 4;
-  fill: none;
-}
-.map-river {
-  fill: #b8d4c8;
-  stroke: #8eb8a8;
-  stroke-width: 2;
-}
-.map-building {
-  fill: #e8dcca;
-  stroke: #c8b898;
-  stroke-width: 1.5;
-}
-.map-building-main {
-  fill: #ddd0b8;
-  stroke: #b8a878;
-  stroke-width: 1.5;
-}
-.map-label {
-  font-family: var(--font);
-  fill: #6b4c30;
-  font-size: 9px;
-}
-.map-label-river {
-  font-family: var(--font);
-  fill: var(--river);
-  font-size: 8px;
-  font-style: italic;
+  object-fit: cover;
 }
 
-.pin-group {
-  cursor: pointer;
+/* ─── Map view toggle (illustrated / Leaflet) ───────────── */
+.map-view-toggle {
+  display: inline-flex;
+  gap: 2px;
+  padding: 3px;
+  margin-bottom: var(--sp-3);
+  background: var(--cream-md);
+  border-radius: 999px;
 }
-.pin-outer {
-  fill: var(--green);
-  stroke: var(--cream);
-  stroke-width: 2;
-  transition: all var(--t-fast);
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.25));
-}
-.pin-group:hover .pin-outer {
-  fill: var(--gold);
-  filter: drop-shadow(0 0 8px rgba(200, 153, 58, 0.7));
-}
-.pin-group.pin-done .pin-outer {
-  fill: var(--gold);
-  stroke: var(--gold-lt);
-}
-.pin-num {
+.map-view-toggle-btn {
+  border: none;
+  background: transparent;
+  color: var(--brown-lt);
   font-family: var(--font);
-  font-size: 8px;
-  font-weight: var(--fw-bold);
-  fill: white;
-  text-anchor: middle;
-  dominant-baseline: middle;
-  pointer-events: none;
+  font-size: var(--fs-small);
+  font-weight: var(--fw-semibold);
+  padding: 6px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background var(--t-fast), color var(--t-fast);
 }
-@keyframes pin-pulse {
+.map-view-toggle-btn.is-active {
+  background: var(--green);
+  color: #fff;
+}
+
+/* ─── Real Leaflet/OSM map view ──────────────────────────── */
+.leaflet-market-map .market-map-stage {
+  aspect-ratio: 1000 / 920;
+}
+.leaflet-market-map-container {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  font-family: var(--font);
+}
+/* Leaflet's default .leaflet-div-icon draws a white box + border — our marker
+   supplies its own circle, so strip that default chrome. */
+.leaflet-poi-icon {
+  background: transparent;
+  border: none;
+}
+.leaflet-poi-dot {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--green);
+  color: #fff;
+  border: 3px solid var(--cream-lt);
+  font-size: 0.9rem;
+  font-weight: var(--fw-bold);
+  line-height: 1;
+  box-shadow: 0 2px 6px rgba(30, 20, 8, 0.35);
+}
+.leaflet-poi-dot.is-done {
+  background: var(--gold);
+  border-color: var(--gold-lt);
+  color: var(--ink);
+}
+.leaflet-market-map .leaflet-tooltip {
+  font-family: var(--font);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-semibold);
+  color: var(--ink);
+  background: var(--cream-lt);
+  border: 1px solid var(--cream-md);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+}
+.leaflet-market-map .leaflet-tooltip-top::before {
+  border-top-color: var(--cream-md);
+}
+
+/* check-point badges — plain HTML buttons layered over the illustration, so the
+   tap target stays a fixed 44px+ no matter how the drawing scales */
+.poi-marker {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.poi-marker:focus-visible {
+  outline: none;
+}
+.poi-marker-dot {
+  position: relative;
+  z-index: 1;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--green);
+  color: #fff;
+  border: 3px solid var(--cream-lt);
+  font-family: var(--font);
+  font-size: 0.9rem;
+  font-weight: var(--fw-bold);
+  line-height: 1;
+  box-shadow: 0 2px 6px rgba(30, 20, 8, 0.35);
+  transition: transform var(--t-fast), background var(--t-fast);
+}
+.poi-marker:hover .poi-marker-dot {
+  background: var(--gold);
+  transform: scale(1.12);
+}
+.poi-marker:focus-visible .poi-marker-dot {
+  outline: 3px solid var(--ink);
+  outline-offset: 2px;
+}
+.poi-marker.is-done .poi-marker-dot {
+  background: var(--gold);
+  border-color: var(--gold-lt);
+  color: var(--ink);
+}
+.poi-marker-pulse {
+  position: absolute;
+  inset: 6px;
+  border-radius: 50%;
+  background: var(--green);
+  opacity: 0.5;
+  animation: poi-marker-pulse 2.4s ease-out infinite;
+}
+.poi-marker.is-done .poi-marker-pulse {
+  background: var(--gold);
+}
+@keyframes poi-marker-pulse {
   0% {
-    opacity: 0.6;
+    opacity: 0.5;
     transform: scale(1);
   }
-  50% {
-    opacity: 0.15;
-    transform: scale(2.2);
+  70% {
+    opacity: 0;
+    transform: scale(2.1);
   }
   100% {
     opacity: 0;
-    transform: scale(2.8);
+    transform: scale(2.1);
   }
 }
-.pin-pulse {
-  fill: var(--green);
-  opacity: 0.5;
-  animation: pin-pulse 2s ease-out infinite;
-  transform-origin: center;
-}
-.pin-group.pin-done .pin-pulse {
-  fill: var(--gold);
+@media (prefers-reduced-motion: reduce) {
+  .poi-marker-pulse {
+    animation: none;
+  }
 }
 
+/* name label — replaces the tooltip the map library used to draw */
+.poi-marker-label {
+  position: absolute;
+  bottom: calc(100% - 2px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  /* the map crops its own overflow, so a label near an edge has to hug that
+     edge instead of centring on the badge — see `data-align` in MarketMap.tsx */
+  max-width: 150px;
+  width: max-content;
+  padding: 3px var(--sp-2);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-semibold);
+  line-height: 1.3;
+  color: var(--ink);
+  background: var(--cream-lt);
+  border: 1px solid var(--cream-md);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--t-fast);
+}
+.poi-marker[data-align="start"] .poi-marker-label {
+  left: 0;
+  transform: none;
+}
+.poi-marker[data-align="end"] .poi-marker-label {
+  left: auto;
+  right: 0;
+  transform: none;
+}
+.poi-marker:hover .poi-marker-label,
+.poi-marker:focus-visible .poi-marker-label {
+  opacity: 1;
+}
+
+/* ─── Check-in point list ───────────────────────────────── */
 .checkin-grid {
   display: flex;
   flex-direction: column;
@@ -195,169 +678,212 @@ body {
   background: var(--cream-lt);
   border: 1.5px solid var(--cream-md);
   border-radius: var(--radius);
-  padding: var(--sp-3) 14px;
+  padding: var(--sp-2) var(--sp-3);
   display: flex;
   align-items: center;
   gap: var(--sp-3);
   text-decoration: none;
   color: inherit;
-  transition: all var(--t-fast);
-  position: relative;
-  overflow: hidden;
-}
-.checkin-card::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 3px;
-  background: var(--cream-md);
-  transition: background var(--t-fast);
+  transition: border-color var(--t-fast), transform var(--t-fast), box-shadow var(--t-fast);
 }
 .checkin-card:hover {
   border-color: var(--green);
   transform: translateX(2px);
-}
-.checkin-card:hover::before {
-  background: var(--green);
+  box-shadow: var(--shadow-card);
 }
 .checkin-card.done {
-  background: #eff7f2;
-  border-color: #b8d8c4;
+  background: rgba(44, 94, 66, 0.06);
+  border-color: rgba(44, 94, 66, 0.3);
 }
-.checkin-card.done::before {
-  background: var(--green);
+.checkin-card-thumb {
+  position: relative;
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--cream-md);
 }
 .card-num {
-  width: 32px;
-  height: 32px;
+  position: absolute;
+  left: 3px;
+  bottom: 3px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
-  background: var(--cream-md);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.8rem;
+  display: grid;
+  place-items: center;
+  background: var(--green);
+  color: #fff;
+  font-size: 0.68rem;
   font-weight: var(--fw-bold);
-  color: var(--brown-lt);
-  flex-shrink: 0;
-  transition: all var(--t-fast);
+  line-height: 1;
+  box-shadow: 0 1px 3px rgba(30, 20, 8, 0.3);
 }
 .checkin-card.done .card-num {
-  background: var(--green);
-  color: white;
+  background: var(--gold);
+  color: var(--ink);
 }
 .card-text {
   flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
 }
 .card-name {
   font-size: 0.92rem;
   font-weight: var(--fw-semibold);
-  color: var(--brown);
-  line-height: 1.3;
+  color: var(--ink);
+  line-height: 1.35;
 }
 .card-desc {
   font-size: 0.76rem;
   color: var(--brown-lt);
   margin-top: 2px;
-  line-height: 1.4;
+  line-height: 1.5;
+  /* keep long Thai descriptions from stretching the row */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
-.card-check {
-  font-size: 1rem;
-  color: var(--green);
+.card-chevron {
   flex-shrink: 0;
-  opacity: 0;
-  transition: opacity var(--t-fast);
+  color: var(--cream-md);
+  transition: color var(--t-fast), transform var(--t-fast);
 }
-.checkin-card.done .card-check {
-  opacity: 1;
+.card-chevron svg {
+  display: block;
+  width: 18px;
+  height: 18px;
+}
+.checkin-card:hover .card-chevron {
+  color: var(--green);
+  transform: translateX(2px);
+}
+.checkin-card.done .card-chevron {
+  color: var(--gold);
 }
 
-/* ─── POI detail page ───────────────────────────────────── */
-.poi-detail-header {
-  margin-bottom: var(--sp-4);
+/* ─── POI detail ────────────────────────────────────────── */
+.poi-hero {
+  position: relative;
+  height: 210px;
+  overflow: hidden;
+  isolation: isolate;
 }
-.poi-detail-category {
-  display: inline-block;
-  font-size: var(--fs-label);
-  font-weight: var(--fw-semibold);
-  letter-spacing: var(--ls-caps);
-  text-transform: uppercase;
-  color: var(--green);
-  background: rgba(44, 94, 66, 0.1);
-  padding: 3px 10px;
-  border-radius: 10px;
+.poi-hero-art {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+}
+.poi-hero-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.poi-hero-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    180deg,
+    rgba(30, 20, 8, 0.05) 0%,
+    rgba(30, 20, 8, 0.3) 55%,
+    rgba(30, 20, 8, 0.72) 100%
+  );
+}
+.poi-hero-content {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: var(--sp-4);
+}
+.poi-hero-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
   margin-bottom: var(--sp-2);
 }
-.poi-detail-name {
-  font-size: var(--fs-h1);
+.poi-hero-title {
+  margin: 0;
+  font-size: 1.45rem;
   font-weight: var(--fw-bold);
-  color: var(--ink);
+  line-height: 1.3;
+  color: #fff;
+  text-shadow: 0 2px 12px rgba(30, 20, 8, 0.5);
 }
-.poi-detail-stamped {
-  display: inline-flex;
+.poi-detail-body {
+  padding-top: var(--sp-4);
+}
+.stamp-flag {
+  display: flex;
   align-items: center;
-  gap: var(--sp-1);
+  gap: var(--sp-2);
+  padding: var(--sp-3) 14px;
+  border-radius: var(--radius);
+  background: var(--cream-lt);
+  border: 1px solid var(--cream-md);
   font-size: var(--fs-small);
-  font-weight: var(--fw-semibold);
+  font-weight: var(--fw-medium);
+  color: var(--brown-lt);
+  margin-bottom: var(--sp-4);
+}
+.stamp-flag.is-earned {
+  background: rgba(44, 94, 66, 0.08);
+  border-color: rgba(44, 94, 66, 0.3);
   color: var(--green);
-  margin-top: var(--sp-2);
+  font-weight: var(--fw-semibold);
+}
+.stamp-flag-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
 }
 .poi-detail-desc {
   font-size: var(--fs-body);
-  line-height: 1.8;
+  line-height: 1.9;
   color: var(--brown);
+  margin: 0 0 var(--sp-5);
 }
-
-/* ─── Landing page ──────────────────────────────────────── */
-.landing-hero {
-  background: var(--green);
-  border-radius: var(--radius-lg);
-  padding: 32px 24px;
-  text-align: center;
-  margin-bottom: var(--sp-5);
-}
-.landing-title {
-  font-size: 1.5rem;
-  font-weight: var(--fw-bold);
-  color: white;
-  margin-bottom: var(--sp-3);
-}
-.landing-desc {
-  font-size: var(--fs-small);
-  color: rgba(245, 237, 216, 0.75);
-  line-height: 1.7;
-  margin-bottom: var(--sp-4);
-}
-.landing-progress {
-  font-size: var(--fs-small);
-  color: var(--gold-lt);
-  font-weight: var(--fw-semibold);
-  margin-bottom: var(--sp-4);
-}
-.landing-cta {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+.poi-detail-actions {
+  display: flex;
+  flex-wrap: wrap;
   gap: var(--sp-2);
-  padding: 14px 28px;
-  min-height: var(--tap-min);
-  background: var(--gold);
-  color: var(--ink);
-  border-radius: var(--radius);
-  font-family: var(--font);
-  font-size: var(--fs-body);
-  font-weight: var(--fw-semibold);
-  text-decoration: none;
-  letter-spacing: var(--ls-caps);
 }
 
 /* ─── Stamps page ───────────────────────────────────────── */
 .stamps-hero {
+  position: relative;
   background: var(--green);
   border-radius: var(--radius-lg);
-  padding: 22px 20px;
-  margin-bottom: var(--sp-5);
+  padding: var(--sp-5) 20px;
+  margin-bottom: var(--sp-4);
+  overflow: hidden;
+}
+.stamps-hero::after {
+  /* soft gold bloom, echoing the landing hero's sun */
+  content: "";
+  position: absolute;
+  top: -70px;
+  right: -50px;
+  width: 190px;
+  height: 190px;
+  border-radius: 50%;
+  background: var(--gold);
+  opacity: 0.16;
+  pointer-events: none;
+}
+.stamps-hero.is-complete::after {
+  opacity: 0.3;
+}
+.stamps-hero-badge {
+  width: 40px;
+  height: 40px;
+  margin-bottom: var(--sp-3);
 }
 .stamps-hero-label {
   font-size: var(--fs-label);
@@ -370,17 +896,17 @@ body {
 .stamps-hero-count {
   font-size: 3.5rem;
   font-weight: var(--fw-bold);
-  color: white;
+  color: #fff;
   line-height: 1;
 }
 .stamps-hero-count span {
   font-size: 1.2rem;
   font-weight: var(--fw-light);
-  opacity: 0.5;
+  opacity: 0.55;
 }
 .stamps-hero-sub {
   font-size: var(--fs-small);
-  color: rgba(245, 237, 216, 0.6);
+  color: rgba(245, 237, 216, 0.7);
   margin-top: var(--sp-2);
 }
 .stamps-hero-bar {
@@ -392,7 +918,7 @@ body {
 }
 .stamps-hero-fill {
   height: 100%;
-  background: var(--gold);
+  background: linear-gradient(90deg, var(--gold), var(--gold-lt));
   border-radius: 3px;
   transition: width var(--t-base);
   box-shadow: 0 0 6px rgba(200, 153, 58, 0.5);
@@ -400,37 +926,66 @@ body {
 
 .stamp-grid-big {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: var(--sp-3);
-  margin-bottom: var(--sp-5);
 }
 .stamp-cell {
-  aspect-ratio: 1 / 1;
   border-radius: var(--radius);
   border: 1.5px solid var(--cream-md);
   background: var(--cream-lt);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 2px;
   padding: var(--sp-2);
   text-align: center;
+  overflow: hidden;
 }
 .stamp-cell.earned {
-  background: #eff7f2;
-  border-color: #b8d8c4;
+  background: rgba(44, 94, 66, 0.06);
+  border-color: rgba(44, 94, 66, 0.32);
 }
-.stamp-cell-icon {
-  font-size: 1.6rem;
-  line-height: 1;
+.stamp-cell-art {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: var(--sp-2);
 }
-.stamp-cell.locked .stamp-cell-icon {
-  filter: grayscale(1);
-  opacity: 0.3;
+.stamp-cell.locked .stamp-cell-art {
+  filter: grayscale(0.85);
+  opacity: 0.45;
+}
+.stamp-cell-seal,
+.stamp-cell-lock {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+}
+.stamp-cell-seal {
+  right: 4px;
+  bottom: 4px;
+  width: 24px;
+  height: 24px;
+  background: var(--gold);
+  color: var(--ink);
+  box-shadow: 0 1px 4px rgba(30, 20, 8, 0.35);
+}
+.stamp-cell-seal svg {
+  width: 15px;
+  height: 15px;
+}
+.stamp-cell-lock {
+  inset: 0;
+  margin: auto;
+  width: 30px;
+  height: 30px;
+  color: var(--brown-lt);
+  opacity: 0.75;
+}
+.stamp-cell-lock svg {
+  width: 20px;
+  height: 20px;
 }
 .stamp-cell-num {
-  font-size: 0.65rem;
+  font-size: 0.64rem;
   font-weight: var(--fw-semibold);
   color: var(--brown-lt);
   letter-spacing: var(--ls-caps);
@@ -440,15 +995,19 @@ body {
   color: var(--green);
 }
 .stamp-cell-name {
-  font-size: 0.65rem;
+  font-size: 0.66rem;
   color: var(--brown-lt);
-  line-height: 1.3;
+  line-height: 1.35;
+  margin-top: 1px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .history-list {
   display: flex;
   flex-direction: column;
-  gap: 0;
 }
 .history-item {
   display: flex;
@@ -473,10 +1032,12 @@ body {
 }
 .history-text {
   flex: 1;
+  min-width: 0;
 }
 .history-name {
   font-size: 0.9rem;
   font-weight: var(--fw-semibold);
+  color: var(--ink);
 }
 .history-time {
   font-size: 0.75rem;
@@ -487,87 +1048,192 @@ body {
   font-size: 0.7rem;
   font-weight: var(--fw-semibold);
   color: var(--gold);
-  background: rgba(200, 153, 58, 0.12);
-  padding: 2px 8px;
-  border-radius: 10px;
+  background: rgba(200, 153, 58, 0.14);
+  padding: 3px 9px;
+  border-radius: 999px;
   flex-shrink: 0;
 }
 
-/* ─── Check-in result page ─────────────────────────────── */
+/* ─── Check-in result ───────────────────────────────────── */
 .checkin-result {
+  position: relative;
   border-radius: var(--radius-lg);
-  padding: 28px 20px;
+  padding: var(--sp-6) var(--sp-4);
   text-align: center;
-  margin-bottom: var(--sp-5);
+  overflow: hidden;
 }
 .checkin-result.success {
   background: var(--green);
 }
-.checkin-result.error {
+.checkin-result.error,
+.checkin-result.is-pending {
   background: var(--cream-lt);
   border: 1.5px solid var(--cream-md);
 }
-.checkin-result-icon {
-  font-size: 2.5rem;
-  margin-bottom: var(--sp-3);
+.checkin-result-art {
+  position: absolute;
+  inset: 0;
+  opacity: 0.2;
+  pointer-events: none;
+}
+.checkin-result-seal {
+  position: relative;
+  width: 66px;
+  height: 66px;
+  margin: 0 auto var(--sp-3);
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--gold);
+  color: var(--ink);
+  box-shadow: 0 6px 20px rgba(200, 153, 58, 0.45);
+}
+.checkin-result-seal svg {
+  width: 36px;
+  height: 36px;
+}
+.checkin-result-title {
+  position: relative;
+  font-size: 1.2rem;
+  font-weight: var(--fw-bold);
 }
 .checkin-result.success .checkin-result-title {
-  color: white;
-  font-size: 1.1rem;
-  font-weight: var(--fw-bold);
+  color: #fff;
 }
-.checkin-result.error .checkin-result-title {
+.checkin-result.error .checkin-result-title,
+.checkin-result.is-pending .checkin-result-title {
   color: var(--ink);
-  font-size: 1.1rem;
-  font-weight: var(--fw-bold);
+}
+.checkin-result-desc {
+  position: relative;
+  font-size: var(--fs-small);
+  margin: var(--sp-2) 0 var(--sp-5);
+  line-height: 1.7;
 }
 .checkin-result.success .checkin-result-desc {
-  color: rgba(245, 237, 216, 0.75);
-  font-size: var(--fs-small);
-  margin-top: var(--sp-2);
-  line-height: 1.6;
+  color: rgba(245, 237, 216, 0.8);
 }
 .checkin-result.error .checkin-result-desc {
   color: var(--brown-lt);
-  font-size: var(--fs-small);
-  margin-top: var(--sp-2);
-  line-height: 1.6;
 }
-.checkin-result-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--sp-2);
-  margin-top: var(--sp-4);
-  padding: 12px 24px;
+.checkin-result .btn-pill {
+  position: relative;
+}
+.checkin-result-link {
+  position: relative;
+  display: block;
+  margin-top: var(--sp-3);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-medium);
+  color: rgba(245, 237, 216, 0.85);
+  text-decoration: underline;
+  text-underline-offset: 3px;
   min-height: var(--tap-min);
-  background: var(--gold);
-  color: var(--ink);
-  border: none;
-  border-radius: var(--radius);
-  font-family: var(--font);
-  font-size: var(--fs-body);
-  font-weight: var(--fw-semibold);
-  text-decoration: none;
-  letter-spacing: var(--ls-caps);
+  line-height: var(--tap-min);
+}
+.checkin-spinner {
+  width: 34px;
+  height: 34px;
+  margin: 0 auto var(--sp-3);
+  border-radius: 50%;
+  border: 3px solid var(--cream-md);
+  border-top-color: var(--green);
+  animation: spin 0.9s linear infinite;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
-/* ─── About page ────────────────────────────────────────── */
+/* ─── About ─────────────────────────────────────────────── */
+.about-hero {
+  position: relative;
+  background: var(--green);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-5) 20px;
+  margin-bottom: var(--sp-5);
+  overflow: hidden;
+}
+.about-hero::after {
+  content: "";
+  position: absolute;
+  top: -60px;
+  right: -40px;
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  background: var(--gold);
+  opacity: 0.16;
+}
+.about-hero-badge {
+  width: 44px;
+  height: 44px;
+  margin-bottom: var(--sp-3);
+}
+.about-hero-title {
+  position: relative;
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: var(--fw-bold);
+  color: #fff;
+}
+.about-hero-sub {
+  position: relative;
+  margin: var(--sp-2) 0 0;
+  font-size: var(--fs-small);
+  color: rgba(245, 237, 216, 0.72);
+  line-height: 1.6;
+}
 .about-section {
   margin-bottom: var(--sp-5);
 }
 .about-section p {
   font-size: var(--fs-small);
-  line-height: 1.8;
+  line-height: 1.9;
   color: var(--brown);
-  margin-bottom: var(--sp-3);
+  margin: 0 0 var(--sp-3);
+}
+.about-steps {
+  list-style: none;
+  margin: 0 0 var(--sp-5);
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+.about-steps li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-3);
+  background: var(--cream-lt);
+  border: 1px solid var(--cream-md);
+  border-radius: var(--radius);
+  padding: var(--sp-3) 14px;
+}
+.about-step-num {
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--green);
+  color: #fff;
+  font-size: 0.76rem;
+  font-weight: var(--fw-bold);
+}
+.about-step-text {
+  font-size: var(--fs-small);
+  line-height: 1.65;
+  color: var(--brown);
 }
 .about-credit-list {
   list-style: none;
   padding: 0;
   margin: 0;
   font-size: var(--fs-small);
-  line-height: 1.9;
+  line-height: 1.95;
   color: var(--brown);
 }
 .about-credit-role {
@@ -578,3 +1244,34 @@ body {
   text-transform: uppercase;
   margin: var(--sp-4) 0 var(--sp-2);
 }
+.about-colophon {
+  margin: var(--sp-5) 0 0;
+  padding-top: var(--sp-4);
+  border-top: 1px solid var(--cream-md);
+  font-size: var(--fs-label);
+  letter-spacing: var(--ls-caps);
+  color: var(--brown-lt);
+  text-align: center;
+}
+
+/* ─── Accessibility ─────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .poi-marker-pulse {
+    display: none;
+  }
+}
+
+/* The map keeps its drawn proportions at every width — `.market-map-stage`
+   carries the aspect ratio, so it needs no per-breakpoint height. */

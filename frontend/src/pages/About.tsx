@@ -1,8 +1,18 @@
+import LogoMark from "../components/LogoMark";
+
 // Owner: Person B (Check-in & Stamp book)
 function About() {
   return (
     <main className="page-inner">
-      <div className="section-eyebrow">เกี่ยวกับโครงการ</div>
+      <section className="about-hero">
+        <LogoMark className="about-hero-badge" tone="light" />
+        <h1 className="about-hero-title">ตลาดท่านา</h1>
+        <p className="about-hero-sub">ตลาดริมน้ำอายุกว่า 140 ปี · นครชัยศรี นครปฐม</p>
+      </section>
+
+      <div className="section-head">
+        <div className="section-eyebrow">เกี่ยวกับโครงการ</div>
+      </div>
 
       <div className="about-section">
         <p>
@@ -19,7 +29,27 @@ function About() {
         </p>
       </div>
 
-      <div className="section-eyebrow">ทีมพัฒนา</div>
+      <div className="section-head">
+        <div className="section-eyebrow">วิธีเล่น</div>
+      </div>
+      <ol className="about-steps">
+        <li>
+          <span className="about-step-num">1</span>
+          <span className="about-step-text">เดินหาป้าย QR code ตามจุดต่างๆ ทั้ง 7 จุดในตลาด</span>
+        </li>
+        <li>
+          <span className="about-step-num">2</span>
+          <span className="about-step-text">สแกน QR code ด้วยกล้องมือถือ ระบบจะบันทึกแสตมป์ให้อัตโนมัติ</span>
+        </li>
+        <li>
+          <span className="about-step-num">3</span>
+          <span className="about-step-text">เก็บครบทั้ง 7 จุด แล้วนำหน้าจอสมุดแสตมป์ไปแสดงที่ตู้จ่ายภาพ</span>
+        </li>
+      </ol>
+
+      <div className="section-head">
+        <div className="section-eyebrow">ทีมพัฒนา</div>
+      </div>
       <div className="about-section">
         <div className="about-credit-role">หัวหน้าโครงการ</div>
         <ul className="about-credit-list">
@@ -45,6 +75,10 @@ function About() {
           <li>นายนิชชาฌ ปัญจกาญน์มณี — ผู้ใหญ่บ้านชุมชนตลาดท่านา</li>
         </ul>
       </div>
+
+      <p className="about-colophon">
+        แผนที่จาก OpenStreetMap · ภาพประกอบทั้งหมดวาดขึ้นใหม่สำหรับโครงการนี้
+      </p>
     </main>
   );
 }
