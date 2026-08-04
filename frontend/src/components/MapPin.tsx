@@ -1,24 +1,25 @@
-import { Link } from "react-router-dom";
-import type { POI } from "../types";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-interface Props {
-  poi: POI;
+interface MapPinProps {
+  id: number;
+  name: string;
+  x: number;
+  y: number;
 }
 
-// Owner: Person A. Positioned absolutely over the map image using map_x/map_y (0-100%).
-function MapPin({ poi }: Props) {
+function MapPin({ id, name, x, y }: MapPinProps) {
   return (
     <Link
-      to={`/poi/${poi.id}`}
-      title={poi.name}
+      to={`/poi/${id}`}
+      className="map-pin"
       style={{
-        position: "absolute",
-        left: `${poi.map_x}%`,
-        top: `${poi.map_y}%`,
-        transform: "translate(-50%, -50%)",
+        left: `${x}%`,
+        top: `${y}%`,
       }}
     >
-      📍
+      <div className="pin-bubble">📍</div>
+      <div className="pin-label">{name}</div>
     </Link>
   );
 }

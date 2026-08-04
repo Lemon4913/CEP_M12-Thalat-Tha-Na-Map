@@ -1,27 +1,19 @@
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import Landing from "./pages/Landing";
-import MapPage from "./pages/MapPage";
-import POIDetail from "./pages/POIDetail";
-import CheckIn from "./pages/CheckIn";
-import Stamps from "./pages/Stamps";
-import About from "./pages/About";
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import './App.css'; // นำเข้าสไตล์ CSS
+
+// นำเข้าหน้าต่างๆ
+import LandingPage from './pages/LandingPage';
+import MapPage from './pages/MapPage';
+import POIDetailPage from './pages/POIDetailPage';
 
 function App() {
   return (
     <BrowserRouter>
-      <nav>
-        <Link to="/">Home</Link>
-        <Link to="/map">Map</Link>
-        <Link to="/stamps">Stamps</Link>
-        <Link to="/about">About</Link>
-      </nav>
       <Routes>
-        <Route path="/" element={<Landing />} />
+        <Route path="/" element={<LandingPage />} />
         <Route path="/map" element={<MapPage />} />
-        <Route path="/poi/:poiId" element={<POIDetail />} />
-        <Route path="/checkin/:poiId" element={<CheckIn />} />
-        <Route path="/stamps" element={<Stamps />} />
-        <Route path="/about" element={<About />} />
+        <Route path="/poi/:id" element={<POIDetailPage />} />
       </Routes>
     </BrowserRouter>
   );

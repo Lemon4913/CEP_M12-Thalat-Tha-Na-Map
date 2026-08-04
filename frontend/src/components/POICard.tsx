@@ -1,17 +1,29 @@
-import { Link } from "react-router-dom";
-import type { POI } from "../types";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import '../App.css';
 
-interface Props {
-  poi: POI;
+interface POICardProps {
+  id: number;
+  name: string;
+  description: string;
+  category?: string;
+  openTime?: string;
 }
 
-// Owner: Person A. Used in list/grid views of POIs.
-function POICard({ poi }: Props) {
+function POICard({ id, name, description, category, openTime }: POICardProps) {
   return (
-    <Link to={`/poi/${poi.id}`}>
-      <h3>{poi.name}</h3>
-      <p>{poi.category}</p>
-    </Link>
+    <div className="poi-card">
+      <div className="poi-badges">
+        <span className="poi-tag">{category || 'สถานที่'}</span>
+        {openTime ? <span className="poi-time">{openTime}</span> : null}
+      </div>
+      <h3>{name}</h3>
+      <p>{description}</p>
+
+      <Link to={`/poi/${id}`} className="card-link">
+        <button className="btn-primary">ดูรายละเอียด</button>
+      </Link>
+    </div>
   );
 }
 
