@@ -11,6 +11,8 @@ CEP_M12-Thalat-Tha-Na-Map/
 │   │   ├── components/
 │   │   ├── pages/
 │   │   ├── styles/
+│   │   ├── data/                # ข้อมูล static/sample (เช่น POI JSON สำรอง)
+│   │   ├── lib/                 # ฟังก์ชันช่วยฝั่งไคลเอนต์ (เช่น visitor ID)
 │   │   └── api/                # เรียกไปยัง backend/api
 │   ├── public/
 │   ├── package.json
@@ -22,6 +24,8 @@ CEP_M12-Thalat-Tha-Na-Map/
 │   │   ├── models/              # DB schema / ORM models
 │   │   ├── services/            # ตรรกะทางธุรกิจ (เช่น การเข้ารหัส)
 │   │   ├── crypto/               # เครื่องมือเข้ารหัส/ถอดรหัสข้อมูล
+│   │   ├── db.py                # ตั้งค่า DB session/engine
+│   │   ├── schemas.py           # Pydantic request/response models
 │   │   └── main.py
 │   ├── tests/
 │   ├── requirements.txt
@@ -32,6 +36,9 @@ CEP_M12-Thalat-Tha-Na-Map/
 │   ├── scripts/                 # สคริปต์ประมวลผลแบบ scheduled/batch
 │   ├── reports/                 # กราฟ/สรุปข้อมูลที่สร้างขึ้น (gitignore หากไฟล์ใหญ่)
 │   └── requirements.txt
+│
+├── tools/                      # เครื่องมือแยกอิสระ (ไม่พึ่งพา backend)
+│   └── qr-generator.html        # สร้าง QR/โลโก้สำหรับพิมพ์ติดจุด POI
 │
 ├── docs/                       # บันทึกการออกแบบ, data schema, ไดอะแกรม
 │

@@ -11,6 +11,8 @@ CEP_M12-Thalat-Tha-Na-Map/
 │   │   ├── components/
 │   │   ├── pages/
 │   │   ├── styles/
+│   │   ├── data/                # static/sample data (e.g. POI fallback JSON)
+│   │   ├── lib/                 # small client helpers (e.g. visitor ID)
 │   │   └── api/                # calls into backend/api
 │   ├── public/
 │   ├── package.json
@@ -22,6 +24,8 @@ CEP_M12-Thalat-Tha-Na-Map/
 │   │   ├── models/              # DB schema / ORM models
 │   │   ├── services/            # business logic (e.g. encryption)
 │   │   ├── crypto/               # encryption/decryption utilities
+│   │   ├── db.py                # DB session/engine setup
+│   │   ├── schemas.py           # Pydantic request/response models
 │   │   └── main.py
 │   ├── tests/
 │   ├── requirements.txt
@@ -32,6 +36,9 @@ CEP_M12-Thalat-Tha-Na-Map/
 │   ├── scripts/                 # scheduled/batch processing scripts
 │   ├── reports/                 # generated charts/summaries (gitignored if large)
 │   └── requirements.txt
+│
+├── tools/                      # standalone utilities (no backend dependency)
+│   └── qr-generator.html        # generates printable QR/logo composites for POIs
 │
 ├── docs/                       # design notes, data schema, diagrams
 │
