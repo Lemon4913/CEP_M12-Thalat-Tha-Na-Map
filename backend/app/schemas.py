@@ -36,3 +36,28 @@ class CheckInOut(BaseModel):
 class CheckInResponse(BaseModel):
     stamped: bool
     checkins: list[CheckInOut]
+
+
+class VisitorRegisterRequest(BaseModel):
+    visitor_id: str
+    name: str
+    phone: str
+
+
+class VisitorStatus(BaseModel):
+    registered: bool
+
+
+class POIScanStats(BaseModel):
+    poi_id: str
+    total_scans: int
+    valid_scans: int
+    unique_visitors: int
+
+
+class ScanLogEntry(BaseModel):
+    visitor_id: str
+    name: str
+    phone: str
+    token_valid: bool
+    created_at: datetime

@@ -1,7 +1,13 @@
 import os
 
+from dotenv import load_dotenv
 from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
+
+# app.db is imported before anything else that reads os.environ (DATABASE_URL
+# right below, ENCRYPTION_KEY / ADMIN_API_KEY read lazily elsewhere), so this
+# is the one place .env needs to be loaded from.
+load_dotenv()
 
 # Falls back to a local SQLite file if DATABASE_URL isn't set, so the team can
 # run the prototype without standing up Postgres. Set DATABASE_URL in .env to

@@ -3,12 +3,14 @@ import Landing from "./pages/Landing";
 import MapPage from "./pages/MapPage";
 import POIDetail from "./pages/POIDetail";
 import CheckIn from "./pages/CheckIn";
+import Scan from "./pages/Scan";
 import Stamps from "./pages/Stamps";
 import About from "./pages/About";
 import LogoMark from "./components/LogoMark";
 
 const NAV_ITEMS = [
   { to: "/map", label: "แผนที่", icon: MapIcon },
+  { to: "/scan", label: "สแกน", icon: ScanIcon },
   { to: "/stamps", label: "แสตมป์", icon: StampIcon },
   { to: "/about", label: "เกี่ยวกับ", icon: InfoIcon },
 ];
@@ -62,6 +64,7 @@ function App() {
             <Route path="/map" element={<MapPage />} />
             <Route path="/poi/:poiId" element={<POIDetail />} />
             <Route path="/checkin/:poiId" element={<CheckIn />} />
+            <Route path="/scan" element={<Scan />} />
             <Route path="/stamps" element={<Stamps />} />
             <Route path="/about" element={<About />} />
           </Routes>
@@ -85,6 +88,22 @@ function MapIcon() {
         strokeLinejoin="round"
       />
       <circle cx="12" cy="10" r="2.6" fill="none" stroke="currentColor" strokeWidth="1.8" />
+    </svg>
+  );
+}
+
+function ScanIcon() {
+  return (
+    <svg className="bottom-nav-icon" viewBox="0 0 24 24" aria-hidden="true">
+      <path
+        d="M4 8V5.5A1.5 1.5 0 0 1 5.5 4H8M16 4h2.5A1.5 1.5 0 0 1 20 5.5V8M20 16v2.5a1.5 1.5 0 0 1-1.5 1.5H16M8 20H5.5A1.5 1.5 0 0 1 4 18.5V16"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <rect x="9" y="9" width="6" height="6" rx="1" fill="none" stroke="currentColor" strokeWidth="1.8" />
     </svg>
   );
 }

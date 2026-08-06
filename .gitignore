@@ -1,6 +1,10 @@
 # Secrets / environment
 .env
 *.env.local
+.env.phone.local
+
+# TLS certs for LAN/phone testing (self-signed, local only)
+backend/certs/
 
 # Node / frontend
 node_modules/

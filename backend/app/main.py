@@ -4,6 +4,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.api.routes import router
 from app.db import Base, SessionLocal, engine
 from app.models.poi import POI
+from app.models.scan_event import ScanEvent  # noqa: F401 — registers table with Base
+from app.models.visitor import Visitor  # noqa: F401 — registers table with Base
 
 app = FastAPI(title="Thalat Tha Na Map API")
 
